@@ -1,0 +1,13 @@
+{
+  "name": "rams-audiovisuals",
+  "version": "1.0.0",
+  "description": "Rams AudioVisuals static site",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
