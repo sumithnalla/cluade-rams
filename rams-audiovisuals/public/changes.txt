@@ -1,0 +1,102 @@
+HOME PAGE:
+1.add a gallery section. below "how it works". divide the section into left half and right half. left half has a big rounded edges square. right half has 4 smae small rounder edges squares.
+the squares have rotating images feature. each square has 4 images and they changes for evry 2 seconds.
+optimize it for mobiles also.
+
+CITY PAGE:
+1.In the "Equipment available in[city]" section we have the 7 equipment cards right.from those remove icons and put the images used for "Browse by Category" cards in home page. you can find them in photos folder.
+2.below the "Popular in [city]" make a gallery section of 3 rectangle cards. same roatating images feature of 4 images  & 2 secs.
+3.Below the gallery add a "Complete Audio-Visual Solutions" section. use this content for the section.
+
+From equipment rental to on-site support - we handle it all
+
+Equipment Rental
+Premium LED walls, projectors, sound systems, speakers, microphones, and event backdrops for any occasion.
+
+
+LED Screens & Walls
+Sound Systems
+Projectors
+Microphones
+Delivery & Setup
+Professional delivery, installation, and configuration of all equipment at your venue.
+
+Safe Transportation
+Professional Setup
+Equipment Testing
+Venue Assessment
+On-Site Support
+Experienced technicians available throughout your event to ensure everything runs smoothly.
+
+Technical Assistance
+Troubleshooting
+Real-time Monitoring
+Emergency Support
+Event Types
+We cater to various events with customized AV solutions tailored to your specific needs.
+
+Corporate Events
+Private Celebrations
+Weddings
+Conferences
+
+4.below "Complete Audio-Visual Solutions" make a new section "Why Choose Ram's AV Services"
+
+Trusted by 500+ events across India
+
+Our Support Team
+Premium Quality Equipment
+Latest technology AV equipment from top brands, regularly maintained and upgraded.
+
+24/7 Customer Support
+Round-the-clock assistance for any queries or emergency support during events.
+
+Experienced Technicians
+Certified professionals with 5+ years experience in event AV management.
+
+Competitive Pricing
+Transparent pricing with no hidden charges. Best value for premium services.
+
+ABOUT PAGE:
+1.remove that about the company and keep "about the founder" section
+Founder & CEO – Ram’s Audio Visuals
+Mr. Ramavath Ramesh is the Founder & CEO of Ram’s Audio Visuals, based in Hyderabad. With strong dedication and vision, he has built the company into a trusted provider of projector rentals and audio-visual solutions for events, corporate meetings, and presentations.
+
+His commitment to quality service, customer satisfaction, and professional execution has helped Ram’s Audio Visuals grow steadily in the industry.
+
+Ramavath Ramesh
+Founder & CEO
+Ram’s Audio Visuals
+Delivering professional AV solutions across India
+
+2. below that a "what we do"section.
+ Complete audio-visual solutions for unforgettable events.
+ put a quote, here is the quote:
+"At Ram's Audio Visual Services, we exist to make events easier, more engaging, and memorable by providing reliable, high-quality AV equipment and professional support. We believe that great technology should enhance experiences, not complicate them."
+
+Visual Solutions
+LED Screens & Walls
+High-Definition Projectors
+Event Backdrops & Drapes
+Video Conferencing Systems
+
+Audio Solutions
+Professional Sound Systems
+Wireless & Wired Microphones
+PA Systems & Speakers
+Mixers & Audio Consoles
+
+Support Services
+Equipment Delivery
+Professional Installation
+On-Site Technical Support
+Post-Event Pack-up
+
+3.below that a "Events We Serve" section
+Corporate Events
+Private Parties
+Conferences
+Seminars
+Concerts
+
+then the cities we serve section keep it as it is.

@@ -1,0 +1,104 @@
+code:
+import React from 'react';
+import './ReviewCarousel.css';
+import { reviews } from './data';
+import googleLogo from './google.png';
+
+const ReviewCarousel = () => {
+  return (
+    <div className="carousel-container">
+      <div className="carousel-track">
+        {/* Render twice for infinite effect */}
+        {[...reviews, ...reviews].map((review, index) => (
+          <div className="review-card" key={index}>
+            <div className="card-top">
+              <img src={googleLogo} alt="Google" className="google-icon" />
+              <div className="stars">{"★".repeat(review.rating)}</div>
+            </div>
+            <p className="comment">“ {review.comment} ”</p>
+            <div className="card-footer">
+              <div className="avatar">{review.initials}</div>
+              <div className="user-info">
+                <div className="name">{review.name}</div>
+                <div className="meta">{review.location} • AV Services</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ReviewCarousel;
+
+css code:
+.carousel-container { overflow: hidden; width: 100%; padding: 40px 0; background: #fff; }
+.carousel-track { display: flex; width: max-content; animation: scroll 50s linear infinite; }
+.carousel-track:hover { animation-play-state: paused; }
+
+.review-card {
+  background: #f8f9ff;
+  border-radius: 24px;
+  border: 1px solid #eef0f7;
+  padding: 20px;
+  width: 320px;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  /* Removed min-height to let the card hug the content */
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px; /* Reduced gap after stars */
+}
+.google-icon { width: 40px; height: 40px; }
+.stars { color: #f4b400; font-size: 26px; }
+
+.comment {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #001e3c;
+  font-weight: 700;
+  margin-top: 15px;      /* Gap between stars and text */
+  margin-bottom: 25px;   /* Exact gap between text and footer */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* No margin-top needed here because the comment margin handles it */
+}
+.avatar {
+  width: 44px;
+  height: 44px;
+  background: #d0dbff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b5998;
+  font-weight: 700;
+  font-size: 14px;
+}
+.name { 
+  font-weight: 700; 
+  font-size: 15px; 
+  color: #444; 
+  margin-bottom: 2px;
+}
+
+.meta { 
+  font-size: 13px; 
+  color: #888; 
+}
+
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }

@@ -5,6 +5,7 @@ import { cities, services } from './data/cities.js';
 import { equipment } from './data/equipData.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const assetVersion = Date.now().toString(36);
 
 /* ---- helpers ---- */
 function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
@@ -14,7 +15,50 @@ function renderStars(rating) {
   return '★'.repeat(full) + (rating % 1 >= 0.5 ? '½' : '');
 }
 
-function equipCardHTML(item, citySlug) {
+const googleReviews = [
+  { name: 'Ravi K.', location: 'Gachibowli', rating: 5, initials: 'RK', comment: 'Excellent setup for our corporate event. Delivered on time and everything worked perfectly.' },
+  { name: 'Priya S.', location: 'Banjara Hills', rating: 5, initials: 'PS', comment: 'Rented projector and sound system for a wedding. Professional team, great equipment.' },
+  { name: 'Anand M.', location: 'Whitefield', rating: 5, initials: 'AM', comment: 'Best projector rental in Bangalore. Setup was quick and the team was very professional.' },
+  { name: 'Sneha R.', location: 'Koramangala', rating: 5, initials: 'SR', comment: 'Rented sound system for a product launch. Crystal clear audio, zero issues.' },
+  { name: 'Rahul D.', location: 'Andheri', rating: 5, initials: 'RD', comment: 'Reliable service for our office conference. Equipment was top-notch and delivery was on time.' },
+  { name: 'Meena P.', location: 'Bandra', rating: 5, initials: 'MP', comment: 'Used their combo package for a birthday party. Great value and excellent sound quality.' },
+  { name: 'Karthik V.', location: 'Anna Nagar', rating: 5, initials: 'KV', comment: 'Projector and screen for our school event. Everything was set up perfectly on time.' },
+  { name: 'Pooja K.', location: 'Baner', rating: 5, initials: 'PK', comment: 'Reliable rental service. Equipment quality was exactly as described. Will use again.' }
+];
+
+function reviewCarouselSectionHTML(reviews = googleReviews, title = 'What clients say about us') {
+  const cards = [...reviews, ...reviews].map(review => `
+        <article class="review-card">
+          <div class="review-card__top">
+            <img src="/photos/google.png" alt="Google" class="review-card__google" loading="lazy" width="40" height="40"/>
+            <div class="review-card__stars" aria-label="${review.rating} out of 5 stars">${'&#9733;'.repeat(review.rating)}</div>
+          </div>
+          <p class="review-card__comment">"${review.comment}"</p>
+          <div class="review-card__footer">
+            <div class="review-card__avatar">${review.initials}</div>
+            <div>
+              <div class="review-card__name">${review.name}</div>
+              <div class="review-card__meta">${review.location} &bull; AV Services</div>
+            </div>
+          </div>
+        </article>`).join('');
+
+  return `
+  <section class="section review-section" aria-label="Client reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2>${title}</h2>
+      </div>
+      <div class="review-carousel" aria-label="${title}">
+        <div class="review-carousel__track">
+${cards}
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function equipCardHTMLLegacy(item, citySlug) {
   const waCity = citySlug ? cities.find(c => c.slug === citySlug) : null;
   const waNum  = waCity ? waCity.whatsapp : '919700033342';
   const waMsg  = encodeURIComponent(`Hi, I'd like to enquire about "${item.name}" rental${waCity ? ` in ${waCity.name}` : ''}.`);
@@ -22,15 +66,35 @@ function equipCardHTML(item, citySlug) {
 <div class="equip-card-wrapper card equip-card" data-category="${item.category}">
   <div class="equip-card__image">
     <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3C/svg%3E" alt="${item.name} for rent${waCity ? ` in ${waCity.name}` : ''}" loading="lazy" width="400" height="300"/>
-    <span class="equip-card__badge">${item.badge}</span>
   </div>
   <div class="equip-card__body">
     <div class="equip-card__name">${item.name}</div>
+    <div class="equip-card__price equip-card__price--primary">&#8377;${item.price}<span>/day</span></div>
     <div class="equip-card__model">${item.model}</div>
     <div class="equip-card__meta">
       <div class="equip-card__price">₹${item.price}<span>/day</span></div>
       <div class="equip-card__rating">${item.rating}</div>
     </div>
+  </div>
+  <a href="https://wa.me/${waNum}?text=${waMsg}" class="equip-card__cta" target="_blank" rel="noopener">
+    WhatsApp to book
+  </a>
+</div>`;
+}
+
+function equipCardHTML(item, citySlug) {
+  const waCity = citySlug ? cities.find(c => c.slug === citySlug) : null;
+  const waNum = waCity ? waCity.whatsapp : '919700033342';
+  const waMsg = encodeURIComponent(`Hi, I'd like to enquire about "${item.name}" rental${waCity ? ` in ${waCity.name}` : ''}.`);
+  return `
+<div class="equip-card-wrapper card equip-card" data-category="${item.category}">
+  <div class="equip-card__image">
+    <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3C/svg%3E" alt="${item.name} for rent${waCity ? ` in ${waCity.name}` : ''}" loading="lazy" width="400" height="300"/>
+  </div>
+  <div class="equip-card__body">
+    <div class="equip-card__name">${item.name}</div>
+    <div class="equip-card__price equip-card__price--primary">&#8377;${item.price}<span>/day</span></div>
+    <div class="equip-card__model">${item.model}</div>
   </div>
   <a href="https://wa.me/${waNum}?text=${waMsg}" class="equip-card__cta" target="_blank" rel="noopener">
     WhatsApp to book
@@ -51,7 +115,7 @@ function navbarHTML(activePage = '') {
         <li><a href="/contact.html" ${activePage==='contact'?'class="active"':''}>Contact</a></li>
       </ul>
       <a href="https://wa.me/919700033342" class="navbar__cta desktop-only btn" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.18a.75.75 0 00.914.914l5.335-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.676-.498-5.217-1.369l-.374-.22-3.866 1.067 1.067-3.866-.22-.374A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
         WhatsApp us
       </a>
       <button class="navbar__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -129,14 +193,15 @@ function headHTML({ title, description, canonical, schema = '' }) {
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/main.css?v=${assetVersion}"/>
   ${schema ? `<script type="application/ld+json">${schema}</script>` : ''}
 </head>
 <body>`;
 }
 
 function closingHTML(jsPath = '/js/main.js') {
-  return `<script src="${jsPath}"></script>\n</body>\n</html>`;
+  const separator = jsPath.includes('?') ? '&' : '?';
+  return `<script src="${jsPath}${separator}v=${assetVersion}"></script>\n</body>\n</html>`;
 }
 
 /* ---- copy static assets ---- */
@@ -194,16 +259,9 @@ function buildHomepage() {
   });
 
   const cityCards = cities.map(c => `
-<a href="/${c.slug}/index.html" class="city-card">
-  <div class="city-card__image-wrapper">
-    <img src="/photos/${c.slug}.png" alt="${c.name}" class="city-card__image" loading="lazy">
-  </div>
-  <div class="city-card__name">${c.name}</div>
-  <div class="city-card__phone">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-    ${c.phoneDisplay}
-  </div>
-  <div class="city-card__link">View equipment →</div>
+<a href="/${c.slug}/index.html" class="service-card">
+  <div class="service-card__icon"><img src="/photos/${c.slug}.png" alt="${c.name}" class="service-card__img" loading="lazy"></div>
+  <div class="service-card__name">${c.name}</div>
 </a>`).join('');
 
   const serviceIcons = { projector: 'projectors', sound: 'sound systems', mic: 'microphones', tv: 'televisions', speaker: 'speakers', screen: 'LED', combo: 'combos' };
@@ -211,7 +269,6 @@ function buildHomepage() {
 <a href="/equipment.html#${s.category}" class="service-card">
   <div class="service-card__icon"><img src="/photos/${serviceIcons[s.icon]}.png" alt="${s.name}" class="service-card__img" loading="lazy"></div>
   <div class="service-card__name">${s.name}</div>
-  <div class="service-card__arrow">Explore →</div>
 </a>`).join('');
 
   const popularCards = topEquip.map(item => equipCardHTML(item, null)).join('');
@@ -235,21 +292,26 @@ ${navbarHTML('home')}
 
 <main>
   <!-- HERO -->
-  <section class="hero section--sm" aria-label="Hero">
+  <section class="section hero-section" aria-label="Hero" style="padding-top: 40px; padding-bottom: 24px;">
     <div class="container">
-      <div class="hero__tag"><span class="badge badge--blue">Serving 5 cities across India</span></div>
-      <h1 class="hero__h1">Professional AV equipment<br>for rent — delivered &amp; set up</h1>
-      <p class="hero__sub">Projectors, sound systems, microphones, LED screens, TVs &amp; combo packages across Hyderabad, Bangalore, Mumbai, Chennai &amp; Pune.</p>
-      <div class="hero__actions">
-        <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20AV%20equipment%20for%20my%20event." class="btn btn--whatsapp" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.18a.75.75 0 00.914.914l5.335-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.676-.498-5.217-1.369l-.374-.22-3.866 1.067 1.067-3.866-.22-.374A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          WhatsApp us now
-        </a>
-        <a href="/equipment.html" class="btn btn--secondary">Browse all equipment</a>
-      </div>
-      <div class="hero__phone">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Hyderabad: <a href="tel:9700033342">9700033342</a> &nbsp;|&nbsp; Bangalore: <a href="tel:9553703737">9553703737</a>
+      <div class="hero-card hero-card--home">
+        <div class="hero-card__content">
+          <div class="badge badge--blue" style="margin-bottom: 16px; align-self: flex-start; background: rgba(255,255,255,0.8); color: var(--blue-dark);">Premium AV Rentals</div>
+          <h1>Professional AV equipment<br>for rent — delivered &amp; set up</h1>
+          <p>Projectors, sound systems, microphones, LED screens, TVs &amp; combo packages across Hyderabad, Bangalore, Mumbai, Chennai &amp; Pune.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:16px;">
+            <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20AV%20equipment%20for%20my%20event." class="btn btn--primary" style="padding:16px 32px; font-size:1.1rem; box-shadow: 0 8px 24px rgba(37,99,235,0.4);" target="_blank" rel="noopener">
+              Book Now
+            </a>
+            <a href="/equipment.html" class="btn btn--secondary" style="padding:16px 32px; font-size:1.1rem; background: rgba(255,255,255,0.7); border-color: transparent;">
+              View Equipment
+            </a>
+          </div>
+          <div class="hero__phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>Hyd: <a href="tel:9700033342" style="font-weight:700; color:var(--text-primary);">9700033342</a> &nbsp;|&nbsp; Blr: <a href="tel:9553703737" style="font-weight:700; color:var(--text-primary);">9553703737</a></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -257,25 +319,23 @@ ${navbarHTML('home')}
   <!-- CITIES -->
   <section class="section--sm" aria-label="Cities we serve">
     <div class="container">
-      <div class="section-header">
-        <span class="badge badge--blue">5 cities</span>
+      <div class="section-header" style="margin-bottom: 32px;">
         <h2>Select your city</h2>
-        <p>We operate in 5 major cities with local teams for fast delivery and setup.</p>
       </div>
-      <div class="grid grid--auto" role="list" aria-label="Available cities">
+      <div class="grid grid--5" role="list" aria-label="Available cities">
         ${cityCards}
       </div>
     </div>
   </section>
 
   <!-- SERVICES STRIP -->
-  <section class="section--sm" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);" aria-label="Equipment categories">
+  <section class="section" style="background:var(--card); border-top:1px solid var(--border-strong); border-bottom:1px solid var(--border-strong);" aria-label="Equipment categories">
     <div class="container">
       <div class="section-header">
-        <h2>Everything you need for your event</h2>
+        <h2>Browse by Category</h2>
         <p>From single-item rentals to complete setups — all delivered and installed.</p>
       </div>
-      <div class="grid grid--4">
+      <div class="services-grid">
         ${serviceStrip}
       </div>
     </div>
@@ -336,6 +396,8 @@ ${navbarHTML('home')}
       </div>
     </div>
   </section>
+
+${reviewCarouselSectionHTML(googleReviews, 'What clients say about us')}
 
   <!-- FAQ -->
   <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="Frequently asked questions">
@@ -416,7 +478,7 @@ ${navbarHTML('equipment')}
         ${cards}
       </div>
 
-      <div class="mt-32" style="padding:24px; background:var(--card); border:1px solid var(--border); border-radius:var(--radius-md);">
+      <div class="mt-32" style="padding:32px; background:var(--card); box-shadow:var(--shadow-card); border-radius:var(--radius-md);">
         <h3 style="margin-bottom:8px">Available in these cities</h3>
         <p style="margin-bottom:16px">All equipment listed here is available for rent in all five cities with free delivery and setup.</p>
         <div class="related-links">${cityAvailability}</div>
@@ -602,12 +664,10 @@ function buildCityPages() {
 
     const popularInCity = [...equipment].sort((a,b) => b.bookedCount - a.bookedCount).slice(0,4).map(item => equipCardHTML(item, city.slug)).join('');
 
-    const testimonialCards = city.testimonials.map(t => `
-<div class="testimonial-card">
-  <p class="testimonial-card__quote">"${t.text}"</p>
-  <div class="testimonial-card__author">${t.name}</div>
-  <div class="testimonial-card__location">${t.area}, ${city.name}</div>
-</div>`).join('');
+    const cityReviews = city.testimonials.map(t => {
+      const initials = t.name.split(' ').map(part => part.charAt(0)).join('').replace('.', '').slice(0, 2).toUpperCase();
+      return { name: t.name, location: `${t.area}, ${city.name}`, rating: 5, initials, comment: t.text };
+    }).concat(googleReviews);
 
     const faqData = [
       [`What AV equipment can I rent in ${city.name}?`, `We offer projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages for rent in ${city.name} — all with free delivery and professional setup.`],
@@ -717,12 +777,7 @@ ${navbarHTML('')}
     </div>
   </section>
 
-  <section class="section--sm" style="background:var(--card); border-top:1px solid var(--border);">
-    <div class="container">
-      <div class="section-header"><h2>What our ${city.name} clients say</h2></div>
-      <div class="grid grid--2">${testimonialCards}</div>
-    </div>
-  </section>
+${reviewCarouselSectionHTML(cityReviews, `What our ${city.name} clients say`)}
 
   <section class="section" aria-label="FAQ">
     <div class="container" style="max-width:720px">
