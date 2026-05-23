@@ -1,4 +1,4 @@
-my enitre website in html,css and js. now it time to improve it. four your understanding go thrrough guide.md phase-0,1,2,3,4 md files. 
+my enitre website in html,css and js. now it time to improve it. four your understanding go thrrough guide.md phase-0,1,2,3,4,5 md files. 
 This is a great question, and you are absolutely right—editing 35 individual HTML files one by one would be a complete waste of time and tokens!
 
 Since the website is built using the node build.js engine (as outlined in Phase 0-4 of your GUIDE.md), we have a highly efficient, centralized way to handle this. Here is exactly how we will do it:
