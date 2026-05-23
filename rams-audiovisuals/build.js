@@ -1,4 +1,4 @@
-﻿import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { cities, services } from './data/cities.js';
@@ -375,7 +375,7 @@ function eventCardHTML(event) {
 function pickGalleryImages(startIndex, count, altBase) {
   if (!galleryImageFiles.length) {
     return Array.from({ length: count }, (_, index) => ({
-      src: '/photos/home hero.png',
+      src: '/photos/h.png',
       alt: `${altBase} ${index + 1}`
     }));
   }
@@ -442,9 +442,11 @@ function homeGallerySectionHTML() {
         <h2>AV setups built for every kind of event</h2>
         <p>A quick look at the combinations and categories our clients book most often.</p>
       </div>
-      <div class="gallery-mosaic">
-        ${galleryTileHTML(featureTile, 'gallery-tile--feature')}
-        ${squareTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--square')).join('')}
+      <div class="gallery-hscroll">
+        <div class="gallery-mosaic">
+          ${galleryTileHTML(featureTile, 'gallery-tile--feature')}
+          ${squareTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--square')).join('')}
+        </div>
       </div>
     </div>
   </section>`;
@@ -663,8 +665,8 @@ function offerCardHTML(offer) {
 
 function equipCardHTMLLegacy(item, citySlug) {
   const waCity = citySlug ? cities.find(c => c.slug === citySlug) : null;
-  const waNum  = waCity ? waCity.whatsapp : '919700033342';
-  const waMsg  = encodeURIComponent(`Hi, I'd like to enquire about "${item.name}" rental${waCity ? ` in ${waCity.name}` : ''}.`);
+  const waNum = waCity ? waCity.whatsapp : '919700033342';
+  const waMsg = encodeURIComponent(`Hi, I'd like to enquire about "${item.name}" rental${waCity ? ` in ${waCity.name}` : ''}.`);
   return `
 <div class="equip-card-wrapper card equip-card" data-category="${item.category}">
   <div class="equip-card__image">
@@ -808,17 +810,23 @@ function headHTML({ title, description, canonical, schema = '' }) {
 <body>`;
 }
 
-function closingHTML(jsPath = '/js/main.js') {
+function closingHTML(jsPath = '/js/main.js', waConfig = {}) {
   const separator = jsPath.includes('?') ? '&' : '?';
-  return `<script src="${jsPath}${separator}v=${assetVersion}"></script>\n</body>\n</html>`;
+  const waNumber = waConfig.number || '919700033342';
+  const waMsg = encodeURIComponent(waConfig.message || 'Hi, I need AV equipment for my event.');
+  const floatBtn = `
+<a href="https://wa.me/${waNumber}?text=${waMsg}" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.74.72 5.41 2.09 7.77L.5 31.5l8-2.06A15.44 15.44 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.22a13.65 13.65 0 01-6.96-1.9l-.5-.3-5.19 1.36 1.38-5.04-.32-.52A13.72 13.72 0 1116 28.72zm7.57-10.27c-.41-.21-2.44-1.21-2.82-1.35s-.65-.21-.93.21-1.07 1.35-1.31 1.63-.48.31-.89.1a11.23 11.23 0 01-3.3-2.04 12.38 12.38 0 01-2.28-2.83c-.24-.41 0-.63.18-.84s.41-.48.62-.72a2.82 2.82 0 00.41-.69.76.76 0 000-.72c-.1-.21-.93-2.24-1.28-3.06s-.67-.69-.93-.69h-.79a1.51 1.51 0 00-1.1.52 4.64 4.64 0 00-1.45 3.44 8.05 8.05 0 001.69 4.27 18.45 18.45 0 007.07 6.24 23.47 23.47 0 002.35.87 5.64 5.64 0 002.59.16 4.27 4.27 0 002.79-1.97 3.44 3.44 0 00.24-1.97c-.1-.17-.38-.28-.79-.49z"/></svg>
+</a>`;
+  return `${floatBtn}\n<script src="${jsPath}${separator}v=${assetVersion}"></script>\n</body>\n</html>`;
 }
 
 /* ---- copy static assets ---- */
 function copyAssets() {
   mkdirSync('public/css', { recursive: true });
-  mkdirSync('public/js',  { recursive: true });
+  mkdirSync('public/js', { recursive: true });
   copyFileSync('src/css/main.css', 'public/css/main.css');
-  copyFileSync('src/js/main.js',   'public/js/main.js');
+  copyFileSync('src/js/main.js', 'public/js/main.js');
 }
 
 /* ---- write file utility ---- */
@@ -930,8 +938,10 @@ ${navbarHTML('home')}
       <div class="section-header" style="margin-bottom: 32px;">
         <h2>Select your city</h2>
       </div>
-      <div class="grid grid--5" role="list" aria-label="Available cities">
-        ${cityCards}
+      <div class="cities-hscroll">
+        <div class="grid grid--5" role="list" aria-label="Available cities">
+          ${cityCards}
+        </div>
       </div>
     </div>
   </section>
@@ -952,7 +962,7 @@ ${navbarHTML('home')}
   <!-- STATS -->
   <section class="section--sm" aria-label="Our track record">
     <div class="container">
-      <div class="grid grid--4">
+      <div class="grid grid--4 stats-grid">
         <div class="stat-card"><div class="stat-card__number">500+</div><div class="stat-card__label">Events served</div></div>
         <div class="stat-card"><div class="stat-card__number">5</div><div class="stat-card__label">Cities covered</div></div>
         <div class="stat-card"><div class="stat-card__number">20+</div><div class="stat-card__label">Equipment types</div></div>
@@ -968,21 +978,23 @@ ${navbarHTML('home')}
         <h2>How it works</h2>
         <p>Three simple steps from enquiry to event-ready setup.</p>
       </div>
-      <div class="grid grid--3">
-        <div class="how-step">
-          <img src="/photos/step1.png" alt="Step 1" class="how-step__img">
-          <div class="how-step__title">Choose your equipment</div>
-          <div class="how-step__desc">Browse our catalogue. Select the items you need for your event type and size.</div>
-        </div>
-        <div class="how-step">
-          <img src="/photos/step2.png" alt="Step 2" class="how-step__img">
-          <div class="how-step__title">WhatsApp or call us</div>
-          <div class="how-step__desc">Share your event date, venue, and city. We confirm availability and pricing within minutes.</div>
-        </div>
-        <div class="how-step">
-          <img src="/photos/step-2.png" alt="Step 3" class="how-step__img">
-          <div class="how-step__title">We deliver and set up</div>
-          <div class="how-step__desc">Our team arrives before your event, sets everything up, and collects after. Zero hassle.</div>
+      <div class="how-hscroll">
+        <div class="grid grid--3">
+          <div class="how-step">
+            <img src="/photos/step1.png" alt="Step 1" class="how-step__img">
+            <div class="how-step__title">Choose your equipment</div>
+            <div class="how-step__desc">Browse our catalogue. Select the items you need for your event type and size.</div>
+          </div>
+          <div class="how-step">
+            <img src="/photos/step2.png" alt="Step 2" class="how-step__img">
+            <div class="how-step__title">WhatsApp or call us</div>
+            <div class="how-step__desc">Share your event date, venue, and city. We confirm availability and pricing within minutes.</div>
+          </div>
+          <div class="how-step">
+            <img src="/photos/step-2.png" alt="Step 3" class="how-step__img">
+            <div class="how-step__title">We deliver and set up</div>
+            <div class="how-step__desc">Our team arrives before your event, sets everything up, and collects after. Zero hassle.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -998,8 +1010,10 @@ ${homeGallerySectionHTML()}
         <h2>Popular equipment</h2>
         <p>Our most rented items â€” trusted by hundreds of events across India.</p>
       </div>
-      <div class="grid grid--3">
-        ${popularCards}
+      <div class="equip-hscroll">
+        <div class="grid grid--3">
+          ${popularCards}
+        </div>
       </div>
       <div class="text-center mt-32">
         <a href="/equipment.html" class="btn btn--secondary">View all 20 items</a>
@@ -1034,7 +1048,7 @@ ${reviewCarouselSectionHTML(googleReviews, 'What clients say about us')}
 </main>
 
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`;
 
   writePage('public/index.html', html);
 }
@@ -1110,7 +1124,7 @@ ${navbarHTML('equipment')}
 </main>
 
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`
 
   writePage('public/equipment.html', html);
 }
@@ -1208,7 +1222,7 @@ ${navbarHTML('about')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`
 
   writePage('public/about.html', html);
 }
@@ -1360,7 +1374,7 @@ ${navbarHTML('contact')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`
 
   writePage('public/contact.html', html);
 }
@@ -1377,7 +1391,7 @@ ${navbarHTML('')}
         <span aria-current="page">Privacy policy</span>
       </nav>
       <h1 style="margin-bottom:24px">Privacy policy</h1>
-      <p style="margin-bottom:16px"><strong>Last updated:</strong> ${new Date().toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' })}</p>
+      <p style="margin-bottom:16px"><strong>Last updated:</strong> ${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 
       <h2 style="font-size:1.125rem; margin:24px 0 8px">1. Information we collect</h2>
       <p>When you contact us via WhatsApp, phone, or email, we collect your name, phone number, and event details solely to process your rental enquiry.</p>
@@ -1397,7 +1411,7 @@ ${navbarHTML('')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`
 
   writePage('public/privacy-policy.html', html);
 }
@@ -1412,7 +1426,7 @@ function buildCityPages() {
   <div class="service-card__arrow">Explore options</div>
 </a>`).join('');
 
-    const popularInCity = [...equipment].sort((a,b) => b.bookedCount - a.bookedCount).slice(0,4).map(item => equipCardHTML(item, city.slug)).join('');
+    const popularInCity = [...equipment].sort((a, b) => b.bookedCount - a.bookedCount).slice(0, 4).map(item => equipCardHTML(item, city.slug)).join('');
     const solutionCards = avSolutionCards.map(card => infoPanelHTML(card)).join('');
     const whyCards = whyChooseCards.map(card => infoPanelHTML(card, 'info-panel--compact')).join('');
 
@@ -1423,7 +1437,7 @@ function buildCityPages() {
 
     const faqData = [
       [`What AV equipment can I rent in ${city.name}?`, `We offer projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages for rent in ${city.name} â€” all with free delivery and professional setup.`],
-      [`Do you deliver to all areas in ${city.name}?`, `Yes, we deliver across ${city.name} including ${city.areas.split(',').slice(0,4).join(', ')} and more. WhatsApp us your venue address for confirmation.`],
+      [`Do you deliver to all areas in ${city.name}?`, `Yes, we deliver across ${city.name} including ${city.areas.split(',').slice(0, 4).join(', ')} and more. WhatsApp us your venue address for confirmation.`],
       [`What is the minimum rental duration in ${city.name}?`, `Minimum rental is 1 day. We accommodate multi-day rentals at reduced rates. Contact us for a custom quote.`],
       [`How do I book AV equipment in ${city.name}?`, `WhatsApp or call us at ${city.phoneDisplay}. Share your event date, venue, and equipment requirements â€” we confirm in minutes.`],
       [`Do you provide setup service in ${city.name}?`, `Yes â€” every rental in ${city.name} includes free professional setup, testing, and collection after your event.`]
@@ -1479,7 +1493,7 @@ ${navbarHTML('')}
         <span aria-current="page">${city.name}</span>
       </nav>
 
-      <div style="display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; margin-bottom:40px">
+      <div class="city-hero-header" style="display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; margin-bottom:40px">
         <div>
           <span class="badge badge--blue">${city.name}</span>
           <h1 style="margin-top:8px; margin-bottom:12px">AV equipment for rent in ${city.name}</h1>
@@ -1495,7 +1509,13 @@ ${navbarHTML('')}
       </div>
 
       <h2 style="margin-bottom:20px">Equipment available in ${city.name}</h2>
-      <div class="grid grid--4">${serviceCards}</div>
+      <div class="grid grid--4 city-cats-grid">
+        ${serviceCards}
+        <a href="/equipment.html" class="view-all-card">
+          <span class="view-all-card__icon">📦</span>
+          <span>View All<br>Equipment →</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1505,7 +1525,9 @@ ${navbarHTML('')}
         <span class="badge badge--blue">Most booked in ${city.name}</span>
         <h2>Popular in ${city.name}</h2>
       </div>
-      <div class="grid grid--4">${popularInCity}</div>
+      <div class="city-equip-hscroll">
+        <div class="grid grid--4">${popularInCity}</div>
+      </div>
     </div>
   </section>
 
@@ -1517,7 +1539,7 @@ ${cityGallerySectionHTML(city)}
         <span class="badge badge--blue">Complete Audio-Visual Solutions</span>
         <h2>From equipment rental to on-site support - we handle it all</h2>
       </div>
-      <div class="grid grid--2">
+      <div class="grid grid--2 info-panels-2col">
         ${solutionCards}
       </div>
     </div>
@@ -1530,7 +1552,7 @@ ${cityGallerySectionHTML(city)}
         <h2>Why Choose Ram's AV Services</h2>
         <p>Trusted by 500+ events across India</p>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--4 info-panels-4col">
         ${whyCards}
       </div>
     </div>
@@ -1562,7 +1584,7 @@ ${reviewCarouselSectionHTML(cityReviews, `What our ${city.name} clients say`)}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: city.whatsapp, message: `Hi, I need AV equipment in ${city.name}.` })}`;
 
     writePage(`public/${city.slug}/index.html`, html);
   });
@@ -1624,13 +1646,13 @@ function buildCityServicePages() {
 
   /* Events served list per service (for SEO) */
   const eventsServed = {
-    'projector-for-rent':    'Corporate presentations, conferences, outdoor film screenings, school events, wedding slideshows, product launches, training sessions',
+    'projector-for-rent': 'Corporate presentations, conferences, outdoor film screenings, school events, wedding slideshows, product launches, training sessions',
     'sound-system-for-rent': 'Weddings, corporate events, birthday parties, outdoor concerts, product launches, college fests, religious gatherings',
-    'mic-for-rent':          'Speeches, wedding ceremonies, corporate meetings, school events, stage performances, seminars, interviews',
-    'tv-for-rent':           'Digital menus, wedding receptions, exhibitions, trade shows, conference rooms, brand activations',
-    'speaker-for-rent':      'Birthday parties, outdoor events, corporate gatherings, DJ setups, karaoke nights, school functions',
-    'led-screen-for-rent':   'Weddings, concerts, product launches, corporate conferences, outdoor screenings, exhibitions, sports viewings',
-    'combo-packages':        'Complete event setups, corporate conferences, wedding audio-visual packages, product launches, graduation ceremonies'
+    'mic-for-rent': 'Speeches, wedding ceremonies, corporate meetings, school events, stage performances, seminars, interviews',
+    'tv-for-rent': 'Digital menus, wedding receptions, exhibitions, trade shows, conference rooms, brand activations',
+    'speaker-for-rent': 'Birthday parties, outdoor events, corporate gatherings, DJ setups, karaoke nights, school functions',
+    'led-screen-for-rent': 'Weddings, concerts, product launches, corporate conferences, outdoor screenings, exhibitions, sports viewings',
+    'combo-packages': 'Complete event setups, corporate conferences, wedding audio-visual packages, product launches, graduation ceremonies'
   };
 
   cities.forEach(city => {
@@ -1658,7 +1680,7 @@ function buildCityServicePages() {
 
       /* Related links â€” same service other cities + other services this city */
       const sameSvcOtherCities = cities.filter(c => c.slug !== city.slug).map(c => `<a href="/${c.slug}/${service.slug}.html" class="related-link">${service.name} in ${c.name}</a>`).join('');
-      const otherSvcSameCity = services.filter(s => s.slug !== service.slug).slice(0,3).map(s => `<a href="/${city.slug}/${s.slug}.html" class="related-link">${s.name} in ${city.name}</a>`).join('');
+      const otherSvcSameCity = services.filter(s => s.slug !== service.slug).slice(0, 3).map(s => `<a href="/${city.slug}/${s.slug}.html" class="related-link">${s.name} in ${city.name}</a>`).join('');
 
       const h1 = `${capitalize(service.h1suffix)} in ${city.name}`;
       const pageTitle = `${capitalize(service.h1suffix)} in ${city.name} | Rams AudioVisuals`;
@@ -1706,7 +1728,7 @@ ${navbarHTML('')}
       </nav>
 
       <!-- HERO -->
-      <div style="display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; margin-bottom:40px">
+      <div class="city-hero-header" style="display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; margin-bottom:40px">
         <div>
           <span class="badge badge--blue">${city.name}</span>
           <h1 style="margin-top:8px; margin-bottom:12px">${h1}</h1>
@@ -1727,9 +1749,9 @@ ${navbarHTML('')}
         <div>
           <h2 style="margin-bottom:20px">${service.name} available in ${city.name}</h2>
           ${cityEquipment.length > 0
-            ? `<div class="grid grid--2">${equipCards}</div>`
-            : `<div class="card" style="padding:32px; text-align:center"><p>Contact us for current ${service.name.toLowerCase()} availability in ${city.name}.</p><a href="https://wa.me/${city.whatsapp}" class="btn btn--whatsapp mt-16" target="_blank" rel="noopener">WhatsApp us</a></div>`
-          }
+          ? `<div class="grid grid--2 subcat-equip-grid">${equipCards}</div>`
+          : `<div class="card" style="padding:32px; text-align:center"><p>Contact us for current ${service.name.toLowerCase()} availability in ${city.name}.</p><a href="https://wa.me/${city.whatsapp}" class="btn btn--whatsapp mt-16" target="_blank" rel="noopener">WhatsApp us</a></div>`
+        }
 
           <!-- Pricing info -->
           <div class="card mt-24" style="padding:24px">
@@ -1820,7 +1842,7 @@ ${navbarHTML('')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: city.whatsapp, message: `Hi, I need ${service.name} for rent in ${city.name}.` })}`;
 
       writePage(`public/${city.slug}/${service.slug}.html`, html);
     });
@@ -1933,7 +1955,7 @@ ${navbarHTML('events')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event. Can you help?' })}`
 
   writePage('public/events-we-serve.html', html);
 }
@@ -2003,7 +2025,7 @@ ${navbarHTML('corporate')}
         <h2>Complete corporate AV solutions for corporate events</h2>
         <p>From boardroom presentations to large-format launches, our corporate AV equipment rental service covers every part of the event setup.</p>
       </div>
-      <div class="grid grid--2">
+      <div class="grid grid--2 info-panels-2col">
         ${solutionCards}
       </div>
     </div>
@@ -2049,7 +2071,7 @@ ${navbarHTML('corporate')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for a corporate event. Please share pricing and availability.' })}`;
 
   writePage('public/corporate.html', html);
 }
@@ -2115,7 +2137,7 @@ ${navbarHTML('offers')}
   </section>
 </main>
 ${footerHTML()}
-${closingHTML()}`;
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I want to book AV equipment and claim an offer.' })}`
 
   writePage('public/offers.html', html);
 }
