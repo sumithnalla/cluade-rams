@@ -26,6 +26,68 @@
   });
 })();
 
+/* ----- Contact form ----- */
+(function () {
+  const form = document.querySelector('[data-contact-form]');
+  if (!form) return;
+
+  const phoneInput = form.querySelector('[data-phone-input]');
+  const citySelect = form.querySelector('[data-city-select]');
+  const status = form.querySelector('[data-contact-status]');
+
+  const setStatus = (message, isError = false) => {
+    if (!status) return;
+    status.hidden = !message;
+    status.textContent = message || '';
+    status.classList.toggle('is-error', isError);
+  };
+
+  const normalizePhone = () => {
+    if (!phoneInput) return;
+    const digits = phoneInput.value.replace(/\D/g, '');
+    phoneInput.value = digits.length > 10 ? digits.slice(-10) : digits;
+    if (phoneInput.value.length && phoneInput.value.length !== 10) {
+      phoneInput.setCustomValidity('Please enter exactly 10 digits.');
+    } else {
+      phoneInput.setCustomValidity('');
+    }
+  };
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', normalizePhone);
+    phoneInput.addEventListener('blur', normalizePhone);
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    normalizePhone();
+    setStatus('');
+
+    if (!form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const selectedOption = citySelect?.options[citySelect.selectedIndex];
+    const cityName = selectedOption?.dataset.cityName || selectedOption?.textContent?.trim() || 'your city';
+    const whatsappNumber = selectedOption?.dataset.cityWhatsapp || '919700033342';
+    const message = [
+      'Hi Rams AudioVisuals,',
+      `Name: ${formData.get('name')}`,
+      `Email: ${formData.get('email')}`,
+      `Phone: +91 ${formData.get('phone')}`,
+      `City: ${cityName}`,
+      `Message: ${formData.get('message')}`
+    ].join('\n');
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    setStatus(`Opening WhatsApp for ${cityName}...`);
+    const popup = window.open(whatsappUrl, '_blank', 'noopener');
+    if (!popup) {
+      window.location.href = whatsappUrl;
+    }
+    form.reset();
+  });
+})();
+
 /* ----- FAQ accordion ----- */
 (function () {
   document.querySelectorAll('.faq-item__question').forEach((btn) => {

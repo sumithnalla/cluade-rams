@@ -337,6 +337,8 @@ const iconPaths = {
   presentation: '<rect x="4" y="3" width="16" height="12" rx="2"></rect><path d="M8 21h8"></path><path d="M12 15v6"></path><path d="m8 8 2.5 2.5L16 7"></path>',
   seminar: '<path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h10"></path><path d="M18 16v6"></path><path d="m15 19 3-3 3 3"></path>',
   music: '<path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18.85 19.5 19.5 0 0 1 5.15 12.81 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.35 1.75.67 2.57a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.19-1.19a2 2 0 0 1 2.11-.45c.82.32 1.68.55 2.57.67A2 2 0 0 1 22 16.92z"></path>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path>',
   check: '<path d="m6 12 4 4 8-8"></path>'
 };
 
@@ -747,7 +749,7 @@ function footerHTML() {
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a href="/index.html" class="footer__logo"><img src="/photos/logo new.png" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
+        <a href="/index.html" class="footer__logo"><img src="/photos/logo-footer.png" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
         <p class="footer__desc">Professional AV equipment on rent across 5 major Indian cities. Delivered, set up, and collected â€” hassle free.</p>
         <a href="mailto:support@ramsaudiovisuals.com" class="footer__email">support@ramsaudiovisuals.com</a>
       </div>
@@ -1212,41 +1214,147 @@ ${closingHTML()}`;
 }
 
 function buildContact() {
-  const cityCards = cities.map(c => `
-<div class="card" style="padding:24px">
-  <h3 style="margin-bottom:8px">${c.name}</h3>
-  <a href="tel:${c.phone}" style="font-size:1.25rem; font-weight:700; color:var(--text-primary); display:block; margin-bottom:12px">${c.phoneDisplay}</a>
-  <a href="https://wa.me/${c.whatsapp}?text=Hi%2C%20I%20need%20AV%20equipment%20in%20${c.name}." class="btn btn--whatsapp btn--sm btn--full" target="_blank" rel="noopener">
-    WhatsApp ${c.name}
-  </a>
-</div>`).join('');
+  const cityOptions = cities.map(c => `
+            <option value="${c.slug}" data-city-name="${c.name}" data-city-whatsapp="${c.whatsapp}">${c.name}</option>`).join('');
+
+  const cityPills = cities
+    .map(c => `<span class="contact-aside__city">${c.name}</span>`)
+    .join('');
+
+  const cityCards = cities.map(c => {
+    const areaPreview = c.areas.split(',').slice(0, 3).map(area => area.trim()).join(', ');
+    return `
+          <article class="contact-city-card">
+            <div class="contact-city-card__eyebrow">City team</div>
+            <div class="contact-city-card__top">
+              <h3>${c.name}</h3>
+              <span class="contact-city-card__badge">Live support</span>
+            </div>
+            <a href="tel:${c.phone}" class="contact-city-card__phone">${c.phoneDisplay}</a>
+            <p class="contact-city-card__copy">Fast AV rental support across ${areaPreview} and more.</p>
+            <div class="contact-city-card__actions">
+              <a href="https://wa.me/${c.whatsapp}?text=Hi%2C%20I%20need%20AV%20equipment%20in%20${c.name}." class="contact-city-card__action contact-city-card__action--primary" target="_blank" rel="noopener">WhatsApp</a>
+              <a href="/${c.slug}/index.html" class="contact-city-card__action">View city page</a>
+            </div>
+          </article>`;
+  }).join('');
 
   const html = `${headHTML({ title: 'Contact Rams AudioVisuals â€” Get a Quote Today', description: 'Contact Rams AudioVisuals for AV equipment rental in Hyderabad, Bangalore, Mumbai, Chennai and Pune. WhatsApp or call your city number for an instant quote.', canonical: '/contact.html' })}
 ${navbarHTML('contact')}
 <main>
-  <section class="section">
-    <div class="container" style="max-width:900px">
+  <section class="section contact-page">
+    <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
         <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
         <span aria-current="page">Contact</span>
       </nav>
-      <div class="section-header" style="text-align:left; margin-bottom:40px">
-        <h1>Contact us</h1>
-        <p>Choose your city below and reach us directly. We respond within minutes on WhatsApp.</p>
-      </div>
-      <div class="grid grid--3" style="margin-bottom:40px">${cityCards}</div>
 
-      <div class="card" style="padding:28px">
-        <h3 style="margin-bottom:4px">General enquiries</h3>
-        <p style="margin-bottom:16px">For general questions, partnerships, or bulk rental queries:</p>
-        <a href="mailto:support@ramsaudiovisuals.com" style="font-size:1rem; font-weight:600; color:var(--blue)">support@ramsaudiovisuals.com</a>
+      <div class="contact-page__intro">
+        <span class="badge badge--blue">Contact</span>
+        <h1>Let&apos;s plan the right AV setup for your event</h1>
+        <p>Share your city and requirement once. We&apos;ll route you to the right Rams team with a quick quote.</p>
       </div>
 
-      <div class="card mt-16" style="padding:28px">
-        <h3 style="margin-bottom:4px">Business hours</h3>
-        <p>Monday â€“ Sunday: 8:00 AM â€“ 9:00 PM</p>
-        <p style="margin-top:4px; font-size:0.875rem; color:var(--text-muted)">WhatsApp messages are monitored till 10:00 PM.</p>
+      <div class="contact-shell">
+        <div class="contact-form-card">
+          <div class="contact-form-card__header">
+            <p class="contact-form-card__eyebrow">Send us a message</p>
+            <h2>Get a quote in minutes</h2>
+            <p>Enter your details and we&apos;ll open the correct city WhatsApp with your enquiry pre-filled.</p>
+          </div>
+
+          <form class="contact-form" data-contact-form>
+            <div class="contact-input-grid">
+              <label class="contact-field">
+                <span>Name</span>
+                <input type="text" name="name" placeholder="Your full name" autocomplete="name" required>
+              </label>
+
+              <label class="contact-field">
+                <span>Email</span>
+                <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+              </label>
+
+              <label class="contact-field">
+                <span>Phone number</span>
+                <div class="contact-phone-input">
+                  <span class="contact-phone-input__prefix">+91</span>
+                  <input type="tel" name="phone" placeholder="10-digit mobile number" inputmode="numeric" autocomplete="tel-national" maxlength="10" minlength="10" pattern="[0-9]{10}" title="Please enter exactly 10 digits" data-phone-input required>
+                </div>
+              </label>
+
+              <label class="contact-field">
+                <span>City</span>
+                <select name="city" data-city-select required>
+                  <option value="" selected disabled>Select your city</option>${cityOptions}
+                </select>
+              </label>
+
+              <label class="contact-field contact-field--full">
+                <span>Message</span>
+                <textarea name="message" placeholder="Event date, venue, equipment list, or anything else we should know." rows="4" required></textarea>
+              </label>
+            </div>
+
+            <div class="contact-form__footer">
+              <p class="contact-form__hint">Your message will open in WhatsApp for the selected city team.</p>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary contact-submit">Send message</button>
+                <p class="contact-form__status" data-contact-status aria-live="polite" hidden></p>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <aside class="contact-aside">
+          <p class="contact-aside__eyebrow">Always here to help</p>
+          <h2>Quick replies and city-specific support.</h2>
+          <p class="contact-aside__copy">For bookings, bulk rentals, or planning help, we&apos;ll connect you with the right team fast.</p>
+
+          <div class="contact-aside__stack">
+            <div class="contact-aside__item">
+              <div class="contact-aside__icon">${iconHTML('phone')}</div>
+              <div>
+                <span class="contact-aside__label">Fastest route</span>
+                <strong>Choose a city to open the right WhatsApp team.</strong>
+                <p>Best for fast pricing and availability checks.</p>
+              </div>
+            </div>
+
+            <div class="contact-aside__item">
+              <div class="contact-aside__icon">${iconHTML('mail')}</div>
+              <div>
+                <span class="contact-aside__label">General email</span>
+                <a href="mailto:support@ramsaudiovisuals.com">support@ramsaudiovisuals.com</a>
+                <p>Best for partnerships and larger quote requests.</p>
+              </div>
+            </div>
+
+            <div class="contact-aside__item">
+              <div class="contact-aside__icon">${iconHTML('clock')}</div>
+              <div>
+                <span class="contact-aside__label">Business hours</span>
+                <strong>Monday - Sunday, 8:00 AM - 9:00 PM</strong>
+                <p>WhatsApp is monitored till 10:00 PM.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-aside__cities">
+            <span class="contact-aside__cities-label">Serving all 5 cities</span>
+            <div class="contact-aside__city-list">${cityPills}</div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="contact-city-section">
+        <div class="section-header contact-city-section__header">
+          <span class="badge badge--grey">Direct city lines</span>
+          <h2>Prefer contacting a city team directly?</h2>
+          <p>Use the local lines below for the fastest call-back and on-ground coordination.</p>
+        </div>
+        <div class="contact-city-grid">${cityCards}</div>
       </div>
     </div>
   </section>
