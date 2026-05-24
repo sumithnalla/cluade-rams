@@ -402,7 +402,7 @@ function chunkItems(items, size) {
   return chunks;
 }
 
-function galleryTileHTML(tile, className = '') {
+function galleryTileHTML(tile, className = '', showOnlyTitle = false) {
   const media = tile.images.map((image, index) => `
     <img
       src="${image.src}"
@@ -416,9 +416,9 @@ function galleryTileHTML(tile, className = '') {
   <article class="gallery-tile ${className}" data-rotating-tile aria-label="${tile.title}">
     ${media}
     <div class="gallery-tile__content">
-      ${tile.eyebrow ? `<span class="gallery-tile__eyebrow">${tile.eyebrow}</span>` : ''}
+      ${!showOnlyTitle && tile.eyebrow ? `<span class="gallery-tile__eyebrow">${tile.eyebrow}</span>` : ''}
       <h3>${tile.title}</h3>
-      ${tile.description ? `<p>${tile.description}</p>` : ''}
+      ${!showOnlyTitle && tile.description ? `<p>${tile.description}</p>` : ''}
     </div>
   </article>`;
 }
@@ -444,8 +444,8 @@ function homeGallerySectionHTML() {
       </div>
       <div class="gallery-hscroll">
         <div class="gallery-mosaic">
-          ${galleryTileHTML(featureTile, 'gallery-tile--feature')}
-          ${squareTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--square')).join('')}
+          ${galleryTileHTML(featureTile, 'gallery-tile--feature', true)}
+          ${squareTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--square', true)).join('')}
         </div>
       </div>
     </div>
@@ -609,7 +609,7 @@ function landingHeroHTML({
 }
 
 function howItWorksSectionHTML({ title, description, steps }) {
-  const stepImages = ['/photos/step1.png', '/photos/step2.png', '/photos/step-2.png'];
+  const stepImages = ['/photos/step1.png', '/photos/step2.png', '/photos/step3.png'];
 
   return `
   <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="${title}">
@@ -635,11 +635,26 @@ function eventTypeCardHTML(card) {
   const waNumber = cities[0].whatsapp;
   const waMessage = encodeURIComponent(card.message);
 
+  const imageMap = {
+    'wedding': 'wedding.png',
+    'corporate event': 'corporate.png',
+    'birthday party': 'birthday.png',
+    'school / college': 'college.png',
+    'outdoor event': 'outdoor event.png',
+    'product launch': 'product launch.png'
+  };
+  const photoName = imageMap[card.title.toLowerCase()] || '';
+  const photoUrl = `/photos/${encodeURIComponent(photoName)}`;
+
   return `
   <article class="event-type-card">
-    <div class="event-type-card__emoji" aria-hidden="true">${card.emoji}</div>
-    <h3>${card.title}</h3>
-    <p>${card.description}</p>
+    <div class="event-type-card__image-container">
+      <img src="${photoUrl}" alt="${card.title} AV rental" class="event-type-card__img" loading="lazy">
+    </div>
+    <div class="event-type-card__info">
+      <h3>${card.title}</h3>
+      <p>${card.description}</p>
+    </div>
     <a href="https://wa.me/${waNumber}?text=${waMessage}" class="btn btn--whatsapp btn--sm btn--full" target="_blank" rel="noopener">
       WhatsApp for ${card.title.toLowerCase()}
     </a>
@@ -749,17 +764,16 @@ function footerHTML() {
   return `
 <footer class="footer" role="contentinfo">
   <div class="container">
-    <div class="footer__grid">
+    <div class="footer__inner">
       <div class="footer__brand">
         <a href="/index.html" class="footer__logo"><img src="/photos/logo-footer.png" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
-        <p class="footer__desc">Professional AV equipment on rent across 5 major Indian cities. Delivered, set up, and collected â€” hassle free.</p>
-        <a href="mailto:support@ramsaudiovisuals.com" class="footer__email">support@ramsaudiovisuals.com</a>
+        <p class="footer__tagline">Professional AV equipment on rent across 5 major Indian cities. Delivered, set up, and collected — hassle free.</p>
       </div>
-      <div>
+      <div class="footer__col">
         <div class="footer__col-title">Cities</div>
         <div class="footer__links">${cityLinks}</div>
       </div>
-      <div>
+      <div class="footer__col">
         <div class="footer__col-title">Equipment</div>
         <div class="footer__links">
           <a href="/equipment.html#projector">Projectors</a>
@@ -769,18 +783,18 @@ function footerHTML() {
           <a href="/equipment.html#combo">Combo packages</a>
         </div>
       </div>
-      <div>
+      <div class="footer__col">
         <div class="footer__col-title">Company</div>
         <div class="footer__links">
           <a href="/about.html">About us</a>
           <a href="/contact.html">Contact</a>
           <a href="/privacy-policy.html">Privacy policy</a>
+          <a href="mailto:support@ramsaudiovisuals.com">support@ramsaudiovisuals.com</a>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>Â© ${new Date().getFullYear()} Rams AudioVisuals. All rights reserved.</span>
-      <a href="/privacy-policy.html">Privacy policy</a>
+      <span>© ${new Date().getFullYear()} Rams AudioVisuals. All rights reserved.</span>
     </div>
   </div>
 </footer>`;
@@ -903,7 +917,7 @@ function buildHomepage() {
   </div>
 </div>`).join('');
 
-  const html = `${headHTML({ title: 'AV Equipment for Rent | Projectors, Sound Systems, Mics & More â€” Rams AudioVisuals', description: 'Rent projectors, sound systems, microphones, LED screens, TVs & combo packages in Hyderabad, Bangalore, Mumbai, Chennai & Pune. Free setup & delivery. Call now.', canonical: '/', schema })}
+  const html = `${headHTML({ title: 'AV Equipment for Rent | Projectors, Sound Systems, Mics & More — Rams AudioVisuals', description: 'Rent projectors, sound systems, microphones, LED screens, TVs & combo packages in Hyderabad, Bangalore, Mumbai, Chennai & Pune. Free setup & delivery. Call now.', canonical: '/', schema })}
 ${navbarHTML('home')}
 
 <main>
@@ -913,8 +927,7 @@ ${navbarHTML('home')}
       <div class="hero-card hero-card--home">
         <div class="hero-card__content">
           <div class="badge badge--blue hero-card__badge">Premium AV Rentals</div>
-          <h1>Professional AV equipment<br>for rent â€” delivered &amp; set up</h1>
-          <p>Projectors, sound systems, microphones, LED screens, TVs &amp; combo packages across Hyderabad, Bangalore, Mumbai, Chennai &amp; Pune.</p>
+          <h1>"Professional <span class="highlight-accent">AV equipment<svg class="hand-drawn-circle" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M5,50 C5,15 95,15 95,50 C95,85 8,85 5,55 C4,35 12,25 22,22" /></svg></span> for rent<br>and <span class="highlight-underline">delivered & set<svg class="hand-drawn-underline" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2,8 C 30,5 70,9 98,6" /></svg></span>"</h1>
           <div class="hero-card__actions">
             <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20AV%20equipment%20for%20my%20event." class="btn btn--primary" target="_blank" rel="noopener">
               Book Now
@@ -922,10 +935,6 @@ ${navbarHTML('home')}
             <a href="/equipment.html" class="btn btn--secondary">
               View Equipment
             </a>
-          </div>
-          <div class="hero__phone hero-card__phone">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <span>Hyd: <a href="tel:9700033342" style="font-weight:700; color:var(--text-primary);">9700033342</a> &nbsp;|&nbsp; Blr: <a href="tel:9553703737" style="font-weight:700; color:var(--text-primary);">9553703737</a></span>
           </div>
         </div>
       </div>
@@ -951,7 +960,7 @@ ${navbarHTML('home')}
     <div class="container">
       <div class="section-header">
         <h2>Browse by Category</h2>
-        <p>From single-item rentals to complete setups â€” all delivered and installed.</p>
+        <p>From single-item rentals to complete setups — all delivered and installed.</p>
       </div>
       <div class="services-grid">
         ${serviceStrip}
@@ -966,7 +975,7 @@ ${navbarHTML('home')}
         <div class="stat-card"><div class="stat-card__number">500+</div><div class="stat-card__label">Events served</div></div>
         <div class="stat-card"><div class="stat-card__number">5</div><div class="stat-card__label">Cities covered</div></div>
         <div class="stat-card"><div class="stat-card__number">20+</div><div class="stat-card__label">Equipment types</div></div>
-        <div class="stat-card"><div class="stat-card__number">4.8â˜…</div><div class="stat-card__label">Average rating</div></div>
+        <div class="stat-card"><div class="stat-card__number">4.8★</div><div class="stat-card__label">Average rating</div></div>
       </div>
     </div>
   </section>
@@ -991,7 +1000,7 @@ ${navbarHTML('home')}
             <div class="how-step__desc">Share your event date, venue, and city. We confirm availability and pricing within minutes.</div>
           </div>
           <div class="how-step">
-            <img src="/photos/step-2.png" alt="Step 3" class="how-step__img">
+            <img src="/photos/step3.png" alt="Step 3" class="how-step__img">
             <div class="how-step__title">We deliver and set up</div>
             <div class="how-step__desc">Our team arrives before your event, sets everything up, and collects after. Zero hassle.</div>
           </div>
