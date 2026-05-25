@@ -375,7 +375,7 @@ function eventCardHTML(event) {
 function pickGalleryImages(startIndex, count, altBase) {
   if (!galleryImageFiles.length) {
     return Array.from({ length: count }, (_, index) => ({
-      src: '/photos/h.png',
+      src: '/photos/h.webp',
       alt: `${altBase} ${index + 1}`
     }));
   }
@@ -485,7 +485,7 @@ function reviewCarouselSectionHTML(reviews = googleReviews, title = 'What client
   const cards = [...reviews, ...reviews].map(review => `
         <article class="review-card">
           <div class="review-card__top">
-            <img src="/photos/google.png" alt="Google" class="review-card__google" loading="lazy" width="40" height="40"/>
+            <img src="/photos/google.webp" alt="Google" class="review-card__google" loading="lazy" width="40" height="40"/>
             <div class="review-card__stars" aria-label="${review.rating} out of 5 stars">${'&#9733;'.repeat(review.rating)}</div>
           </div>
           <p class="review-card__comment">"${review.comment}"</p>
@@ -609,7 +609,7 @@ function landingHeroHTML({
 }
 
 function howItWorksSectionHTML({ title, description, steps }) {
-  const stepImages = ['/photos/step1.png', '/photos/step2.png', '/photos/step3.png'];
+  const stepImages = ['/photos/step1.webp', '/photos/step2.webp', '/photos/step3.webp'];
 
   return `
   <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="${title}">
@@ -636,12 +636,12 @@ function eventTypeCardHTML(card) {
   const waMessage = encodeURIComponent(card.message);
 
   const imageMap = {
-    'wedding': 'wedding.png',
-    'corporate event': 'corporate.png',
-    'birthday party': 'birthday.png',
-    'school / college': 'college.png',
-    'outdoor event': 'outdoor event.png',
-    'product launch': 'product launch.png'
+    'wedding': 'wedding.webp',
+    'corporate event': 'corporate.webp',
+    'birthday party': 'birthday.webp',
+    'school / college': 'college.webp',
+    'outdoor event': 'outdoor event.webp',
+    'product launch': 'product launch.webp'
   };
   const photoName = imageMap[card.title.toLowerCase()] || '';
   const photoUrl = `/photos/${encodeURIComponent(photoName)}`;
@@ -744,7 +744,7 @@ function navbarHTML(activePage = '') {
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="navbar__inner">
-      <a href="/index.html" class="navbar__logo"><img src="/photos/logo new.png" alt="Rams AudioVisuals Logo" class="navbar__logo-img"></a>
+      <a href="/index.html" class="navbar__logo"><img src="/photos/logo new.webp" alt="Rams AudioVisuals Logo" class="navbar__logo-img"></a>
       <ul class="navbar__links" role="list">
         ${desktopLinks}
       </ul>
@@ -766,7 +766,7 @@ function footerHTML() {
   <div class="container">
     <div class="footer__inner">
       <div class="footer__brand">
-        <a href="/index.html" class="footer__logo"><img src="/photos/logo-footer.png" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
+        <a href="/index.html" class="footer__logo"><img src="/photos/logo-footer.webp" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
         <p class="footer__tagline">Professional AV equipment on rent across 5 major Indian cities. Delivered, set up, and collected — hassle free.</p>
       </div>
       <div class="footer__col">
@@ -808,7 +808,7 @@ function headHTML({ title, description, canonical, schema = '' }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${title}</title>
   <meta name="description" content="${description}"/>
-  <link rel="icon" type="image/png" href="/photos/favicon.png" />
+  <link rel="icon" type="image/webp" href="/photos/favicon.webp" />
   <link rel="canonical" href="https://www.ramsaudiovisuals.com${canonical}"/>
   <meta property="og:title" content="${title}"/>
   <meta property="og:description" content="${description}"/>
@@ -865,7 +865,7 @@ function buildHomepage() {
         "@type": "LocalBusiness",
         "name": "Rams AudioVisuals",
         "url": "https://www.ramsaudiovisuals.com",
-        "logo": "https://www.ramsaudiovisuals.com/images/logo.png",
+        "logo": "https://www.ramsaudiovisuals.com/photos/logo%20new.webp",
         "email": "support@ramsaudiovisuals.com",
         "description": "Professional AV equipment rental â€” projectors, sound systems, mics, TVs, and combo packages across Hyderabad, Bangalore, Mumbai, Chennai and Pune.",
         "areaServed": cities.map(c => c.name),
@@ -891,13 +891,13 @@ function buildHomepage() {
 
   const cityCards = cities.map(c => `
 <a href="/${c.slug}/index.html" class="service-card">
-  <div class="service-card__icon"><img src="/photos/${c.slug}.png" alt="${c.name}" class="service-card__img" loading="lazy"></div>
+  <div class="service-card__icon"><img src="/photos/${c.slug}.webp" alt="${c.name}" class="service-card__img" loading="lazy"></div>
   <div class="service-card__name">${c.name}</div>
 </a>`).join('');
 
   const serviceStrip = services.map(s => `
 <a href="/equipment.html#${s.category}" class="service-card">
-  <div class="service-card__icon"><img src="/photos/${servicePhotoMap[s.icon]}.png" alt="${s.name}" class="service-card__img" loading="lazy"></div>
+  <div class="service-card__icon"><img src="/photos/${servicePhotoMap[s.icon]}.webp" alt="${s.name}" class="service-card__img" loading="lazy"></div>
   <div class="service-card__name">${s.name}</div>
 </a>`).join('');
 
@@ -990,17 +990,17 @@ ${navbarHTML('home')}
       <div class="how-hscroll">
         <div class="grid grid--3">
           <div class="how-step">
-            <img src="/photos/step1.png" alt="Step 1" class="how-step__img">
+            <img src="/photos/step1.webp" alt="Step 1" class="how-step__img">
             <div class="how-step__title">Choose your equipment</div>
             <div class="how-step__desc">Browse our catalogue. Select the items you need for your event type and size.</div>
           </div>
           <div class="how-step">
-            <img src="/photos/step2.png" alt="Step 2" class="how-step__img">
+            <img src="/photos/step2.webp" alt="Step 2" class="how-step__img">
             <div class="how-step__title">WhatsApp or call us</div>
             <div class="how-step__desc">Share your event date, venue, and city. We confirm availability and pricing within minutes.</div>
           </div>
           <div class="how-step">
-            <img src="/photos/step3.png" alt="Step 3" class="how-step__img">
+            <img src="/photos/step3.webp" alt="Step 3" class="how-step__img">
             <div class="how-step__title">We deliver and set up</div>
             <div class="how-step__desc">Our team arrives before your event, sets everything up, and collects after. Zero hassle.</div>
           </div>
@@ -1167,7 +1167,7 @@ ${navbarHTML('about')}
       </div>
       <div class="founder-card">
         <div class="founder-card__media">
-          <img src="/photos/ceo.jpeg" alt="Ramavath Ramesh, Founder and CEO of Ram's Audio Visuals" class="founder-card__image" loading="lazy" decoding="async" />
+          <img src="/photos/ceo.webp" alt="Ramavath Ramesh, Founder and CEO of Ram's Audio Visuals" class="founder-card__image" loading="lazy" decoding="async" />
         </div>
         <div class="founder-card__content">
           <p>Mr. Ramavath Ramesh is the Founder &amp; CEO of Ram's Audio Visuals, based in Hyderabad. With strong dedication and vision, he has built the company into a trusted provider of projector rentals and audio-visual solutions for events, corporate meetings, and presentations.</p>
@@ -1429,7 +1429,7 @@ function buildCityPages() {
   cities.forEach(city => {
     const serviceCards = services.map(s => `
 <a href="/${city.slug}/${s.slug}.html" class="service-card service-card--detailed">
-  <div class="service-card__icon"><img src="/photos/${servicePhotoMap[s.icon]}.png" alt="${s.name}" class="service-card__img" loading="lazy"></div>
+  <div class="service-card__icon"><img src="/photos/${servicePhotoMap[s.icon]}.webp" alt="${s.name}" class="service-card__img" loading="lazy"></div>
   <div class="service-card__name">${s.name}</div>
   <div class="service-card__desc">Delivered and set up in ${city.name}</div>
   <div class="service-card__arrow">Explore options</div>
@@ -1898,9 +1898,9 @@ ${navbarHTML('events')}
       className: 'btn btn--secondary'
     },
     supportContent: `<p class="landing-hero__support-copy">Call your city team directly for AV equipment for rent for events.</p>${cityPhoneStripHTML()}`,
-    mainImageSrc: '/photos/projectors.png',
+    mainImageSrc: '/photos/projectors.webp',
     mainImageAlt: 'Projector and screen setup for event rentals',
-    accentImageSrc: '/photos/microphones.png',
+    accentImageSrc: '/photos/microphones.webp',
     accentImageAlt: 'Wireless microphones for event rentals',
     tags: ['Weddings', 'Corporate events', 'Birthday parties'],
     ariaLabel: 'AV equipment for rent for every event in India'
@@ -2019,9 +2019,9 @@ ${navbarHTML('corporate')}
       className: 'btn btn--secondary'
     },
     supportContent: '<p class="landing-hero__support-copy">Prefer email for your corporate AV equipment rental?</p><a href="mailto:support@ramsaudiovisuals.com" class="landing-email-line">support@ramsaudiovisuals.com</a>',
-    mainImageSrc: '/photos/sound systems.png',
+    mainImageSrc: '/photos/sound systems.webp',
     mainImageAlt: 'Corporate sound system rental setup',
-    accentImageSrc: '/photos/LED.png',
+    accentImageSrc: '/photos/LED.webp',
     accentImageAlt: 'LED wall rental for corporate events',
     tags: ['GST invoice', 'Same-day delivery', 'Dedicated support'],
     ariaLabel: 'Corporate AV equipment rental'
@@ -2111,9 +2111,9 @@ ${navbarHTML('offers')}
       external: true
     },
     supportContent: '<p class="landing-note">Offers are updated seasonally. WhatsApp us to confirm current availability.</p>',
-    mainImageSrc: '/photos/combos.png',
+    mainImageSrc: '/photos/combos.webp',
     mainImageAlt: 'AV combo rental offer equipment',
-    accentImageSrc: '/photos/projectors.png',
+    accentImageSrc: '/photos/projectors.webp',
     accentImageAlt: 'Projector rental offer visual',
     tags: ['Combo rental offer', 'Multi-day rental offer', 'Affordable packages'],
     ariaLabel: 'AV equipment rental offers'

@@ -1,0 +1,33 @@
+# Walkthrough - WebP Image Migration
+
+We have successfully migrated the Rams AudioVisuals website's images from heavy PNG/JPEG formats to lightweight WebP format.
+
+## Changes Made
+
+### 1. Image Assets Relocation & Cleanup
+* Moved 31 `.webp` files from the temporary `public/photos/photos-webp/` directory to the main `public/photos/` directory.
+* Moved 51 `.webp` files from `public/photos/gallery/gallery-webp/` to `public/photos/gallery/`.
+* Deleted all original heavy `.png`, `.jpeg`, and `.jpg` files from both `public/photos/` and `public/photos/gallery/` folders.
+* Deleted the now empty temporary `photos-webp` and `gallery-webp` subfolders.
+* Staged all file deletions and additions in git to track the transition cleanly.
+
+### 2. Code Updates
+* Modified [build.js](file:///d:/claude%20rams/rams-audiovisuals/build.js) to replace all hardcoded `.png` and `.jpeg` file extensions with `.webp` for:
+  * Static images (step images, logo files, google logo, favicon).
+  * Dynamic mapping maps (such as `imageMap`).
+  * Hero section assets (main and accent images for events, corporate, and offers pages).
+  * breadcrumbs and local schema icons.
+* Modified [main.css](file:///d:/claude%20rams/rams-audiovisuals/src/css/main.css) to change the background image URL for the home hero section:
+  * Updated `/photos/sumith.png` to `/photos/sumith.webp` (Line 837).
+
+### 3. Website Regeneration
+* Ran the build generator script (`node build.js`).
+* Successfully regenerated all **35+ identical HTML pages** (city pages, service pages, and static pages like index, about, contact, offers, privacy policy, and corporate) with the correct `.webp` links and schemas.
+
+---
+
+## Validation Results
+
+* **Compilation / Generation:** The build generator script ran flawlessly and created all sitemaps, robots.txt, and HTML pages.
+* **Asset References:** Verification grep searches across all generated output HTML and CSS files confirmed that there are no remaining `.png` or `.jpeg` references under the `/photos/` path.
+* **Git Status:** All deletions and new files have been successfully staged in git.

@@ -1,0 +1,63 @@
+# Image Migration to WebP
+
+This implementation plan details the steps required to transition the Rams AudioVisuals website to use WebP images instead of heavy PNG/JPEG images. By doing this, we will significantly improve page load speeds and decrease the weight of the repository.
+
+## Proposed Changes
+
+### Component 1: Image Assets Relocation and Cleanup
+We will move the `.webp` files out of the temporary `photos-webp` and `gallery-webp` subdirectories and replace the original heavy `.png`/`.jpeg`/`.jpg` files in the main `photos/` and `photos/gallery/` folders.
+
+- **Move Files:**
+  - Move all `.webp` files from `public/photos/photos-webp/` to `public/photos/`
+  - Move all `.webp` files from `public/photos/gallery/gallery-webp/` to `public/photos/gallery/`
+- **Delete Heavy Assets:**
+  - Delete all `.png` and `.jpeg`/`.jpg` files in `public/photos/`
+  - Delete all `.jpeg` files in `public/photos/gallery/`
+- **Clean Up Subdirectories:**
+  - Remove empty `public/photos/photos-webp/` and `public/photos/gallery/gallery-webp/` directories.
+
+---
+
+### Component 2: Source Code Updates
+We will update hardcoded image references in the build script and stylesheets to point to the new `.webp` filenames.
+
+#### [MODIFY] [build.js](file:///d:/claude%20rams/rams-audiovisuals/build.js)
+We will modify all static image paths referencing `/photos/` from `.png` or `.jpeg` to `.webp`:
+- Update `h.png` fallback to `h.webp`.
+- Update `google.png` to `google.webp`.
+- Update `step1.png`, `step2.png`, `step3.png` to `.webp` in `stepImages` array.
+- Update `imageMap` keys/values to map wedding, corporate, birthday, college, outdoor, and product launch events to `.webp` files.
+- Update logo files: `logo new.png` -> `logo new.webp` and `logo-footer.png` -> `logo-footer.webp`.
+- Update favicon: `/photos/favicon.png` -> `/photos/favicon.webp` (updating icon link type to `image/webp`).
+- Update service maps: `/photos/${c.slug}.png` -> `/photos/${c.slug}.webp`, etc.
+- Update CEO photo: `ceo.jpeg` -> `ceo.webp`.
+- Update landing page hero main/accent images (`projectors.png` -> `projectors.webp`, `microphones.png` -> `microphones.webp`, etc.).
+
+#### [MODIFY] [main.css](file:///d:/claude%20rams/rams-audiovisuals/src/css/main.css)
+- Change line 837 background image url: `/photos/sumith.png` -> `/photos/sumith.webp`.
+
+---
+
+### Component 3: Site Regeneration
+#### [COMMAND] Run Build
+After code modifications, we will run the static generator to rebuild all 35 pages with correct WebP paths:
+```powershell
+node build.js
+```
+
+---
+
+## Verification Plan
+
+### Automated Verification
+We will run a grep search across the generated `public/` directory (excluding subdirectories containing original images if any, or general searches) to verify that no `.png` or `.jpeg` assets under `/photos/` are referenced anymore in HTML or CSS files.
+
+We will run:
+```powershell
+node build.js
+```
+And check if it runs without errors.
+
+### Manual Verification
+- Confirm that the website pages load correctly.
+- Verify that WebP files are correctly served when inspecting the output pages.

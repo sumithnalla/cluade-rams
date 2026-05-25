@@ -834,7 +834,7 @@ p {
 
 .hero-card--home {
   min-height: clamp(410px, 54vh, 470px);
-  background: #eef5ff url('/photos/sumith.png') 60% 54% / cover no-repeat;
+  background: #eef5ff url('/photos/sumith.webp') 60% 54% / cover no-repeat;
 }
 
 .hero-card__content {
