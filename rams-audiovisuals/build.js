@@ -927,7 +927,7 @@ ${navbarHTML('home')}
       <div class="hero-card hero-card--home">
         <div class="hero-card__content">
           <div class="badge badge--blue hero-card__badge">Premium AV Rentals</div>
-          <h1>"Professional <span class="highlight-accent">AV equipment<svg class="hand-drawn-circle" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M5,50 C5,15 95,15 95,50 C95,85 8,85 5,55 C4,35 12,25 22,22" /></svg></span> for rent<br>and <span class="highlight-underline">delivered & set<svg class="hand-drawn-underline" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2,8 C 30,5 70,9 98,6" /></svg></span>"</h1>
+          <h1>"Professional <span class="highlight-accent">AV equipment<svg class="hand-drawn-circle" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M5,50 C5,15 95,15 95,50 C95,85 8,85 5,55 C4,35 12,25 22,22" /></svg></span> for Rent —<br>delivered &<br><span class="highlight-underline">setup<svg class="hand-drawn-underline" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2,8 C 30,5 70,9 98,6" /></svg></span>"</h1>
           <div class="hero-card__actions">
             <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20AV%20equipment%20for%20my%20event." class="btn btn--primary" target="_blank" rel="noopener">
               Book Now
