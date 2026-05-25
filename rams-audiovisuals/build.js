@@ -12,7 +12,7 @@ function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function renderStars(rating) {
   const full = Math.floor(rating);
-  return 'â˜…'.repeat(full) + (rating % 1 >= 0.5 ? 'Â½' : '');
+  return '★'.repeat(full) + (rating % 1 >= 0.5 ? '½' : '');
 }
 
 const googleReviews = [
@@ -475,7 +475,7 @@ function cityGallerySectionHTML(city) {
         <p>Three popular setup directions our clients ask for in ${city.name}.</p>
       </div>
       <div class="grid grid--3 gallery-grid">
-        ${cityTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--wide')).join('')}
+        ${cityTiles.map((tile) => galleryTileHTML(tile, 'gallery-tile--wide', true)).join('')}
       </div>
     </div>
   </section>`;
@@ -692,7 +692,7 @@ function equipCardHTMLLegacy(item, citySlug) {
     <div class="equip-card__price equip-card__price--primary">&#8377;${item.price}<span>/day</span></div>
     <div class="equip-card__model">${item.model}</div>
     <div class="equip-card__meta">
-      <div class="equip-card__price">â‚¹${item.price}<span>/day</span></div>
+      <div class="equip-card__price">₹${item.price}<span>/day</span></div>
       <div class="equip-card__rating">${item.rating}</div>
     </div>
   </div>
@@ -847,12 +847,12 @@ function copyAssets() {
 function writePage(filePath, html) {
   mkdirSync(dirname(filePath), { recursive: true });
   writeFileSync(filePath, html, 'utf8');
-  console.log('âœ“', filePath);
+  console.log('✓', filePath);
 }
 
 /* ============================================
-   BUILD FUNCTIONS â€” one per template type
-   These are stubs. Phase 1â€“3 will fill them.
+   BUILD FUNCTIONS — one per template type
+   These are stubs. Phase 1–3 will fill them.
    ============================================ */
 
 function buildHomepage() {
@@ -867,7 +867,7 @@ function buildHomepage() {
         "url": "https://www.ramsaudiovisuals.com",
         "logo": "https://www.ramsaudiovisuals.com/photos/logo%20new.webp",
         "email": "support@ramsaudiovisuals.com",
-        "description": "Professional AV equipment rental â€” projectors, sound systems, mics, TVs, and combo packages across Hyderabad, Bangalore, Mumbai, Chennai and Pune.",
+        "description": "Professional AV equipment rental — projectors, sound systems, mics, TVs, and combo packages across Hyderabad, Bangalore, Mumbai, Chennai and Pune.",
         "areaServed": cities.map(c => c.name),
         "contactPoint": cities.map(c => ({
           "@type": "ContactPoint",
@@ -881,9 +881,9 @@ function buildHomepage() {
         "mainEntity": [
           { "@type": "Question", "name": "Which cities does Rams AudioVisuals serve?", "acceptedAnswer": { "@type": "Answer", "text": "We serve Hyderabad, Bangalore, Mumbai, Chennai, and Pune." } },
           { "@type": "Question", "name": "Do you provide setup along with the equipment?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, all rentals include free delivery, professional setup, and collection after your event." } },
-          { "@type": "Question", "name": "What is the minimum rental duration?", "acceptedAnswer": { "@type": "Answer", "text": "Minimum rental is for 1 day. We also offer hourly rentals for certain equipment â€” WhatsApp us for details." } },
+          { "@type": "Question", "name": "What is the minimum rental duration?", "acceptedAnswer": { "@type": "Answer", "text": "Minimum rental is for 1 day. We also offer hourly rentals for certain equipment — WhatsApp us for details." } },
           { "@type": "Question", "name": "What types of AV equipment can I rent?", "acceptedAnswer": { "@type": "Answer", "text": "We rent projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages." } },
-          { "@type": "Question", "name": "How do I book AV equipment?", "acceptedAnswer": { "@type": "Answer", "text": "Simply WhatsApp or call your city's number. Share your event date, type, and venue â€” we'll confirm availability and pricing instantly." } }
+          { "@type": "Question", "name": "How do I book AV equipment?", "acceptedAnswer": { "@type": "Answer", "text": "Simply WhatsApp or call your city's number. Share your event date, type, and venue — we'll confirm availability and pricing instantly." } }
         ]
       }
     ]
@@ -905,10 +905,10 @@ function buildHomepage() {
 
   const faqs = [
     ['Which cities does Rams AudioVisuals serve?', 'We serve Hyderabad, Bangalore, Mumbai, Chennai, and Pune with free delivery and setup.'],
-    ['Do you provide setup along with the equipment?', 'Yes â€” every rental includes professional delivery, setup, and collection after your event at no extra cost.'],
-    ['What is the minimum rental duration?', 'Minimum is 1 day. We also accommodate half-day and multi-day rentals â€” WhatsApp us for pricing.'],
+    ['Do you provide setup along with the equipment?', 'Yes — every rental includes professional delivery, setup, and collection after your event at no extra cost.'],
+    ['What is the minimum rental duration?', 'Minimum is 1 day. We also accommodate half-day and multi-day rentals — WhatsApp us for pricing.'],
     ['What types of AV equipment can I rent?', 'Projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages.'],
-    ['How do I book?', 'WhatsApp or call your city number. Share your event date and venue â€” we confirm in minutes.']
+    ['How do I book?', 'WhatsApp or call your city number. Share your event date and venue — we confirm in minutes.']
   ].map(([q, a]) => `
 <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
   <button class="faq-item__question" itemprop="name">${q}<i class="faq-item__icon" aria-hidden="true">+</i></button>
@@ -944,8 +944,16 @@ ${navbarHTML('home')}
   <!-- CITIES -->
   <section class="section--sm" aria-label="Cities we serve">
     <div class="container">
-      <div class="section-header" style="margin-bottom: 32px;">
+      <div class="section-header cities-section-header" style="margin-bottom: 32px;">
         <h2>Select your city</h2>
+        <div class="cities-nav" aria-label="Cities navigation">
+          <button class="cities-nav__btn cities-nav__btn--prev" aria-label="Previous city" id="cities-prev-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="cities-nav__btn cities-nav__btn--next" aria-label="Next city" id="cities-next-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
       </div>
       <div class="cities-hscroll">
         <div class="grid grid--5" role="list" aria-label="Available cities">
@@ -1017,7 +1025,7 @@ ${homeGallerySectionHTML()}
       <div class="section-header">
         <span class="badge badge--blue">Most booked</span>
         <h2>Popular equipment</h2>
-        <p>Our most rented items â€” trusted by hundreds of events across India.</p>
+        <p>Our most rented items — trusted by hundreds of events across India.</p>
       </div>
       <div class="equip-hscroll">
         <div class="grid grid--3">
@@ -1075,7 +1083,7 @@ function buildEquipmentHub() {
   const schema = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "AV Equipment for Rent â€” Rams AudioVisuals",
+    "name": "AV Equipment for Rent — Rams AudioVisuals",
     "numberOfItems": equipment.length,
     "itemListElement": equipment.map((item, i) => ({
       "@type": "ListItem",
@@ -1085,7 +1093,7 @@ function buildEquipmentHub() {
     }))
   });
 
-  const html = `${headHTML({ title: 'AV Equipment for Rent â€” Projectors, Sound Systems, Mics, TVs & Combos | Rams AudioVisuals', description: 'Browse our full catalogue of AV equipment for rent â€” projectors, LED screens, sound systems, microphones, TVs and combo packages. Available in 5 cities.', canonical: '/equipment.html', schema })}
+  const html = `${headHTML({ title: 'AV Equipment for Rent — Projectors, Sound Systems, Mics, TVs & Combos | Rams AudioVisuals', description: 'Browse our full catalogue of AV equipment for rent — projectors, LED screens, sound systems, microphones, TVs and combo packages. Available in 5 cities.', canonical: '/equipment.html', schema })}
 ${navbarHTML('equipment')}
 
 <main>
@@ -1093,14 +1101,14 @@ ${navbarHTML('equipment')}
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">Equipment</span>
       </nav>
 
       <div class="section-header" style="text-align:left; margin-bottom:32px">
         <span class="badge badge--blue">20 items available</span>
         <h1 style="margin-top:8px">AV equipment for rent</h1>
-        <p style="max-width:none">Professional projectors, sound systems, microphones, LED screens, TVs and combo packages â€” available in Hyderabad, Bangalore, Mumbai, Chennai and Pune. All rentals include delivery and setup.</p>
+        <p style="max-width:none">Professional projectors, sound systems, microphones, LED screens, TVs and combo packages — available in Hyderabad, Bangalore, Mumbai, Chennai and Pune. All rentals include delivery and setup.</p>
       </div>
 
       <div class="filter-tabs" role="tablist" aria-label="Filter by category">
@@ -1123,7 +1131,7 @@ ${navbarHTML('equipment')}
     <div class="container">
       <div class="cta-banner">
         <h2>Need help choosing the right equipment?</h2>
-        <p>Tell us your event type, venue size, and date â€” we'll suggest the perfect setup.</p>
+        <p>Tell us your event type, venue size, and date — we'll suggest the perfect setup.</p>
         <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20help%20choosing%20AV%20equipment%20for%20my%20event." class="btn btn--whatsapp" target="_blank" rel="noopener">
           WhatsApp for a free recommendation
         </a>
@@ -1147,17 +1155,17 @@ function buildAbout() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
     <a href="tel:${c.phone}">${c.phoneDisplay}</a>
   </div>
-  <a href="/${c.slug}/index.html" class="city-card__link">View ${c.name} equipment â†’</a>
+  <a href="/${c.slug}/index.html" class="city-card__link">View ${c.name} equipment →</a>
 </div>`).join('');
 
-  const html = `${headHTML({ title: 'About Rams AudioVisuals â€” Your Trusted AV Rental Partner', description: 'Rams AudioVisuals provides professional AV equipment for rent across Hyderabad, Bangalore, Mumbai, Chennai and Pune since 2016. Learn about our story and team.', canonical: '/about.html' })}
+  const html = `${headHTML({ title: 'About Rams AudioVisuals — Your Trusted AV Rental Partner', description: 'Rams AudioVisuals provides professional AV equipment for rent across Hyderabad, Bangalore, Mumbai, Chennai and Pune since 2016. Learn about our story and team.', canonical: '/about.html' })}
 ${navbarHTML('about')}
 <main>
   <section class="section">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">About us</span>
       </nav>
       <div class="section-header" style="text-align:left; margin-bottom:32px">
@@ -1262,14 +1270,14 @@ function buildContact() {
           </article>`;
   }).join('');
 
-  const html = `${headHTML({ title: 'Contact Rams AudioVisuals â€” Get a Quote Today', description: 'Contact Rams AudioVisuals for AV equipment rental in Hyderabad, Bangalore, Mumbai, Chennai and Pune. WhatsApp or call your city number for an instant quote.', canonical: '/contact.html' })}
+  const html = `${headHTML({ title: 'Contact Rams AudioVisuals — Get a Quote Today', description: 'Contact Rams AudioVisuals for AV equipment rental in Hyderabad, Bangalore, Mumbai, Chennai and Pune. WhatsApp or call your city number for an instant quote.', canonical: '/contact.html' })}
 ${navbarHTML('contact')}
 <main>
   <section class="section contact-page">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">Contact</span>
       </nav>
 
@@ -1389,14 +1397,14 @@ ${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV e
 }
 
 function buildPrivacyPolicy() {
-  const html = `${headHTML({ title: 'Privacy Policy â€” Rams AudioVisuals', description: 'Privacy policy for Rams AudioVisuals. Learn how we handle your data when you contact us for AV equipment rental.', canonical: '/privacy-policy.html' })}
+  const html = `${headHTML({ title: 'Privacy Policy — Rams AudioVisuals', description: 'Privacy policy for Rams AudioVisuals. Learn how we handle your data when you contact us for AV equipment rental.', canonical: '/privacy-policy.html' })}
 ${navbarHTML('')}
 <main>
   <section class="section">
     <div class="container" style="max-width:720px">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">Privacy policy</span>
       </nav>
       <h1 style="margin-bottom:24px">Privacy policy</h1>
@@ -1445,11 +1453,11 @@ function buildCityPages() {
     }).concat(googleReviews);
 
     const faqData = [
-      [`What AV equipment can I rent in ${city.name}?`, `We offer projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages for rent in ${city.name} â€” all with free delivery and professional setup.`],
+      [`What AV equipment can I rent in ${city.name}?`, `We offer projectors, LED screens, sound systems, speakers, microphones, TVs, and combo packages for rent in ${city.name} — all with free delivery and professional setup.`],
       [`Do you deliver to all areas in ${city.name}?`, `Yes, we deliver across ${city.name} including ${city.areas.split(',').slice(0, 4).join(', ')} and more. WhatsApp us your venue address for confirmation.`],
       [`What is the minimum rental duration in ${city.name}?`, `Minimum rental is 1 day. We accommodate multi-day rentals at reduced rates. Contact us for a custom quote.`],
-      [`How do I book AV equipment in ${city.name}?`, `WhatsApp or call us at ${city.phoneDisplay}. Share your event date, venue, and equipment requirements â€” we confirm in minutes.`],
-      [`Do you provide setup service in ${city.name}?`, `Yes â€” every rental in ${city.name} includes free professional setup, testing, and collection after your event.`]
+      [`How do I book AV equipment in ${city.name}?`, `WhatsApp or call us at ${city.phoneDisplay}. Share your event date, venue, and equipment requirements — we confirm in minutes.`],
+      [`Do you provide setup service in ${city.name}?`, `Yes — every rental in ${city.name} includes free professional setup, testing, and collection after your event.`]
     ];
 
     const faqs = faqData.map(([q, a]) => `
@@ -1491,14 +1499,14 @@ function buildCityPages() {
       ]
     });
 
-    const html = `${headHTML({ title: `AV Equipment for Rent in ${city.name} â€” Projectors, Sound Systems, Mics & More | Rams AudioVisuals`, description: city.metaDescription, canonical: `/${city.slug}/`, schema })}
+    const html = `${headHTML({ title: `AV Equipment for Rent in ${city.name} — Projectors, Sound Systems, Mics & More | Rams AudioVisuals`, description: city.metaDescription, canonical: `/${city.slug}/`, schema })}
 ${navbarHTML('')}
 <main>
   <section class="section">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">${city.name}</span>
       </nav>
 
@@ -1506,7 +1514,7 @@ ${navbarHTML('')}
         <div>
           <span class="badge badge--blue">${city.name}</span>
           <h1 style="margin-top:8px; margin-bottom:12px">AV equipment for rent in ${city.name}</h1>
-          <p style="font-size:1.05rem; max-width:600px">Projectors, sound systems, microphones, LED screens, TVs and combo packages â€” delivered and set up anywhere in ${city.name}.</p>
+          <p style="font-size:1.05rem; max-width:600px">Projectors, sound systems, microphones, LED screens, TVs and combo packages — delivered and set up anywhere in ${city.name}.</p>
           <div class="hero__phone mt-16">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             Call us: <a href="tel:${city.phone}">${city.phoneDisplay}</a>
@@ -1571,7 +1579,7 @@ ${reviewCarouselSectionHTML(cityReviews, `What our ${city.name} clients say`)}
 
   <section class="section" aria-label="FAQ">
     <div class="container" style="max-width:720px">
-      <div class="section-header"><h2>Frequently asked questions â€” ${city.name}</h2></div>
+      <div class="section-header"><h2>Frequently asked questions — ${city.name}</h2></div>
       ${faqs}
     </div>
   </section>
@@ -1604,50 +1612,50 @@ function buildCityServicePages() {
   const faqTemplates = {
     'projector-for-rent': (city) => [
       [`Where can I rent a projector in ${city.name}?`, `Rams AudioVisuals offers projector rental in ${city.name} with free delivery and professional setup. Call or WhatsApp us at ${city.phoneDisplay}.`],
-      [`What is the projector rental price per day in ${city.name}?`, `Projector rental in ${city.name} starts from â‚¹1,800 per day for standard models and goes up to â‚¹2,999 for high-brightness laser projectors. Prices include delivery and setup.`],
-      [`Do you provide a projector screen with the projector in ${city.name}?`, `Yes â€” we offer tripod screens and LED walls separately, and as part of combo packages. You can rent them together at a discounted rate in ${city.name}.`],
+      [`What is the projector rental price per day in ${city.name}?`, `Projector rental in ${city.name} starts from ₹1,800 per day for standard models and goes up to ₹2,999 for high-brightness laser projectors. Prices include delivery and setup.`],
+      [`Do you provide a projector screen with the projector in ${city.name}?`, `Yes — we offer tripod screens and LED walls separately, and as part of combo packages. You can rent them together at a discounted rate in ${city.name}.`],
       [`Which projector is best for outdoor events in ${city.name}?`, `For outdoor events in ${city.name}, we recommend the Panasonic PT-VMZ51S (5200 lm) or the LED Wall options, which perform well in bright conditions.`],
-      [`How early should I book a projector in ${city.name}?`, `For weekends and peak event seasons, we recommend booking at least 3â€“5 days in advance in ${city.name}. Last-minute bookings are also accepted subject to availability.`]
+      [`How early should I book a projector in ${city.name}?`, `For weekends and peak event seasons, we recommend booking at least 3–5 days in advance in ${city.name}. Last-minute bookings are also accepted subject to availability.`]
     ],
     'sound-system-for-rent': (city) => [
       [`Where can I rent a sound system in ${city.name}?`, `Rams AudioVisuals provides sound system rental in ${city.name} with delivery, setup, and testing included. Reach us at ${city.phoneDisplay}.`],
       [`What types of sound systems are available for rent in ${city.name}?`, `We offer portable party speakers, professional PA speakers (JBL PRX412M), powered speaker pairs with stands, and complete audio mixer setups in ${city.name}.`],
-      [`How much does sound system rental cost in ${city.name}?`, `Sound system rental in ${city.name} starts from â‚¹1,299/day for portable speakers and goes up to â‚¹2,499/day for a full audio mixer setup with multiple speakers.`],
-      [`Is setup included with sound system rental in ${city.name}?`, `Yes â€” every sound system rental in ${city.name} includes professional setup, cable management, sound check, and collection after your event.`],
+      [`How much does sound system rental cost in ${city.name}?`, `Sound system rental in ${city.name} starts from ₹1,299/day for portable speakers and goes up to ₹2,499/day for a full audio mixer setup with multiple speakers.`],
+      [`Is setup included with sound system rental in ${city.name}?`, `Yes — every sound system rental in ${city.name} includes professional setup, cable management, sound check, and collection after your event.`],
       [`What events is a sound system suitable for in ${city.name}?`, `Our sound systems are used for corporate meetings, weddings, birthday parties, product launches, school events, and outdoor gatherings across ${city.name}.`]
     ],
     'mic-for-rent': (city) => [
       [`Where can I rent a microphone in ${city.name}?`, `Rams AudioVisuals rents wireless and wired microphones in ${city.name} with delivery and setup. Contact us at ${city.phoneDisplay}.`],
       [`What types of microphones are available for rent in ${city.name}?`, `We offer dual wireless handheld mics, collar mics (lavalier), headband mics, and complete PA systems with integrated microphones in ${city.name}.`],
-      [`How much does microphone rental cost in ${city.name}?`, `Microphone rental in ${city.name} starts from â‚¹499/day for a dual wireless set and goes up to â‚¹3,999/day for a complete PA system with speakers and mics.`],
-      [`Do wireless microphones work reliably in ${city.name}?`, `Yes â€” we use professional UHF wireless systems that are interference-free and reliable for events with up to 200ft range in ${city.name}.`],
+      [`How much does microphone rental cost in ${city.name}?`, `Microphone rental in ${city.name} starts from ₹499/day for a dual wireless set and goes up to ₹3,999/day for a complete PA system with speakers and mics.`],
+      [`Do wireless microphones work reliably in ${city.name}?`, `Yes — we use professional UHF wireless systems that are interference-free and reliable for events with up to 200ft range in ${city.name}.`],
       [`Can I rent just a microphone without speakers in ${city.name}?`, `Absolutely. You can rent microphones as standalone items in ${city.name}. We also offer combo packages if you need speakers and mics together at a discounted price.`]
     ],
     'tv-for-rent': (city) => [
       [`Where can I rent a TV in ${city.name}?`, `Rams AudioVisuals provides TV rental in ${city.name} including 43", 55", and 65" options. Free delivery and setup. Call ${city.phoneDisplay}.`],
       [`What TV sizes are available for rent in ${city.name}?`, `We have 43" Full HD Smart TVs, 55" QLED 4K TVs, and 65" QLED 4K TVs available for rent in ${city.name}.`],
-      [`How much does TV rental cost in ${city.name}?`, `TV rental in ${city.name} starts from â‚¹1,999/day for a 43" Smart TV and goes up to â‚¹2,999/day for a 65" 4K QLED TV. Delivery and setup included.`],
+      [`How much does TV rental cost in ${city.name}?`, `TV rental in ${city.name} starts from ₹1,999/day for a 43" Smart TV and goes up to ₹2,999/day for a 65" 4K QLED TV. Delivery and setup included.`],
       [`What is a TV rental used for at events in ${city.name}?`, `TVs are commonly rented in ${city.name} for digital menus at restaurants and caterers, presentation displays at conferences, reception screens at weddings, and product display at exhibitions.`],
-      [`Do the rental TVs have HDMI and screen mirroring in ${city.name}?`, `Yes â€” all rental TVs support HDMI input, screen mirroring (Chromecast/Miracast), and USB playback. Smart TVs also support WiFi for streaming in ${city.name}.`]
+      [`Do the rental TVs have HDMI and screen mirroring in ${city.name}?`, `Yes — all rental TVs support HDMI input, screen mirroring (Chromecast/Miracast), and USB playback. Smart TVs also support WiFi for streaming in ${city.name}.`]
     ],
     'speaker-for-rent': (city) => [
       [`Where can I rent speakers in ${city.name}?`, `Rams AudioVisuals offers speaker rental in ${city.name} with professional setup included. WhatsApp or call ${city.phoneDisplay}.`],
       [`What speaker options are available for rent in ${city.name}?`, `We offer portable karaoke speakers, 400W powered monitor speakers, JBL PRX412M professional speakers, and full speaker-and-stand setups in ${city.name}.`],
-      [`How much does speaker rental cost in ${city.name}?`, `Speaker rental in ${city.name} starts from â‚¹1,299/day for portable speakers and goes up to â‚¹1,999/day for professional 400W powered monitors.`],
-      [`Are the rental speakers suitable for outdoor events in ${city.name}?`, `Yes â€” our 400W Power X Monitors and JBL PRX412M speakers are suitable for both indoor and outdoor events with up to 300 attendees in ${city.name}.`],
-      [`Do speakers come with stands and cables in ${city.name}?`, `Yes â€” all speaker rentals in ${city.name} include stands, cables, and a free sound check before your event starts.`]
+      [`How much does speaker rental cost in ${city.name}?`, `Speaker rental in ${city.name} starts from ₹1,299/day for portable speakers and goes up to ₹1,999/day for professional 400W powered monitors.`],
+      [`Are the rental speakers suitable for outdoor events in ${city.name}?`, `Yes — our 400W Power X Monitors and JBL PRX412M speakers are suitable for both indoor and outdoor events with up to 300 attendees in ${city.name}.`],
+      [`Do speakers come with stands and cables in ${city.name}?`, `Yes — all speaker rentals in ${city.name} include stands, cables, and a free sound check before your event starts.`]
     ],
     'led-screen-for-rent': (city) => [
       [`Where can I rent an LED screen or LED wall in ${city.name}?`, `Rams AudioVisuals provides LED screen and LED wall rental in ${city.name}. We supply P2.9 and P3.9 panels in custom sizes. Call ${city.phoneDisplay}.`],
-      [`What LED screen sizes are available for rent in ${city.name}?`, `We offer a fixed 8Ã—12 ft LED wall and custom-size LED walls using P2.9 & P3.9 panels priced per square foot, available across ${city.name}.`],
-      [`How much does LED wall rental cost in ${city.name}?`, `LED screen rental in ${city.name} is priced from â‚¹79/sq.ft to â‚¹119/sq.ft depending on panel type. The 8Ã—12 ft LED wall package starts at â‚¹7,999 for a full day.`],
+      [`What LED screen sizes are available for rent in ${city.name}?`, `We offer a fixed 8×12 ft LED wall and custom-size LED walls using P2.9 & P3.9 panels priced per square foot, available across ${city.name}.`],
+      [`How much does LED wall rental cost in ${city.name}?`, `LED screen rental in ${city.name} is priced from ₹79/sq.ft to ₹119/sq.ft depending on panel type. The 8×12 ft LED wall package starts at ₹7,999 for a full day.`],
       [`What events are LED walls used for in ${city.name}?`, `LED walls are popular in ${city.name} for weddings, corporate conferences, product launches, outdoor concerts, exhibitions, and sports screenings.`],
-      [`Are LED walls suitable for outdoor use in ${city.name}?`, `Yes â€” our P3.9 LED panels are designed for both indoor and outdoor events in ${city.name} and remain clearly visible in bright ambient light conditions.`]
+      [`Are LED walls suitable for outdoor use in ${city.name}?`, `Yes — our P3.9 LED panels are designed for both indoor and outdoor events in ${city.name} and remain clearly visible in bright ambient light conditions.`]
     ],
     'combo-packages': (city) => [
-      [`What AV combo packages are available for rent in ${city.name}?`, `We offer three combo packages in ${city.name}: Projector + Screen + Speaker (â‚¹2,999), PA System Package (â‚¹3,999), and Complete Presentation Setup (â‚¹5,999).`],
-      [`Are combo packages cheaper than renting items separately in ${city.name}?`, `Yes â€” combo packages in ${city.name} save you 15â€“25% compared to renting the same items individually. They also simplify booking and setup coordination.`],
-      [`What is included in the Complete Presentation Setup in ${city.name}?`, `The Complete Presentation Setup includes a projector, tripod screen, audio mixer, 2 powered speakers, a laptop, and a slide clicker â€” everything for a full conference or corporate event in ${city.name}.`],
+      [`What AV combo packages are available for rent in ${city.name}?`, `We offer three combo packages in ${city.name}: Projector + Screen + Speaker (₹2,999), PA System Package (₹3,999), and Complete Presentation Setup (₹5,999).`],
+      [`Are combo packages cheaper than renting items separately in ${city.name}?`, `Yes — combo packages in ${city.name} save you 15–25% compared to renting the same items individually. They also simplify booking and setup coordination.`],
+      [`What is included in the Complete Presentation Setup in ${city.name}?`, `The Complete Presentation Setup includes a projector, tripod screen, audio mixer, 2 powered speakers, a laptop, and a slide clicker — everything for a full conference or corporate event in ${city.name}.`],
       [`Can I customise a combo package for my event in ${city.name}?`, `Absolutely. WhatsApp us your event requirements and we can build a custom combo package tailored to your venue size, event type, and budget in ${city.name}.`],
       [`How do I book a combo package in ${city.name}?`, `WhatsApp or call us at ${city.phoneDisplay} with your event date and venue. We'll confirm availability, finalise the package, and schedule delivery in ${city.name}.`]
     ]
@@ -1680,20 +1688,20 @@ function buildCityServicePages() {
   </div>
 </div>`).join('');
 
-      /* Sidebar â€” other services in this city */
+      /* Sidebar — other services in this city */
       const sidebarLinks = services.filter(s => s.slug !== service.slug).map(s => `
 <a href="/${city.slug}/${s.slug}.html" class="sidebar-link ${s.category === service.category ? 'active' : ''}">
   <span>${s.name}</span>
-  <span class="sidebar-link__arrow">â†’</span>
+  <span class="sidebar-link__arrow">→</span>
 </a>`).join('');
 
-      /* Related links â€” same service other cities + other services this city */
+      /* Related links — same service other cities + other services this city */
       const sameSvcOtherCities = cities.filter(c => c.slug !== city.slug).map(c => `<a href="/${c.slug}/${service.slug}.html" class="related-link">${service.name} in ${c.name}</a>`).join('');
       const otherSvcSameCity = services.filter(s => s.slug !== service.slug).slice(0, 3).map(s => `<a href="/${city.slug}/${s.slug}.html" class="related-link">${s.name} in ${city.name}</a>`).join('');
 
       const h1 = `${capitalize(service.h1suffix)} in ${city.name}`;
       const pageTitle = `${capitalize(service.h1suffix)} in ${city.name} | Rams AudioVisuals`;
-      const metaDesc = `Rent ${service.metaSuffix} in ${city.name} with free delivery and professional setup. Starting from â‚¹499/day. Call ${city.phoneDisplay} or WhatsApp for an instant quote.`;
+      const metaDesc = `Rent ${service.metaSuffix} in ${city.name} with free delivery and professional setup. Starting from ₹499/day. Call ${city.phoneDisplay} or WhatsApp for an instant quote.`;
 
       const schema = JSON.stringify({
         "@context": "https://schema.org",
@@ -1730,9 +1738,9 @@ ${navbarHTML('')}
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/index.html">Home</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <a href="/${city.slug}/index.html">${city.name}</a>
-        <span class="breadcrumb__sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
         <span aria-current="page">${service.name}</span>
       </nav>
 
@@ -1741,7 +1749,7 @@ ${navbarHTML('')}
         <div>
           <span class="badge badge--blue">${city.name}</span>
           <h1 style="margin-top:8px; margin-bottom:12px">${h1}</h1>
-          <p style="font-size:1.05rem; max-width:600px; margin-bottom:16px">Professional ${service.name.toLowerCase()} delivered and set up anywhere in ${city.name}. Starting from â‚¹499/day â€” all rentals include setup, testing, and collection.</p>
+          <p style="font-size:1.05rem; max-width:600px; margin-bottom:16px">Professional ${service.name.toLowerCase()} delivered and set up anywhere in ${city.name}. Starting from ₹499/day — all rentals include setup, testing, and collection.</p>
           <div class="hero__phone">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             Call: <a href="tel:${city.phone}">${city.phoneDisplay}</a>
@@ -1779,15 +1787,15 @@ ${navbarHTML('')}
             <div style="display:flex; flex-direction:column; gap:12px">
               <div style="display:flex; gap:12px; align-items:flex-start">
                 <div style="width:28px; height:28px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:700; flex-shrink:0">1</div>
-                <div><strong>Choose your equipment</strong> â€” browse the options above and note what you need</div>
+                <div><strong>Choose your equipment</strong> — browse the options above and note what you need</div>
               </div>
               <div style="display:flex; gap:12px; align-items:flex-start">
                 <div style="width:28px; height:28px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:700; flex-shrink:0">2</div>
-                <div><strong>WhatsApp or call us</strong> â€” share your event date, venue in ${city.name}, and requirements</div>
+                <div><strong>WhatsApp or call us</strong> — share your event date, venue in ${city.name}, and requirements</div>
               </div>
               <div style="display:flex; gap:12px; align-items:flex-start">
                 <div style="width:28px; height:28px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:700; flex-shrink:0">3</div>
-                <div><strong>We deliver and set up</strong> â€” our team arrives before your event and handles everything</div>
+                <div><strong>We deliver and set up</strong> — our team arrives before your event and handles everything</div>
               </div>
             </div>
           </div>
@@ -1821,7 +1829,7 @@ ${navbarHTML('')}
   <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="FAQ">
     <div class="container" style="max-width:720px">
       <div class="section-header">
-        <h2>Frequently asked questions â€” ${service.name} in ${city.name}</h2>
+        <h2>Frequently asked questions — ${service.name} in ${city.name}</h2>
       </div>
       ${faqs}
     </div>
@@ -2179,19 +2187,19 @@ ${allPages.map(p => `  <url>
   </url>`).join('\n')}
 </urlset>`;
   writeFileSync('public/sitemap.xml', xml, 'utf8');
-  console.log('âœ“ public/sitemap.xml');
+  console.log('✓ public/sitemap.xml');
 }
 
 /* ---- robots.txt ---- */
 function buildRobots() {
   const txt = `User-agent: *\nAllow: /\nSitemap: https://www.ramsaudiovisuals.com/sitemap.xml\n`;
   writeFileSync('public/robots.txt', txt, 'utf8');
-  console.log('âœ“ public/robots.txt');
+  console.log('✓ public/robots.txt');
 }
 
 /* ---- MAIN ---- */
 (async function main() {
-  console.log('\nðŸ”¨ Building Rams AudioVisuals...\n');
+  console.log('\n🛠️ Building Rams AudioVisuals...\n');
   mkdirSync('public', { recursive: true });
   copyAssets();
   buildHomepage();
@@ -2206,7 +2214,7 @@ function buildRobots() {
   buildOffersPage();
   buildSitemap();
   buildRobots();
-  console.log('\nâœ… Build complete.\n');
+  console.log('\n✅ Build complete.\n');
 })();
 
 /* export helpers for use in later phases */

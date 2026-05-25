@@ -162,3 +162,20 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '200px' });
   lazyImages.forEach(img => observer.observe(img));
 }
+
+/* ----- Cities scroll navigation ----- */
+(function () {
+  const container = document.querySelector('.cities-hscroll');
+  const prevBtn = document.getElementById('cities-prev-btn');
+  const nextBtn = document.getElementById('cities-next-btn');
+  if (!container || !prevBtn || !nextBtn) return;
+
+  prevBtn.addEventListener('click', () => {
+    container.scrollBy({ left: -150, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    container.scrollBy({ left: 150, behavior: 'smooth' });
+  });
+})();
+

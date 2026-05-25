@@ -39,7 +39,6 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -49,7 +48,7 @@ body {
   line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
@@ -559,6 +558,40 @@ p {
 .section-header p {
   max-width: 560px;
   margin: 0 auto;
+}
+
+.cities-section-header {
+  position: relative;
+}
+
+.cities-nav {
+  display: none;
+}
+
+.cities-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border: 1px solid #d8e8ff;
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.cities-nav__btn:hover {
+  background: var(--bg-pastel);
+  border-color: var(--blue-light);
+  color: var(--blue);
+}
+
+.cities-nav__btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5px;
 }
 
 /* ===== GRID SYSTEMS ===== */
@@ -2755,6 +2788,19 @@ p {
 
 /* ===== RESPONSIVE — MOBILE (≤768px) ===== */
 @media (max-width: 992px) {
+  .cities-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .cities-nav {
+    display: flex;
+    gap: 8px;
+    margin-left: 16px;
+  }
+
   .navbar__links {
     display: none;
   }
@@ -3057,10 +3103,28 @@ p {
   }
 
   .filter-tabs {
-    gap: 6px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -16px;
+    padding: 4px 16px 12px;
+    margin-bottom: 24px;
+    scroll-behavior: smooth;
+    gap: 8px;
+    /* Peek scrolling fade effect at the right edge */
+    mask-image: linear-gradient(to right, black 82%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to right, black 82%, transparent 98%);
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-tab {
+    flex-shrink: 0;
+    white-space: nowrap;
     padding: 8px 14px;
     font-size: 0.8rem;
   }
@@ -3357,6 +3421,10 @@ p {
     scrollbar-width: none;
     margin: 0 -16px;
     padding: 0 16px 12px;
+    scroll-behavior: smooth;
+    /* Peek scrolling fade effect at the right edge */
+    mask-image: linear-gradient(to right, black 82%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to right, black 82%, transparent 98%);
   }
 
   .cities-hscroll::-webkit-scrollbar {
@@ -3516,26 +3584,7 @@ p {
     flex-shrink: 0;
   }
 
-  .filter-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0 -16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 8px;
-    margin-bottom: 24px;
-  }
-
-  .filter-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .filter-tab {
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
+  /* filter-tabs horizontal scroll row styling moved to 992px media query */
 
   #equip-grid.grid--3,
   .subcat-equip-grid.grid--2 {
@@ -3613,7 +3662,8 @@ p {
   }
 
   .gallery-grid.grid--3 .gallery-tile--wide {
-    min-height: 220px;
+    min-height: 0;
+    width: 100%;
     aspect-ratio: 16/9;
   }
 
@@ -3871,7 +3921,7 @@ p {
   .grid.grid--4 .equip-card__cta::after {
     content: "WhatsApp";
     font-size: 0.72rem;
-    color: #fff;
+    color: var(--blue-dark);
     font-weight: 600;
   }
 
@@ -3939,7 +3989,7 @@ p {
   [aria-label="Corporate rental equipment"] .grid--3 .equip-card__cta::after {
     content: "WhatsApp";
     font-size: 0.72rem;
-    color: #fff;
+    color: var(--blue-dark);
     font-weight: 600;
   }
 }
