@@ -1688,9 +1688,9 @@ function buildCityServicePages() {
   </div>
 </div>`).join('');
 
-      /* Sidebar — other services in this city */
-      const sidebarLinks = services.filter(s => s.slug !== service.slug).map(s => `
-<a href="/${city.slug}/${s.slug}.html" class="sidebar-link ${s.category === service.category ? 'active' : ''}">
+      /* Sidebar — services in this city */
+      const sidebarLinks = services.map(s => `
+<a href="/${city.slug}/${s.slug}.html" class="sidebar-link ${s.slug === service.slug ? 'active' : ''}">
   <span>${s.name}</span>
   <span class="sidebar-link__arrow">→</span>
 </a>`).join('');

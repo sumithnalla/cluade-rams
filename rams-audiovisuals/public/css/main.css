@@ -2734,6 +2734,7 @@ p {
 
   .page-with-sidebar {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   .sidebar-sticky {
@@ -3736,6 +3737,7 @@ p {
   .page-with-sidebar {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
   }
 
   .page-with-sidebar aside {
@@ -3749,12 +3751,17 @@ p {
     box-shadow: none;
     border-radius: 0;
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 8px;
     margin: 0 -16px;
     padding: 4px 16px 12px;
+    scroll-behavior: smooth;
+    /* Peek scrolling fade effect at the right edge */
+    mask-image: linear-gradient(to right, black 82%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to right, black 82%, transparent 98%);
   }
 
   .sidebar-sticky::-webkit-scrollbar {
@@ -3996,10 +4003,14 @@ p {
 
 @media (max-width: 480px) {
 
-  #equip-grid.grid--3,
-  .subcat-equip-grid.grid--2 {
+  #equip-grid.grid--3 {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+  }
+
+  .subcat-equip-grid.grid--2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   #equip-grid .equip-card,
