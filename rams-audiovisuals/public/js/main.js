@@ -179,3 +179,15 @@ if ('IntersectionObserver' in window) {
   });
 })();
 
+/* ----- Scroll active chip to center on mobile ----- */
+(function () {
+  const container = document.querySelector('.sidebar-sticky');
+  const activeLink = document.querySelector('.sidebar-sticky .sidebar-link.active');
+  if (container && activeLink) {
+    const containerRect = container.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const scrollOffset = (linkRect.left - containerRect.left) - (containerRect.width / 2) + (linkRect.width / 2);
+    container.scrollLeft += scrollOffset;
+  }
+})();
+

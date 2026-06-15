@@ -3699,13 +3699,7 @@ p {
     font-size: 0.8rem;
   }
 
-  .city-cats-grid .service-card--detailed:nth-child(n+5) {
-    display: none;
-  }
 
-  .city-cats-grid .view-all-card {
-    display: flex;
-  }
 
   .info-panels-2col.grid--2 {
     grid-template-columns: 1fr;

@@ -1,0 +1,200 @@
+File Tree: rams-audiovisuals
+Generated on: 6/13/2026, 10:01:10 PM
+Root path: d:\claude rams\rams-audiovisuals
+
+────────────────────────────────────────────────────────────────────────────────
+
+├── data/
+│   ├── cities.js
+│   └── equipData.js
+├── public/
+│   ├── bangalore/
+│   │   ├── combo-packages.html
+│   │   ├── index.html
+│   │   ├── led-screen-for-rent.html
+│   │   ├── mic-for-rent.html
+│   │   ├── projector-for-rent.html
+│   │   ├── sound-system-for-rent.html
+│   │   ├── speaker-for-rent.html
+│   │   └── tv-for-rent.html
+│   ├── chennai/
+│   │   ├── combo-packages.html
+│   │   ├── index.html
+│   │   ├── led-screen-for-rent.html
+│   │   ├── mic-for-rent.html
+│   │   ├── projector-for-rent.html
+│   │   ├── sound-system-for-rent.html
+│   │   ├── speaker-for-rent.html
+│   │   └── tv-for-rent.html
+│   ├── css/
+│   │   └── main.css
+│   ├── equipment/
+│   │   ├── Ahuja AWM.png
+│   │   ├── Ahuja collar.png
+│   │   ├── JBL PRX.png
+│   │   ├── LED wall custom.png
+│   │   ├── LED wall(8 12 ft).png
+│   │   ├── PA system.png
+│   │   ├── Panasonic PT-V.png
+│   │   ├── VU 55.png
+│   │   ├── VU 65.png
+│   │   ├── clarion JM DC.png
+│   │   ├── combo 1(projector+screen+speaker).png
+│   │   ├── combo 2(PA System).png
+│   │   ├── combo 3(complete presentation).png
+│   │   ├── epson 107.png
+│   │   ├── onetouch 43.png
+│   │   ├── power x.png
+│   │   ├── samcon 1202.png
+│   │   ├── studiomaster air 12.png
+│   │   ├── studiomaster dual wireless.png
+│   │   └── tripod screen.png
+│   ├── hyderabad/
+│   │   ├── combo-packages.html
+│   │   ├── index.html
+│   │   ├── led-screen-for-rent.html
+│   │   ├── mic-for-rent.html
+│   │   ├── projector-for-rent.html
+│   │   ├── sound-system-for-rent.html
+│   │   ├── speaker-for-rent.html
+│   │   └── tv-for-rent.html
+│   ├── js/
+│   │   └── main.js
+│   ├── mumbai/
+│   │   ├── combo-packages.html
+│   │   ├── index.html
+│   │   ├── led-screen-for-rent.html
+│   │   ├── mic-for-rent.html
+│   │   ├── projector-for-rent.html
+│   │   ├── sound-system-for-rent.html
+│   │   ├── speaker-for-rent.html
+│   │   └── tv-for-rent.html
+│   ├── photos/
+│   │   ├── gallery/
+│   │   │   ├── RAV-1.webp
+│   │   │   ├── RAV-10.webp
+│   │   │   ├── RAV-11.webp
+│   │   │   ├── RAV-12.webp
+│   │   │   ├── RAV-13.webp
+│   │   │   ├── RAV-14.webp
+│   │   │   ├── RAV-15.webp
+│   │   │   ├── RAV-16.webp
+│   │   │   ├── RAV-17.webp
+│   │   │   ├── RAV-18.webp
+│   │   │   ├── RAV-19.webp
+│   │   │   ├── RAV-2.webp
+│   │   │   ├── RAV-20.webp
+│   │   │   ├── RAV-21.webp
+│   │   │   ├── RAV-22.webp
+│   │   │   ├── RAV-23.webp
+│   │   │   ├── RAV-24.webp
+│   │   │   ├── RAV-25.webp
+│   │   │   ├── RAV-26.webp
+│   │   │   ├── RAV-27.webp
+│   │   │   ├── RAV-28.webp
+│   │   │   ├── RAV-29.webp
+│   │   │   ├── RAV-3.webp
+│   │   │   ├── RAV-30.webp
+│   │   │   ├── RAV-31.webp
+│   │   │   ├── RAV-32.webp
+│   │   │   ├── RAV-33.webp
+│   │   │   ├── RAV-34.webp
+│   │   │   ├── RAV-35.webp
+│   │   │   ├── RAV-36.webp
+│   │   │   ├── RAV-37.webp
+│   │   │   ├── RAV-38.webp
+│   │   │   ├── RAV-39.webp
+│   │   │   ├── RAV-4.webp
+│   │   │   ├── RAV-40.webp
+│   │   │   ├── RAV-41.webp
+│   │   │   ├── RAV-42.webp
+│   │   │   ├── RAV-43.webp
+│   │   │   ├── RAV-44.webp
+│   │   │   ├── RAV-45.webp
+│   │   │   ├── RAV-46.webp
+│   │   │   ├── RAV-47.webp
+│   │   │   ├── RAV-48.webp
+│   │   │   ├── RAV-49.webp
+│   │   │   ├── RAV-5.webp
+│   │   │   ├── RAV-50.webp
+│   │   │   ├── RAV-51.webp
+│   │   │   ├── RAV-6.webp
+│   │   │   ├── RAV-7.webp
+│   │   │   ├── RAV-8.webp
+│   │   │   └── RAV-9.webp
+│   │   ├── ChatGPT Image May 17, 2026, 10_15_32 PM.webp
+│   │   ├── LED.webp
+│   │   ├── bangalore.webp
+│   │   ├── birthday.webp
+│   │   ├── ceo.webp
+│   │   ├── chennai.webp
+│   │   ├── college.webp
+│   │   ├── combos.webp
+│   │   ├── corporate.webp
+│   │   ├── equipment hero.webp
+│   │   ├── favicon.webp
+│   │   ├── google.webp
+│   │   ├── h.webp
+│   │   ├── home hero.webp
+│   │   ├── hyderabad.webp
+│   │   ├── logo new.webp
+│   │   ├── logo-footer.webp
+│   │   ├── microphones.webp
+│   │   ├── mumbai.webp
+│   │   ├── outdoor event.webp
+│   │   ├── product launch.webp
+│   │   ├── projectors.webp
+│   │   ├── pune.webp
+│   │   ├── sound systems.webp
+│   │   ├── speakers.webp
+│   │   ├── step1.webp
+│   │   ├── step2.webp
+│   │   ├── step3.webp
+│   │   ├── sumith.webp
+│   │   ├── televisions.webp
+│   │   └── wedding.webp
+│   ├── pune/
+│   │   ├── combo-packages.html
+│   │   ├── index.html
+│   │   ├── led-screen-for-rent.html
+│   │   ├── mic-for-rent.html
+│   │   ├── projector-for-rent.html
+│   │   ├── sound-system-for-rent.html
+│   │   ├── speaker-for-rent.html
+│   │   └── tv-for-rent.html
+│   ├── .htaccess
+│   ├── 404.html
+│   ├── Untitled-1.md
+│   ├── about.html
+│   ├── changes.txt
+│   ├── contact.html
+│   ├── contextt.txt
+│   ├── corporate.html
+│   ├── equipment.html
+│   ├── events-we-serve.html
+│   ├── index.html
+│   ├── mobile.md
+│   ├── offers.html
+│   ├── optimization.txt
+│   ├── privacy-policy.html
+│   ├── reviewcarousel.txt
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src/
+│   ├── css/
+│   │   └── main.css
+│   ├── js/
+│   │   └── main.js
+│   └── templates/
+│       ├── about.html
+│       ├── city-service.html
+│       ├── city.html
+│       ├── contact.html
+│       ├── equipment.html
+│       ├── index.html
+│       └── privacy-policy.html
+├── build.js
+└── package.json
+
+────────────────────────────────────────────────────────────────────────────────
+Generated by FileTree Pro Extension

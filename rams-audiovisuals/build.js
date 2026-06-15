@@ -1528,10 +1528,6 @@ ${navbarHTML('')}
       <h2 style="margin-bottom:20px">Equipment available in ${city.name}</h2>
       <div class="grid grid--4 city-cats-grid">
         ${serviceCards}
-        <a href="/equipment.html" class="view-all-card">
-          <span class="view-all-card__icon">📦</span>
-          <span>View All<br>Equipment →</span>
-        </a>
       </div>
     </div>
   </section>
