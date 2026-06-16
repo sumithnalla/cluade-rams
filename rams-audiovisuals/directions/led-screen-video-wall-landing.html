@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Screen & Video Wall Rental in Hyderabad | Rams AudioVisuals</title>
+    <meta name="description" content="Rent premium LED screens and video walls in Hyderabad. Perfect for events, conferences, and weddings. Fast setup and technical support included. Book today!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0ea5e9', // Light soft blue for premium feel
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        whatsapp: {
+                            500: '#25d366',
+                            600: '#20ba5a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+        
+        /* Custom hide scrollbars but keep functionality */
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Infinite horizontal scroll marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans pt-16" x-data="{ showModal: false }">
+
+    <!-- 1. FIXED HEADER -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-white border-b border-slate-200/50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left: Logo (Decreased size by 40% -> h-6 md:h-7.5) -->
+                <a href="../public/index.html" class="flex items-center">
+                    <img src="../public/photos/logo new.webp" alt="Rams AudioVisuals" class="h-6 md:h-7.5 w-auto object-contain">
+                </a>
+
+                <!-- Right: Cylindrical Book Now button in light blue pill style -->
+                <div>
+                    <button @click="showModal = true" class="flex items-center justify-center gap-2 bg-primary-100 hover:bg-primary-200 text-primary-700 text-xs sm:text-sm font-extrabold px-5 py-2.5 rounded-full border border-primary-200 transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm active:translate-y-0">
+                        <i class="fa-regular fa-calendar-check text-sm"></i> Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. HEADLINE BANNER -->
+        <section class="bg-gradient-to-r from-primary-50/50 via-slate-50 to-primary-50/50 border-b border-slate-200/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 text-center">
+                <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Premium LED Screen & Video Wall Rental
+                </h1>
+                <p class="text-sm md:text-base text-primary-500 font-bold uppercase tracking-wider mt-2">
+                    High-Brightness Displays • Delivery & Setup Included • Professional AV Support
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. HERO SECTION (Divided 70:30 on Desktop, Stacked on Mobile with Form on Top) -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-[68%_32%] gap-8 items-stretch">
+                
+                <!-- HERO FORM (Right on Desktop, TOP/Order-1 on Mobile) -->
+                <div class="order-1 lg:order-2 flex flex-col justify-center bg-white border border-slate-200/80 rounded-2xl shadow-lg p-6 md:p-8">
+                    <div class="text-center mb-6">
+                        <span class="bg-primary-50 text-primary-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Fast Quote</span>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2 mb-1">10 Min Call Back</h3>
+                        <p class="text-xs text-slate-500">Share your details and we will call you back immediately to confirm pricing & details.</p>
+                    </div>
+
+                    <form class="space-y-4" data-lead-form>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
+                            <input type="text" placeholder="Your Name" required
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:bg-white focus:border-primary-500 text-sm transition-all duration-200">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+                            <input type="tel" placeholder="10-digit Mobile Number" inputmode="numeric" required
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:bg-white focus:border-primary-500 text-sm transition-all duration-200">
+                        </div>
+                        
+                        <div class="rounded-xl border border-amber-100 bg-amber-50/70 p-3 text-center text-xs font-medium text-amber-800">
+                            Available in Hyderabad. Complete setup & technical operator support available.
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 flex justify-center items-center gap-2 text-sm">
+                            Get Quote Now <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- HERO SLIDER (Left on Desktop, BOTTOM/Order-2 on Mobile) -->
+                <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-xl aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:min-h-[460px] bg-slate-900"
+                    x-data="{ activeSlide: 0, slides: ['../public/photos/gallery/RAV-21.webp', '../public/photos/gallery/RAV-22.webp', '../public/photos/gallery/RAV-23.webp', '../public/photos/gallery/RAV-24.webp', '../public/photos/gallery/RAV-25.webp'] }"
+                    x-init="setInterval(() => activeSlide = (activeSlide + 1) % slides.length, 3000)">
+                    
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <img :src="slide" alt="LED Event Display Setup"
+                            class="absolute inset-0 h-full w-full object-cover transition-all duration-1000 ease-in-out transform"
+                            x-show="activeSlide === index"
+                            x-transition:enter="transition-opacity duration-1000"
+                            x-transition:enter-start="opacity-0 scale-105"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition-opacity duration-1000 absolute"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0">
+                    </template>
+
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+
+                    <!-- Floating CTA buttons at the bottom of the slider -->
+                    <div class="absolute bottom-6 left-4 right-4 sm:left-6 flex flex-row gap-3">
+                        <a href="tel:+919700033342"
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95">
+                            <i class="fa-solid fa-phone"></i> Call Now
+                        </a>
+                        <a href="https://wa.me/919700033342?text=Hello%20Rams%20AudioVisuals%2C%20I%20am%20enquiring%20about%20LED%20Screen%20%2F%20Video%20Wall%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-whatsapp-500 hover:bg-whatsapp-600 text-white px-5 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. EQUIPMENT CARDS SECTION (Horizontal Scroll, Small and Cute with Overlay Arrows) -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-slate-200/60">
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Equipment Catalogue</span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">Choose your LED Screen setup</h2>
+            </div>
+
+            <!-- Wrapper with relative position for absolute overlay arrows -->
+            <div class="relative group">
+                <!-- Small left right overlay arrows (Visible on both mobile & desktop) -->
+                <button onclick="scrollContainer('equipment-rail', 'left')" class="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </button>
+                <button onclick="scrollContainer('equipment-rail', 'right')" class="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90">
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+
+                <!-- Horizontal scroll track -->
+                <div id="equipment-rail" class="flex overflow-x-auto gap-5 pb-6 px-1 -mx-1 scrollbar-none snap-x snap-mandatory scroll-smooth">
+                    
+                    <!-- Card 1: LED Wall 8x12 ft -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-50 flex items-center justify-center p-3 relative">
+                            <img src="../public/equipment/LED wall(8 12 ft).png" alt="LED Wall (8x12 ft)" class="max-h-full max-w-full object-contain">
+                        </div>
+                        
+                        <div class="p-4 flex flex-col flex-grow">
+                            <!-- Rating -->
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span>
+                                <span>4.7</span>
+                                <span class="text-slate-400 font-medium">(92 rentals)</span>
+                            </div>
+                            
+                            <!-- Title & Description -->
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">LED Wall (8×12 ft)</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium">P3.9 LED wall</p>
+                            
+                            <!-- Price section -->
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">8544</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹7999</p>
+                                
+                                <!-- Badges -->
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md">
+                                        <i class="fa-solid fa-bolt-lightning text-[9px]"></i> Fast Setup
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md">
+                                        <i class="fa-solid fa-info-circle text-[9px]"></i> Support Incl.
+                                    </span>
+                                </div>
+
+                                <!-- WhatsApp button -->
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20LED%20Wall%20(8x12%20ft)%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200 active:scale-98">
+                                    Quick WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: LED Wall Custom Size -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-50 flex items-center justify-center p-3 relative">
+                            <img src="../public/equipment/LED wall custom.png" alt="LED Wall Custom Size" class="max-h-full max-w-full object-contain">
+                        </div>
+                        
+                        <div class="p-4 flex flex-col flex-grow">
+                            <!-- Rating -->
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span>
+                                <span>4.9</span>
+                                <span class="text-slate-400 font-medium">(900 rentals)</span>
+                            </div>
+                            
+                            <!-- Title & Description -->
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">LED Wall (Custom Size)</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium">P2.9 & P3.9 LED panels</p>
+                            
+                            <!-- Price section -->
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">89–119</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/sq.ft</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹79–99/sq.ft</p>
+                                
+                                <!-- Badges -->
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md">
+                                        <i class="fa-solid fa-bolt-lightning text-[9px]"></i> Fast Setup
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md">
+                                        <i class="fa-solid fa-info-circle text-[9px]"></i> Support Incl.
+                                    </span>
+                                </div>
+
+                                <!-- WhatsApp button -->
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20an%20LED%20Wall%20(Custom%20Size)%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200 active:scale-98">
+                                    Quick WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PACKAGES SECTION (Horizontal Scroll, Small and Cute with Overlay Arrows) -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-slate-200/60 bg-slate-50/50">
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Combos & Upsells</span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">Complete AV Packages</h2>
+            </div>
+
+            <!-- Wrapper with relative position for absolute overlay arrows -->
+            <div class="relative group">
+                <!-- Small left right overlay arrows (Visible on both mobile & desktop) -->
+                <button onclick="scrollContainer('package-rail', 'left')" class="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </button>
+                <button onclick="scrollContainer('package-rail', 'right')" class="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90">
+                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+
+                <!-- Horizontal scroll track -->
+                <div id="package-rail" class="flex overflow-x-auto gap-5 pb-6 px-1 -mx-1 scrollbar-none snap-x snap-mandatory scroll-smooth">
+                    
+                    <!-- Package Cards (ID 21 to 28) -->
+                    
+                    <!-- ID 21 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Meeting Essentials Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(128 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Meeting Essentials Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">Projector, Projection Screen, Powered Speaker, HDMI Cable & Setup</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">3999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹2999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20Meeting%20Essentials%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 22 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Presentation Pro Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(94 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Presentation Pro Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">Projector, Screen, Audio Mixer, 2 Speakers, Presentation Laptop & Wireless Presenter</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">7999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹5999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20Presentation%20Pro%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 23 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="PA System Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(165 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">PA System Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">Audio Mixer, 2 Powered Speakers with Stands, 2 Cordless Microphones</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">5999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹4499</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20PA%20System%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 24 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Conference Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(81 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Conference Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">High Brightness Projector, Large Screen, Audio Mixer, Speakers, Wireless Mics & Podium Mic</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">11999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹8999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20Conference%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 25 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="LED Display Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(72 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">LED Display Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">LED Wall, Video Processor, Cabling, Installation & Operator Support</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">14999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹11999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20LED%20Display%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 26 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Event Audio Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(142 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Event Audio Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">Audio Mixer, 4 Powered Speakers, 4 Wireless Mics & Monitor Speaker</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">14999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹11999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20Event%20Audio%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 27 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Premium Event AV Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(57 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Premium Event AV Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">LED Wall, Projector, Screen, Audio Mixer, 4 Speakers & 4 Wireless Mics</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-base font-extrabold text-slate-900">₹</span>
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">24999</span>
+                                    <span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Additional day at ₹18999</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20the%20Premium%20Event%20AV%20Package%20rental%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Add to Quote
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ID 28 -->
+                    <article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+                        <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <img src="../public/equipment/combo 3(complete presentation).png" alt="Custom AV Package" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+                                <span class="text-amber-500 text-sm">★</span><span>5.0</span><span class="text-slate-400 font-medium">(48 rentals)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">Custom AV Package</h3>
+                            <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">Tailor-Made AV Configuration Based on Event Requirements</p>
+                            <div class="mt-auto">
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-2xl font-extrabold text-slate-900 tracking-tight">Custom</span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-600 mb-3">Custom quote based on size</p>
+                                <a href="https://wa.me/919700033342?text=Hi%20Rams%20AudioVisuals%2C%20I%20need%20a%20Custom%20AV%20Package%20setup%20in%20Hyderabad." target="_blank" rel="noopener"
+                                    class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">
+                                    Enquire Now
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. GOOGLE REVIEWS CAROUSEL -->
+        <section class="py-12 bg-white overflow-hidden border-y border-slate-200/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+                <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Client Reviews</span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">What Our Clients Say</h2>
+            </div>
+            
+            <div class="relative w-full">
+                <!-- Scrolling track -->
+                <div class="animate-marquee gap-5">
+                    
+                    <!-- Review 1 -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Excellent setup for our corporate event. Delivered on time and everything worked perfectly."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">RK</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Ravi K.</h4>
+                                <p class="text-[10px] text-slate-400">Gachibowli • Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Rented projector and sound system for a wedding. Professional team, great equipment."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">PS</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Priya S.</h4>
+                                <p class="text-[10px] text-slate-400">Banjara Hills • Wedding Setup</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Best AV rental in Hyderabad. Setup was quick and the team was very professional."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">AM</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Anand M.</h4>
+                                <p class="text-[10px] text-slate-400">Madhapur • Corporate AV</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Rented sound system and screen for a product launch. Crystal clear display and audio."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">SR</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Sneha Reddy</h4>
+                                <p class="text-[10px] text-slate-400">Jubilee Hills • Launch Event</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Reliable service for our office conference. Equipment was top-notch and delivery was on time."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">RD</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Rahul D.</h4>
+                                <p class="text-[10px] text-slate-400">Hitech City • Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repeat same reviews to make an infinite marquee scroll -->
+                    <!-- Review 1 repeat -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between" aria-hidden="true">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Excellent setup for our corporate event. Delivered on time and everything worked perfectly."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">RK</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Ravi K.</h4>
+                                <p class="text-[10px] text-slate-400">Gachibowli • Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 repeat -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between" aria-hidden="true">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Rented projector and sound system for a wedding. Professional team, great equipment."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">PS</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Priya S.</h4>
+                                <p class="text-[10px] text-slate-400">Banjara Hills • Wedding Setup</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 repeat -->
+                    <div class="w-[290px] shrink-0 bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between" aria-hidden="true">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <img src="../public/photos/google.webp" alt="Google" class="h-8 w-auto">
+                                <div class="text-amber-500 text-lg">★★★★★</div>
+                            </div>
+                            <p class="text-slate-600 text-xs font-medium italic leading-relaxed">"Best AV rental in Hyderabad. Setup was quick and the team was very professional."</p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-4 pt-3 border-t border-slate-200/60">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">AM</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">Anand M.</h4>
+                                <p class="text-[10px] text-slate-400">Madhapur • Corporate AV</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. GALLERY SECTION (Grid matching user's first mobile screenshot layout) -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Our Portfolio</span>
+                <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">Professionalism Delivered with Perfection</h2>
+            </div>
+
+            <!-- Mobile Grid layout: 2 Columns, 3 Rows matching screenshot exactly -->
+            <!-- Desktop Layout: 3 Columns, 2 Rows -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                
+                <!-- Image 1 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-21.webp" alt="Wedding Stage AV Setup" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Image 2 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-22.webp" alt="Corporate Training Room Setup" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Image 3 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-23.webp" alt="Conference Presentation Screen" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Image 4 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-24.webp" alt="Ballroom Presentation Setup" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Image 5 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-25.webp" alt="LED Display Screen Landscape" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Image 6 -->
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <img src="../public/photos/gallery/RAV-26.webp" alt="Corporate Presenter Stage Setup" class="w-full h-full object-cover">
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 pt-12 pb-6 border-t border-slate-900" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-900">
+                
+                <!-- Brand description -->
+                <div>
+                    <a href="../public/index.html" class="flex items-center mb-4">
+                        <img src="../public/photos/logo-footer.webp" alt="Rams AudioVisuals" class="h-10 w-auto object-contain brightness-0 invert">
+                    </a>
+                    <p class="text-xs leading-relaxed max-w-xs">
+                        Professional AV equipment rentals in Hyderabad. High brightness LED walls, projectors, PA systems, and full event display configurations delivered and set up.
+                    </p>
+                </div>
+
+                <!-- Hyderabad Info -->
+                <div>
+                    <h4 class="text-white font-extrabold text-sm uppercase tracking-wider mb-4">Hyderabad Office</h4>
+                    <p class="text-xs mb-2">Direct call support: <a href="tel:+919700033342" class="text-white font-semibold hover:underline">+91 97000 33342</a></p>
+                    <p class="text-xs">Chat with our sales team: <a href="https://wa.me/919700033342" target="_blank" rel="noopener" class="text-white font-semibold hover:underline">WhatsApp Support</a></p>
+                </div>
+
+                <!-- Quick links -->
+                <div>
+                    <h4 class="text-white font-extrabold text-sm uppercase tracking-wider mb-4">Equipment</h4>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <a href="../public/hyderabad/led-screen-for-rent.html" class="hover:text-white transition">LED Walls</a>
+                        <a href="../public/hyderabad/projector-for-rent.html" class="hover:text-white transition">Projectors</a>
+                        <a href="../public/hyderabad/sound-system-for-rent.html" class="hover:text-white transition">PA Systems</a>
+                        <a href="../public/hyderabad/tv-for-rent.html" class="hover:text-white transition">Smart TVs</a>
+                        <a href="../public/hyderabad/combo-packages.html" class="hover:text-white transition">Combo Deals</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-slate-500 font-medium">
+                <p>&copy; 2026 Rams AudioVisuals. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="../public/about.html" class="hover:text-white transition">About Us</a>
+                    <a href="../public/contact.html" class="hover:text-white transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 9. FLOATING ACTION BUTTONS (Colors from floatingbuttons.md) -->
+    <div class="fixed right-4 bottom-4 md:right-6 md:bottom-6 z-40 flex flex-col gap-3" aria-label="Quick contact actions">
+        
+        <!-- Phone Button (bg-color: #2d93ff, hover: #015fc3, icon color: white) -->
+        <a href="tel:+919700033342"
+            class="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+            style="background-color: #2d93ff; color: white;"
+            onmouseover="this.style.backgroundColor='#015fc3'"
+            onmouseout="this.style.backgroundColor='#2d93ff'"
+            aria-label="Call Us">
+            <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5.15 12.81 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.35 1.75.67 2.57a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.19-1.19a2 2 0 0 1 2.11-.45c.82.32 1.68.55 2.57.67A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+        </a>
+
+        <!-- WhatsApp Button (bg-color: #d3ff81, hover: #78ff1e, icon color: black) -->
+        <a href="https://wa.me/919700033342?text=Hello%20Rams%20AudioVisuals%2C%20I%20need%20sound%20system%20%2F%20AV%20equipment%20rental%20for%20an%20event%20.%20Kindly%20share%20your%20packages%2C%20availability%2C%20and%20contact%20details.%20Thanks." target="_blank" rel="noopener"
+            class="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+            style="background-color: #d3ff81; color: rgb(0,0,0);"
+            onmouseover="this.style.backgroundColor='#78ff1e'"
+            onmouseout="this.style.backgroundColor='#d3ff81'"
+            aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+            </svg>
+        </a>
+
+    </div>
+
+    <!-- 10. MODAL BOOK NOW FORM -->
+    <div x-show="showModal" x-cloak class="relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div x-show="showModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                
+                <!-- Modal Panel -->
+                <div x-show="showModal" @click.away="showModal = false" x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-slate-100">
+
+                    <!-- Close button -->
+                    <button @click="showModal = false"
+                        class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+
+                    <div class="px-6 py-8">
+                        <div class="text-center mb-6">
+                            <span class="bg-primary-50 text-primary-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Booking Call</span>
+                            <h3 class="font-display text-2xl font-extrabold text-slate-900 mt-2 mb-1" id="modal-title">Book Your LED Screen</h3>
+                            <p class="text-slate-500 text-xs">Share your details for a fast booking call from the Hyderabad team.</p>
+                        </div>
+
+                        <form class="space-y-4" data-lead-form>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
+                                <input type="text" required
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition text-sm"
+                                    placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+                                <input type="tel" inputmode="numeric" required
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition text-sm"
+                                    placeholder="10-digit Mobile Number">
+                            </div>
+                            
+                            <div class="rounded-xl border border-amber-100 bg-amber-50/70 p-3 text-center text-xs font-medium text-amber-800">
+                                Free delivery & professional setup anywhere in Hyderabad.
+                            </div>
+                            
+                            <button type="submit"
+                                class="w-full bg-primary-500 hover:bg-primary-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-primary-500/20 transition-all flex justify-center items-center gap-2 text-sm">
+                                Send Booking Request <i class="fa-solid fa-check text-xs"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. SCRIPTS & LOGIC -->
+    <script>
+        // Scroll horizontal rails helper
+        function scrollContainer(containerId, direction) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const scrollAmount = 300; // scroll by roughly one card width
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Setup Phone Number Inputs strictly restricted to 10 digits
+        function setupPhoneValidation() {
+            document.querySelectorAll('input[type="tel"]').forEach((input) => {
+                // Remove any non-digits, limit length to 10
+                input.addEventListener('input', () => {
+                    input.value = input.value.replace(/\D/g, '').slice(0, 10);
+                    
+                    if (input.value.length === 10) {
+                        input.setCustomValidity('');
+                    } else {
+                        input.setCustomValidity('Enter exactly 10 digits.');
+                    }
+                });
+
+                // Extra filter on keypress to block non-digits directly
+                input.addEventListener('keypress', (e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        }
+
+        // Setup Lead Form Submit Actions
+        function setupLeadForms() {
+            document.querySelectorAll('form[data-lead-form]').forEach((form) => {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const nameInput = form.querySelector('input[type="text"]');
+                    const phoneInput = form.querySelector('input[type="tel"]');
+                    
+                    const name = nameInput.value.trim();
+                    const phone = phoneInput.value.trim();
+                    
+                    if (phone.length !== 10) {
+                        phoneInput.setCustomValidity('Enter exactly 10 digits.');
+                        form.reportValidity();
+                        return;
+                    }
+
+                    // Pre-fill WhatsApp message text
+                    const whatsappMsg = [
+                        "Hi Rams AudioVisuals,",
+                        "I want to book LED screen / video wall rental in Hyderabad.",
+                        `Name: ${name}`,
+                        `Phone: +91 ${phone}`
+                    ].join("\n");
+
+                    const whatsappUrl = `https://wa.me/919700033342?text=${encodeURIComponent(whatsappMsg)}`;
+
+                    // Attempt opening in a new tab, fallback to same window
+                    const popup = window.open(whatsappUrl, '_blank', 'noopener');
+                    if (!popup) {
+                        window.location.href = whatsappUrl;
+                    }
+                    
+                    // Reset and close modal if open
+                    form.reset();
+                    if (window.Alpine) {
+                        // Let Alpine handle the modal closing
+                        document.body.__x?.$data && (document.body.__x.$data.showModal = false);
+                    } else {
+                        // Fail-safe direct state update if Alpine isn't ready
+                        const modal = document.querySelector('[role="dialog"]');
+                        if (modal) {
+                            // Find Alpine elements and close
+                            const alpineRoot = document.querySelector('[x-data]');
+                            if (alpineRoot && alpineRoot.__x) {
+                                alpineRoot.__x.$data.showModal = false;
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Initialize script logic
+        window.addEventListener('DOMContentLoaded', () => {
+            setupPhoneValidation();
+            setupLeadForms();
+        });
+    </script>
+</body>
+</html>
