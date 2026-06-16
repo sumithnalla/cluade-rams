@@ -3335,34 +3335,64 @@ p {
    Desktop layout untouched.
    ============================================ */
 
-/* ===== FLOATING WHATSAPP BUTTON (all screens) ===== */
-.wa-float {
+/* ===== FLOATING CONTACT BUTTONS ===== */
+.floating-buttons-container {
   position: fixed;
-  bottom: 24px;
   right: 20px;
-  z-index: 1000;
-  width: 54px;
-  height: 54px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.floating-btn {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: #25D366;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.52), 0 2px 8px rgba(0, 0, 0, 0.14);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  color: rgb(0, 0, 0);
   text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.wa-float:hover {
-  transform: scale(1.1) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+.floating-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.wa-float svg {
-  width: 30px;
-  height: 30px;
-  fill: #fff;
+.phone-btn {
+  background-color: #2d93ff;
+  color: white;
+}
+
+.phone-btn:hover {
+  background-color: #015fc3;
+}
+
+.whatsapp-btn {
+  background-color: #d3ff81;
+  padding: 0;
+}
+
+.whatsapp-btn:hover {
+  background-color: #78ff1e;
+}
+
+.floating-btn svg {
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
 }
 
 /* ===== VIEW ALL CARD (hidden on desktop, shown on mobile) ===== */
@@ -4046,15 +4076,19 @@ p {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .wa-float {
-    width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 16px;
+  .whatsapp-icon {
+    width: 24px;
+    height: 24px;
   }
 
-  .wa-float svg {
-    width: 26px;
-    height: 26px;
+  .floating-buttons-container {
+    right: 16px;
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .floating-btn {
+    width: 50px;
+    height: 50px;
   }
 }

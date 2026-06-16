@@ -1,0 +1,1 @@
+so since the website is completed now we have to create landing pages for our google ads.
