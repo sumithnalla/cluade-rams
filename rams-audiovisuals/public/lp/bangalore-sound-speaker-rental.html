@@ -80,7 +80,7 @@
     <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2 mb-1">10 Min Call Back</h3>
     <p class="text-xs text-slate-500">Share your details and we will call you back immediately to confirm pricing & details.</p>
   </div>
-  <form class="space-y-4" data-lead-form data-source="Bangalore | Sound & Speaker Rental Landing Page" data-wa-number="919553703737" data-wa-message="Hi%20Rams%20AudioVisuals%2C%20I%20need%20sound%20system%20%2F%20speaker%20rental%20in%20Bangalore.%20Kindly%20share%20packages%2C%20availability%2C%20and%20pricing.%20Thanks.">
+  <form class="space-y-4" data-lead-form data-source="Bangalore | Sound & Speaker Rental Landing Page" data-city-slug="bangalore">
     <div>
       <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
       <input type="text" name="Name" placeholder="Your Name" required
@@ -103,7 +103,7 @@
 </div>
       
 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-xl aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:min-h-[460px] bg-slate-900"
-  x-data="{ activeSlide: 0, slides: ["/photos/gallery/RAV-10.webp","/photos/gallery/RAV-18.webp","/photos/gallery/RAV-27.webp","/photos/gallery/RAV-34.webp","/photos/gallery/RAV-46.webp"] }"
+  x-data="{ activeSlide: 0, slides: ['/photos/gallery/RAV-10.webp','/photos/gallery/RAV-18.webp','/photos/gallery/RAV-27.webp','/photos/gallery/RAV-34.webp','/photos/gallery/RAV-46.webp'] }"
   x-init="setInterval(() => activeSlide = (activeSlide + 1) % slides.length, 3000)">
   <template x-for="(slide, index) in slides" :key="index">
     <img :src="slide" alt="Sound & Speaker Rental setup in Bangalore"
@@ -932,7 +932,7 @@
             <h3 class="font-display text-2xl font-extrabold text-slate-900 mt-2 mb-1" id="lp-modal-title">Book Your Sound System in Bangalore</h3>
             <p class="text-slate-500 text-xs">Share your details for a fast booking call from the Bangalore team.</p>
           </div>
-          <form class="space-y-4" data-lead-form data-source="Bangalore | Sound & Speaker Rental Landing Page" data-wa-number="919553703737" data-wa-message="Hi%20Rams%20AudioVisuals%2C%20I%20need%20sound%20system%20%2F%20speaker%20rental%20in%20Bangalore.%20Kindly%20share%20packages%2C%20availability%2C%20and%20pricing.%20Thanks.">
+          <form class="space-y-4" data-lead-form data-source="Bangalore | Sound & Speaker Rental Landing Page" data-city-slug="bangalore">
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
               <input type="text" name="Name" placeholder="Your Name" required
@@ -984,8 +984,8 @@
         const name   = nameInput  ? nameInput.value.trim()  : '';
         const phone  = phoneInput ? phoneInput.value.trim() : '';
         const source = sourceInput ? sourceInput.value : (form.dataset.source || '');
-        const waNumber  = form.dataset.waNumber  || '';
-        const waBase    = form.dataset.waMessage ? decodeURIComponent(form.dataset.waMessage) : '';
+        const citySlug = form.dataset.citySlug || 'hyderabad';
+        const thankYouUrl = '/lp/' + citySlug + '-thankyou.html';
 
         if (phone.length !== 10) {
           if (phoneInput) phoneInput.setCustomValidity('Enter exactly 10 digits.');
@@ -993,25 +993,42 @@
           return;
         }
 
-        // 1. POST to Apps Script (fire-and-forget, no-cors)
-        const fd = new FormData();
-        fd.append('Name',   name);
-        fd.append('Number', phone);
-        fd.append('Source', source);
-        fetch('https://script.google.com/macros/s/AKfycbwQBnK4brEDrtnHe_-HNZjdJABPy_4XIQTu1WATjrwqwVc2kcR-i6s8XVnECMLr7rktOw/exec', { method: 'POST', mode: 'no-cors', body: fd });
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonContent = submitButton.innerHTML;
 
-        // 2. Open WhatsApp
-        const waMsg = waBase + '\nName: ' + name + '\nPhone: +91 ' + phone;
-        const waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
-        const popup = window.open(waUrl, '_blank', 'noopener');
-        if (!popup) window.location.href = waUrl;
+        // Disable button & show spinner
+        submitButton.disabled = true;
+        submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Sending Info...';
 
-        // 3. Reset + close modal
-        form.reset();
-        const root = document.querySelector('[x-data]');
-        if (root && root._x_dataStack) {
-          try { root._x_dataStack[0].showModal = false; } catch(_) {}
-        }
+        // POST to Apps Script using URLSearchParams (application/x-www-form-urlencoded)
+        const params = new URLSearchParams();
+        params.append('Name', name);
+        params.append('Number', phone);
+        params.append('Source', source);
+
+        fetch('https://script.google.com/macros/s/AKfycbwCXe774VG8zvOZDAWfl_UAmqDUyFDhd2zG1fQpPGZzKQdLYVGVLFQV-RGrovWSXx1V/exec', { 
+          method: 'POST', 
+          mode: 'no-cors', 
+          body: params 
+        })
+        .then(() => {
+          // Success: Reset form, close modal and redirect to thank you page
+          form.reset();
+          const root = document.querySelector('[x-data]');
+          if (root && root._x_dataStack) {
+            try { root._x_dataStack[0].showModal = false; } catch(_) {}
+          }
+          window.location.href = thankYouUrl;
+        })
+        .catch(error => {
+          console.error('Submission error:', error);
+          alert('Sorry, we could not submit your details. Please call us directly.');
+          // Re-enable button
+          submitButton.disabled = false;
+          submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+          submitButton.innerHTML = originalButtonContent;
+        });
       });
     });
   }

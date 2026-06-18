@@ -2045,9 +2045,9 @@ ${navbarHTML('events')}
       </div>
       <div class="grid grid--3">
         ${offerShowcaseEquipment.map(item => equipCardHTML(item, null, {
-          pricingCitySlug: DEFAULT_CITY_SLUG,
-          startingFrom: true
-        })).join('')}
+    pricingCitySlug: DEFAULT_CITY_SLUG,
+    startingFrom: true
+  })).join('')}
       </div>
     </div>
   </section>
@@ -2274,9 +2274,9 @@ ${navbarHTML('offers')}
       </div>
       <div class="grid grid--3">
         ${offerShowcaseEquipment.map(item => equipCardHTML(item, null, {
-          pricingCitySlug: DEFAULT_CITY_SLUG,
-          startingFrom: true
-        })).join('')}
+    pricingCitySlug: DEFAULT_CITY_SLUG,
+    startingFrom: true
+  })).join('')}
       </div>
     </div>
   </section>
@@ -2306,24 +2306,24 @@ ${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I want to b
    6 ad groups × 5 cities = 30 pages (noindex)
    ============================================ */
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQBnK4brEDrtnHe_-HNZjdJABPy_4XIQTu1WATjrwqwVc2kcR-i6s8XVnECMLr7rktOw/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCXe774VG8zvOZDAWfl_UAmqDUyFDhd2zG1fQpPGZzKQdLYVGVLFQV-RGrovWSXx1V/exec';
 
 // Fixed gallery images for hero sliders (4 per group, cycling through our 51 real images)
 const LP_GALLERY_SETS = [
-  ['/photos/gallery/RAV-1.webp',  '/photos/gallery/RAV-8.webp',  '/photos/gallery/RAV-22.webp', '/photos/gallery/RAV-28.webp', '/photos/gallery/RAV-35.webp'],
+  ['/photos/gallery/RAV-1.webp', '/photos/gallery/RAV-8.webp', '/photos/gallery/RAV-22.webp', '/photos/gallery/RAV-28.webp', '/photos/gallery/RAV-35.webp'],
   ['/photos/gallery/RAV-21.webp', '/photos/gallery/RAV-22.webp', '/photos/gallery/RAV-23.webp', '/photos/gallery/RAV-24.webp', '/photos/gallery/RAV-25.webp'],
   ['/photos/gallery/RAV-10.webp', '/photos/gallery/RAV-18.webp', '/photos/gallery/RAV-27.webp', '/photos/gallery/RAV-34.webp', '/photos/gallery/RAV-46.webp'],
-  ['/photos/gallery/RAV-7.webp',  '/photos/gallery/RAV-9.webp',  '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp', '/photos/gallery/RAV-50.webp'],
+  ['/photos/gallery/RAV-7.webp', '/photos/gallery/RAV-9.webp', '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp', '/photos/gallery/RAV-50.webp'],
   ['/photos/gallery/RAV-16.webp', '/photos/gallery/RAV-19.webp', '/photos/gallery/RAV-20.webp', '/photos/gallery/RAV-30.webp', '/photos/gallery/RAV-33.webp'],
   ['/photos/gallery/RAV-26.webp', '/photos/gallery/RAV-29.webp', '/photos/gallery/RAV-36.webp', '/photos/gallery/RAV-40.webp', '/photos/gallery/RAV-51.webp'],
 ];
 
 // Gallery section images (4-image grid, varied per group)
 const LP_PORTFOLIO_SETS = [
-  ['/photos/gallery/RAV-1.webp',  '/photos/gallery/RAV-4.webp',  '/photos/gallery/RAV-8.webp',  '/photos/gallery/RAV-10.webp'],
+  ['/photos/gallery/RAV-1.webp', '/photos/gallery/RAV-4.webp', '/photos/gallery/RAV-8.webp', '/photos/gallery/RAV-10.webp'],
   ['/photos/gallery/RAV-21.webp', '/photos/gallery/RAV-23.webp', '/photos/gallery/RAV-25.webp', '/photos/gallery/RAV-28.webp'],
   ['/photos/gallery/RAV-27.webp', '/photos/gallery/RAV-34.webp', '/photos/gallery/RAV-46.webp', '/photos/gallery/RAV-50.webp'],
-  ['/photos/gallery/RAV-7.webp',  '/photos/gallery/RAV-9.webp',  '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp'],
+  ['/photos/gallery/RAV-7.webp', '/photos/gallery/RAV-9.webp', '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp'],
   ['/photos/gallery/RAV-16.webp', '/photos/gallery/RAV-19.webp', '/photos/gallery/RAV-30.webp', '/photos/gallery/RAV-33.webp'],
   ['/photos/gallery/RAV-26.webp', '/photos/gallery/RAV-29.webp', '/photos/gallery/RAV-40.webp', '/photos/gallery/RAV-51.webp'],
 ];
@@ -2518,7 +2518,7 @@ function lpHeroFormHTML(group, city) {
     <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2 mb-1">${group.heroFormTitle}</h3>
     <p class="text-xs text-slate-500">${group.heroFormSubtext}</p>
   </div>
-  <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-wa-number="${city.whatsapp}" data-wa-message="${encodeURIComponent(group.waMessage(city))}">
+  <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-city-slug="${city.slug}">
     <div>
       <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
       <input type="text" name="Name" placeholder="Your Name" required
@@ -2543,7 +2543,7 @@ function lpHeroFormHTML(group, city) {
 
 /** Hero image slider — left column on desktop, bottom on mobile */
 function lpHeroSliderHTML(slides, group, city) {
-  const slidesJSON = JSON.stringify(slides);
+  const slidesJSON = JSON.stringify(slides).replace(/"/g, "'");
   return `
 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-xl aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:min-h-[460px] bg-slate-900"
   x-data="{ activeSlide: 0, slides: ${slidesJSON} }"
@@ -2610,7 +2610,7 @@ function lpModalHTML(group, city) {
             <h3 class="font-display text-2xl font-extrabold text-slate-900 mt-2 mb-1" id="lp-modal-title">${group.modalTitle(city)}</h3>
             <p class="text-slate-500 text-xs">${group.modalSubtext(city)}</p>
           </div>
-          <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-wa-number="${city.whatsapp}" data-wa-message="${encodeURIComponent(group.waMessage(city))}">
+          <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-city-slug="${city.slug}">
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
               <input type="text" name="Name" placeholder="Your Name" required
@@ -2662,7 +2662,7 @@ function lpFloatingButtonsHTML(city, group) {
 /** LP footer — city-specific, dark, matches reference */
 function lpFooterHTML(city) {
   const serviceLinks = services
-    .filter(s => ['projector-for-rent','led-screen-for-rent','sound-system-for-rent','tv-for-rent','combo-packages'].includes(s.slug))
+    .filter(s => ['projector-for-rent', 'led-screen-for-rent', 'sound-system-for-rent', 'tv-for-rent', 'combo-packages'].includes(s.slug))
     .map(s => `<a href="/${city.slug}/${s.slug}.html" class="hover:text-white transition text-xs">${s.name}</a>`)
     .join('');
   return `
@@ -2711,7 +2711,90 @@ function lpFooterHTML(city) {
 </footer>`;
 }
 
-/** Lead form submit script — POSTs to Apps Script + opens WhatsApp */
+/** City-specific Thank You page generator */
+function lpThankYouHTML(city) {
+  return `${lpHeadHTML({
+    title: `Thank You | Rams AudioVisuals ${city.name}`,
+    description: `Thank you for choosing Rams AudioVisuals in ${city.name}. We will get back to you shortly.`
+  })}
+<main class="min-h-[70vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-xl w-full text-center bg-white border border-slate-200/85 rounded-2xl shadow-xl p-8 md:p-12">
+    <!-- Checkmark Circle -->
+    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl font-extrabold mx-auto mb-6" aria-hidden="true">
+      ✓
+    </div>
+    
+    <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-none mb-3">
+      Thank You!
+    </h1>
+    
+    <h2 class="text-base sm:text-lg font-bold text-slate-600 mb-5">
+      Your Request is Confirmed
+    </h2>
+    
+    <p class="text-sm sm:text-base text-slate-500 leading-relaxed mb-8">
+      Our event coordination team in <strong class="text-slate-800">${city.name}</strong> will contact you within <strong class="text-slate-800">10 minutes</strong> on your number to discuss availability, customized package options, and delivery schedules.
+    </p>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+      <a href="tel:+91${city.phone}" 
+        class="inline-flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-bold px-6 py-3 rounded-xl shadow-md transition text-sm">
+        <i class="fa-solid fa-phone"></i> Call Office Directly
+      </a>
+      <a href="/${city.slug}/" 
+        class="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-xl transition text-sm">
+        <i class="fa-solid fa-house"></i> Back to Homepage
+      </a>
+    </div>
+
+    <!-- Next Steps -->
+    <section class="border border-slate-100 bg-slate-50/70 rounded-xl p-6 text-left">
+      <h3 class="text-xs font-extrabold uppercase tracking-wider text-primary-600 mb-4 text-center">
+        What Happens Next?
+      </h3>
+      <div class="space-y-4">
+        <!-- Step 1 -->
+        <div class="flex gap-3 items-start">
+          <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            1
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-800">10-Minute Callback</h4>
+            <p class="text-xs text-slate-500 mt-0.5">We call you to clarify equipment list, event timing, power setup, and exact delivery coordinate details.</p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="flex gap-3 items-start">
+          <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            2
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-800">Customized Quote</h4>
+            <p class="text-xs text-slate-500 mt-0.5">We send a transparent, custom quotation on email or WhatsApp including all logistics and optional operator supports.</p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="flex gap-3 items-start">
+          <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            3
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-800">Delivery, Setup & Handover</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Our transport team delivers the gear on-time and does full testing. You just enjoy a flawless AV setup!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+${lpFooterHTML(city)}
+</body>
+</html>`;
+}
+
+/** Lead form submit script — POSTs to Apps Script + redirects to thankyou page */
 const LP_SCRIPT = `
 <script>
   function scrollLP(id, dir) {
@@ -2739,8 +2822,8 @@ const LP_SCRIPT = `
         const name   = nameInput  ? nameInput.value.trim()  : '';
         const phone  = phoneInput ? phoneInput.value.trim() : '';
         const source = sourceInput ? sourceInput.value : (form.dataset.source || '');
-        const waNumber  = form.dataset.waNumber  || '';
-        const waBase    = form.dataset.waMessage ? decodeURIComponent(form.dataset.waMessage) : '';
+        const citySlug = form.dataset.citySlug || 'hyderabad';
+        const thankYouUrl = '/lp/' + citySlug + '-thankyou.html';
 
         if (phone.length !== 10) {
           if (phoneInput) phoneInput.setCustomValidity('Enter exactly 10 digits.');
@@ -2748,25 +2831,42 @@ const LP_SCRIPT = `
           return;
         }
 
-        // 1. POST to Apps Script (fire-and-forget, no-cors)
-        const fd = new FormData();
-        fd.append('Name',   name);
-        fd.append('Number', phone);
-        fd.append('Source', source);
-        fetch('${APPS_SCRIPT_URL}', { method: 'POST', mode: 'no-cors', body: fd });
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonContent = submitButton.innerHTML;
 
-        // 2. Open WhatsApp
-        const waMsg = waBase + '\\nName: ' + name + '\\nPhone: +91 ' + phone;
-        const waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
-        const popup = window.open(waUrl, '_blank', 'noopener');
-        if (!popup) window.location.href = waUrl;
+        // Disable button & show spinner
+        submitButton.disabled = true;
+        submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+        submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Sending Info...';
 
-        // 3. Reset + close modal
-        form.reset();
-        const root = document.querySelector('[x-data]');
-        if (root && root._x_dataStack) {
-          try { root._x_dataStack[0].showModal = false; } catch(_) {}
-        }
+        // POST to Apps Script using URLSearchParams (application/x-www-form-urlencoded)
+        const params = new URLSearchParams();
+        params.append('Name', name);
+        params.append('Number', phone);
+        params.append('Source', source);
+
+        fetch('${APPS_SCRIPT_URL}', { 
+          method: 'POST', 
+          mode: 'no-cors', 
+          body: params 
+        })
+        .then(() => {
+          // Success: Reset form, close modal and redirect to thank you page
+          form.reset();
+          const root = document.querySelector('[x-data]');
+          if (root && root._x_dataStack) {
+            try { root._x_dataStack[0].showModal = false; } catch(_) {}
+          }
+          window.location.href = thankYouUrl;
+        })
+        .catch(error => {
+          console.error('Submission error:', error);
+          alert('Sorry, we could not submit your details. Please call us directly.');
+          // Re-enable button
+          submitButton.disabled = false;
+          submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+          submitButton.innerHTML = originalButtonContent;
+        });
       });
     });
   }
@@ -2790,6 +2890,10 @@ function buildAdLandingPages() {
     .slice(0, 6);
 
   cities.forEach(city => {
+    // Generate city-specific thank you page
+    const thankYouHtml = lpThankYouHTML(city);
+    writePage(`public/lp/${city.slug}-thankyou.html`, thankYouHtml);
+
     adGroups.forEach((group, gIdx) => {
       // ── Equipment items ──
       let equipItems = group.equipmentFilter
@@ -2798,10 +2902,10 @@ function buildAdLandingPages() {
 
       // ── Rail IDs (unique per page so multiple rails don't conflict) ──
       const equipRailId = `equip-rail-${group.slug}`;
-      const pkgRailId   = `pkg-rail-${group.slug}`;
+      const pkgRailId = `pkg-rail-${group.slug}`;
 
       const equipCards = equipItems.map(item => lpEquipCardHTML(item, city, 'Quick WhatsApp')).join('');
-      const pkgCards   = packageItems.map(item => lpPackageCardHTML(item, city)).join('');
+      const pkgCards = packageItems.map(item => lpPackageCardHTML(item, city)).join('');
 
       const equipSection = lpScrollRailHTML({
         railId: equipRailId,
