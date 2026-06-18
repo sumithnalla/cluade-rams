@@ -3,11 +3,12 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { cities, services } from './data/cities.js';
 import { equipment } from './data/equipData.js';
+import { adGroups } from './data/adGroups.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const assetVersion = Date.now().toString(36);
 const DEFAULT_CITY_SLUG = 'hyderabad';
-const coreEquipment = equipment.filter(item => item.id <= 20);
+const coreEquipment = equipment.filter(item => item.id <= 17 || (item.id >= 21 && item.id <= 31));
 const offerShowcaseEquipment = equipment.filter(item => item.id >= 21 && item.id <= 31);
 
 /* ---- helpers ---- */
@@ -535,7 +536,7 @@ function localBusinessEntity({ description, serviceType }) {
     "@type": "LocalBusiness",
     "name": "Rams AudioVisuals",
     "url": "https://www.ramsaudiovisuals.com",
-    "email": "support@ramsaudiovisuals.com",
+    "email": "contact@ramsaudiovisuals.com",
     "telephone": cities[0].phone,
     "description": description,
     "serviceType": serviceType,
@@ -676,6 +677,9 @@ function offerCardHTML(offer) {
 
     return `
   <article class="offer-card">
+    <div class="offer-card__image">
+      <img data-src="${offer.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3C/svg%3E" alt="${offer.name} offer" loading="lazy" width="400" height="300"/>
+    </div>
     <span class="badge badge--blue offer-card__badge">${offer.badge}</span>
     <h3>${offer.name}</h3>
     <p>${offer.model}</p>
@@ -691,6 +695,10 @@ function offerCardHTML(offer) {
 
   return `
   <article class="offer-card">
+    ${offer.image ? `
+    <div class="offer-card__image">
+      <img data-src="${offer.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3C/svg%3E" alt="${offer.title} offer" loading="lazy" width="400" height="300"/>
+    </div>` : ''}
     <span class="badge badge--blue offer-card__badge">${offer.badge}</span>
     <h3>${offer.title}</h3>
     <p>${offer.description}</p>
@@ -865,6 +873,17 @@ function footerHTML() {
       <div class="footer__brand">
         <a href="/index.html" class="footer__logo"><img src="/photos/logo-footer.webp" alt="Rams AudioVisuals Logo" class="footer__logo-img"></a>
         <p class="footer__tagline">Professional AV equipment on rent across 5 major Indian cities. Delivered, set up, and collected — hassle free.</p>
+        <div class="footer__socials">
+          <a href="https://www.linkedin.com/company/125183919/admin/dashboard/" target="_blank" rel="noopener" class="footer__social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="https://www.instagram.com/ramsaudiovisuals.in/" target="_blank" rel="noopener" class="footer__social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61590470136429" target="_blank" rel="noopener" class="footer__social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-4h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+        </div>
       </div>
       <div class="footer__col">
         <div class="footer__col-title">Cities</div>
@@ -886,7 +905,7 @@ function footerHTML() {
           <a href="/about.html">About us</a>
           <a href="/contact.html">Contact</a>
           <a href="/privacy-policy.html">Privacy policy</a>
-          <a href="mailto:support@ramsaudiovisuals.com">support@ramsaudiovisuals.com</a>
+          <a href="mailto:contact@ramsaudiovisuals.com">contact@ramsaudiovisuals.com</a>
         </div>
       </div>
     </div>
@@ -957,7 +976,7 @@ function buildHomepage() {
         "name": "Rams AudioVisuals",
         "url": "https://www.ramsaudiovisuals.com",
         "logo": "https://www.ramsaudiovisuals.com/photos/logo%20new.webp",
-        "email": "support@ramsaudiovisuals.com",
+        "email": "contact@ramsaudiovisuals.com",
         "description": "Professional AV equipment rental — projectors, sound systems, mics, TVs, and combo packages across Hyderabad, Bangalore, Mumbai, Chennai and Pune.",
         "areaServed": cities.map(c => c.name),
         "contactPoint": cities.map(c => ({
@@ -1451,7 +1470,7 @@ ${navbarHTML('contact')}
               <div class="contact-aside__icon">${iconHTML('mail')}</div>
               <div>
                 <span class="contact-aside__label">General email</span>
-                <a href="mailto:support@ramsaudiovisuals.com">support@ramsaudiovisuals.com</a>
+                <a href="mailto:contact@ramsaudiovisuals.com">contact@ramsaudiovisuals.com</a>
                 <p>Best for partnerships and larger quote requests.</p>
               </div>
             </div>
@@ -1517,7 +1536,7 @@ ${navbarHTML('')}
       <p>This website does not use tracking cookies or analytics at this time.</p>
 
       <h2 style="font-size:1.125rem; margin:24px 0 8px">5. Contact</h2>
-      <p>For any privacy-related questions, email us at <a href="mailto:support@ramsaudiovisuals.com" style="color:var(--blue)">support@ramsaudiovisuals.com</a>.</p>
+      <p>For any privacy-related questions, email us at <a href="mailto:contact@ramsaudiovisuals.com" style="color:var(--blue)">contact@ramsaudiovisuals.com</a>.</p>
     </div>
   </section>
 </main>
@@ -1572,7 +1591,7 @@ function buildCityPages() {
           "name": `Rams AudioVisuals ${city.name}`,
           "url": `https://www.ramsaudiovisuals.com/${city.slug}/`,
           "telephone": city.phone,
-          "email": "support@ramsaudiovisuals.com",
+          "email": "contact@ramsaudiovisuals.com",
           "areaServed": city.name,
           "description": city.metaDescription
         },
@@ -2017,6 +2036,22 @@ ${navbarHTML('events')}
     </div>
   </section>
 
+  <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="Event AV packages">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge--blue">AV Packages</span>
+        <h2>Premium AV packages and combos for events</h2>
+        <p>Pre-configured audio-visual solutions tailored for corporate gatherings, weddings, private parties, and stages.</p>
+      </div>
+      <div class="grid grid--3">
+        ${offerShowcaseEquipment.map(item => equipCardHTML(item, null, {
+          pricingCitySlug: DEFAULT_CITY_SLUG,
+          startingFrom: true
+        })).join('')}
+      </div>
+    </div>
+  </section>
+
   ${howItWorksSectionHTML({
     title: 'How it works for weddings, corporate events and parties',
     description: 'Booking AV equipment for rent for events is simple - share your event details, approve the quote, and let us handle delivery, setup, and collection.',
@@ -2116,7 +2151,7 @@ ${navbarHTML('corporate')}
       label: 'Browse equipment',
       className: 'btn btn--secondary'
     },
-    supportContent: '<p class="landing-hero__support-copy">Prefer email for your corporate AV equipment rental?</p><a href="mailto:support@ramsaudiovisuals.com" class="landing-email-line">support@ramsaudiovisuals.com</a>',
+    supportContent: '<p class="landing-hero__support-copy">Prefer email for your corporate AV equipment rental?</p><a href="mailto:contact@ramsaudiovisuals.com" class="landing-email-line">contact@ramsaudiovisuals.com</a>',
     mainImageSrc: '/photos/sound systems.webp',
     mainImageAlt: 'Corporate sound system rental setup',
     accentImageSrc: '/photos/LED.webp',
@@ -2172,7 +2207,7 @@ ${navbarHTML('corporate')}
         <a href="https://wa.me/919700033342?text=Hi%2C%20I%20need%20a%20corporate%20AV%20equipment%20quote.%20Event%20date%3A%20%5Bdate%5D.%20Venue%3A%20%5Bvenue%5D.%20City%3A%20%5Bcity%5D." class="btn btn--whatsapp" target="_blank" rel="noopener">
           Request a corporate quote
         </a>
-        <p class="landing-email-cta">Prefer email? Write to <a href="mailto:support@ramsaudiovisuals.com">support@ramsaudiovisuals.com</a></p>
+        <p class="landing-email-cta">Prefer email? Write to <a href="mailto:contact@ramsaudiovisuals.com">contact@ramsaudiovisuals.com</a></p>
       </div>
     </div>
   </section>
@@ -2230,6 +2265,22 @@ ${navbarHTML('offers')}
     </div>
   </section>
 
+  <section class="section" style="background:var(--card); border-top:1px solid var(--border);" aria-label="Special AV package details">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge--blue">Promotional Packages</span>
+        <h2>Explore our AV combo packages</h2>
+        <p>Special bundle pricing on our most popular equipment combinations for events and corporate functions.</p>
+      </div>
+      <div class="grid grid--3">
+        ${offerShowcaseEquipment.map(item => equipCardHTML(item, null, {
+          pricingCitySlug: DEFAULT_CITY_SLUG,
+          startingFrom: true
+        })).join('')}
+      </div>
+    </div>
+  </section>
+
   <section class="section--sm" aria-label="Claim your rental offer">
     <div class="container">
       <div class="cta-banner">
@@ -2248,6 +2299,610 @@ ${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I want to b
 
   writePage('public/offers.html', html);
 }
+
+/* ============================================
+   PHASE 6 — buildAdLandingPages()
+   Generates public/lp/{city}-{adGroup}.html
+   6 ad groups × 5 cities = 30 pages (noindex)
+   ============================================ */
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQBnK4brEDrtnHe_-HNZjdJABPy_4XIQTu1WATjrwqwVc2kcR-i6s8XVnECMLr7rktOw/exec';
+
+// Fixed gallery images for hero sliders (4 per group, cycling through our 51 real images)
+const LP_GALLERY_SETS = [
+  ['/photos/gallery/RAV-1.webp',  '/photos/gallery/RAV-8.webp',  '/photos/gallery/RAV-22.webp', '/photos/gallery/RAV-28.webp', '/photos/gallery/RAV-35.webp'],
+  ['/photos/gallery/RAV-21.webp', '/photos/gallery/RAV-22.webp', '/photos/gallery/RAV-23.webp', '/photos/gallery/RAV-24.webp', '/photos/gallery/RAV-25.webp'],
+  ['/photos/gallery/RAV-10.webp', '/photos/gallery/RAV-18.webp', '/photos/gallery/RAV-27.webp', '/photos/gallery/RAV-34.webp', '/photos/gallery/RAV-46.webp'],
+  ['/photos/gallery/RAV-7.webp',  '/photos/gallery/RAV-9.webp',  '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp', '/photos/gallery/RAV-50.webp'],
+  ['/photos/gallery/RAV-16.webp', '/photos/gallery/RAV-19.webp', '/photos/gallery/RAV-20.webp', '/photos/gallery/RAV-30.webp', '/photos/gallery/RAV-33.webp'],
+  ['/photos/gallery/RAV-26.webp', '/photos/gallery/RAV-29.webp', '/photos/gallery/RAV-36.webp', '/photos/gallery/RAV-40.webp', '/photos/gallery/RAV-51.webp'],
+];
+
+// Gallery section images (4-image grid, varied per group)
+const LP_PORTFOLIO_SETS = [
+  ['/photos/gallery/RAV-1.webp',  '/photos/gallery/RAV-4.webp',  '/photos/gallery/RAV-8.webp',  '/photos/gallery/RAV-10.webp'],
+  ['/photos/gallery/RAV-21.webp', '/photos/gallery/RAV-23.webp', '/photos/gallery/RAV-25.webp', '/photos/gallery/RAV-28.webp'],
+  ['/photos/gallery/RAV-27.webp', '/photos/gallery/RAV-34.webp', '/photos/gallery/RAV-46.webp', '/photos/gallery/RAV-50.webp'],
+  ['/photos/gallery/RAV-7.webp',  '/photos/gallery/RAV-9.webp',  '/photos/gallery/RAV-32.webp', '/photos/gallery/RAV-38.webp'],
+  ['/photos/gallery/RAV-16.webp', '/photos/gallery/RAV-19.webp', '/photos/gallery/RAV-30.webp', '/photos/gallery/RAV-33.webp'],
+  ['/photos/gallery/RAV-26.webp', '/photos/gallery/RAV-29.webp', '/photos/gallery/RAV-40.webp', '/photos/gallery/RAV-51.webp'],
+];
+
+/** LP page <head> — Tailwind CDN + Alpine + Google Fonts + noindex */
+function lpHeadHTML({ title, description }) {
+  return `<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <meta name="description" content="${description}">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/webp" href="/photos/favicon.webp">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd',
+              500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .animate-marquee { display: flex; width: max-content; animation: marquee 50s linear infinite; }
+    .animate-marquee:hover { animation-play-state: paused; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans pt-16" x-data="{ showModal: false }">`;
+}
+
+/** Equipment card — Tailwind, matches reference exactly */
+function lpEquipCardHTML(item, city, ctaLabel = 'Quick WhatsApp') {
+  const pricing = getEquipmentPricing(item, city.slug);
+  const rawPrice = String(pricing.price || '').trim();
+  const rawExtra = String(pricing.extraPrice || '').trim();
+  const isCustom = /^custom$/i.test(rawPrice);
+  const hasSqFt = /sq\.?\s*ft/i.test(rawPrice);
+  const priceNum = rawPrice.replace(/^₹/, '');
+  const extraNum = rawExtra.replace(/^₹/, '');
+  const unit = isCustom ? '' : (hasSqFt ? '/sq.ft' : '/day');
+  const extraDisplay = (!isCustom && rawExtra) ? (hasSqFt ? `Additional day at ₹${extraNum}/sq.ft` : `Additional day at ₹${extraNum}`) : (isCustom ? 'Custom quote based on requirements' : '');
+  const waMsg = encodeURIComponent(`Hi Rams AudioVisuals, I need the ${item.name} rental in ${city.name}.`);
+
+  return `
+<article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+  <div class="aspect-[4/3] bg-slate-50 flex items-center justify-center p-3">
+    <img src="${item.image}" alt="${item.name} rental in ${city.name}" loading="lazy" class="max-h-full max-w-full object-contain">
+  </div>
+  <div class="p-4 flex flex-col flex-grow">
+    <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+      <span class="text-amber-500 text-sm">★</span>
+      <span>${item.rating}</span>
+      <span class="text-slate-400 font-medium">(${item.bookedCount} rentals)</span>
+    </div>
+    <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">${item.name}</h3>
+    <p class="text-xs text-slate-500 mb-3 font-medium">${item.model}</p>
+    <div class="mt-auto">
+      <div class="flex items-baseline mb-0.5">
+        ${!isCustom ? '<span class="text-base font-extrabold text-slate-900">₹</span>' : ''}
+        <span class="text-2xl font-extrabold text-slate-900 tracking-tight">${isCustom ? 'Custom' : priceNum}</span>
+        ${unit ? `<span class="text-xs text-slate-400 font-semibold ml-0.5">${unit}</span>` : ''}
+      </div>
+      ${extraDisplay ? `<p class="text-xs font-bold text-emerald-600 mb-3">${extraDisplay}</p>` : '<div class="mb-3"></div>'}
+      <div class="flex flex-wrap gap-1.5 mb-4">
+        <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md"><i class="fa-solid fa-bolt-lightning text-[9px]"></i> Fast Setup</span>
+        <span class="inline-flex items-center gap-1 text-[10px] font-bold text-primary-500 bg-primary-50 border border-primary-200/80 px-2 py-0.5 rounded-md"><i class="fa-solid fa-circle-check text-[9px]"></i> Support Incl.</span>
+      </div>
+      <a href="https://wa.me/${city.whatsapp}?text=${waMsg}" target="_blank" rel="noopener"
+        class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">${ctaLabel}</a>
+    </div>
+  </div>
+</article>`;
+}
+
+/** Package card — Tailwind, matches reference exactly */
+function lpPackageCardHTML(item, city) {
+  const pricing = getEquipmentPricing(item, city.slug);
+  const rawPrice = String(pricing.price || '').trim();
+  const rawExtra = String(pricing.extraPrice || '').trim();
+  const isCustom = /^custom$/i.test(rawPrice);
+  const priceNum = rawPrice.replace(/^₹/, '');
+  const extraNum = rawExtra.replace(/^₹/, '');
+  const extraDisplay = (!isCustom && rawExtra) ? `Additional day at ₹${extraNum}` : (isCustom ? 'Custom quote based on size' : '');
+  const waMsg = encodeURIComponent(`Hi Rams AudioVisuals, I need the ${item.name} rental in ${city.name}.`);
+  const ctaLabel = isCustom ? 'Enquire Now' : 'Add to Quote';
+
+  return `
+<article class="w-[275px] shrink-0 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 snap-start flex flex-col justify-between overflow-hidden">
+  <div class="aspect-[4/3] bg-slate-100 flex items-center justify-center overflow-hidden">
+    <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover">
+  </div>
+  <div class="p-4 flex flex-col flex-grow">
+    <div class="flex items-center gap-1.5 text-slate-900 font-extrabold text-xs mb-1.5">
+      <span class="text-amber-500 text-sm">★</span>
+      <span>${item.rating}</span>
+      <span class="text-slate-400 font-medium">(${item.bookedCount} rentals)</span>
+    </div>
+    <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-1">${item.name}</h3>
+    <p class="text-xs text-slate-500 mb-3 font-medium line-clamp-2">${item.model}</p>
+    <div class="mt-auto">
+      <div class="flex items-baseline mb-0.5">
+        ${!isCustom ? '<span class="text-base font-extrabold text-slate-900">₹</span>' : ''}
+        <span class="text-2xl font-extrabold text-slate-900 tracking-tight">${isCustom ? 'Custom' : priceNum}</span>
+        ${!isCustom ? '<span class="text-xs text-slate-400 font-semibold ml-0.5">/day</span>' : ''}
+      </div>
+      ${extraDisplay ? `<p class="text-xs font-bold text-emerald-600 mb-3">${extraDisplay}</p>` : '<div class="mb-3"></div>'}
+      <a href="https://wa.me/${city.whatsapp}?text=${waMsg}" target="_blank" rel="noopener"
+        class="block w-full text-center bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 rounded-xl text-xs shadow-md transition-all duration-200">${ctaLabel}</a>
+    </div>
+  </div>
+</article>`;
+}
+
+/** Horizontal scroll rail — matches reference exactly (relative wrapper + overlay arrows + scrollbar-none track) */
+function lpScrollRailHTML({ railId, sectionLabel, sectionTitle, cards, bgClass = '' }) {
+  return `
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-slate-200/60 ${bgClass}">
+  <div class="mb-6">
+    <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">${sectionLabel}</span>
+    <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">${sectionTitle}</h2>
+  </div>
+  <div class="relative group">
+    <button onclick="scrollLP('${railId}','left')"
+      class="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90 animate-pulse sm:animate-none" aria-label="Scroll left">
+      <i class="fa-solid fa-chevron-left text-[10px]"></i>
+    </button>
+    <button onclick="scrollLP('${railId}','right')"
+      class="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-slate-200 bg-white/95 shadow-md flex items-center justify-center text-slate-600 hover:bg-slate-50 transition active:scale-90 animate-pulse sm:animate-none" aria-label="Scroll right">
+      <i class="fa-solid fa-chevron-right text-[10px]"></i>
+    </button>
+    <div id="${railId}" class="flex overflow-x-auto gap-5 pb-6 px-1 -mx-1 scrollbar-none snap-x snap-mandatory scroll-smooth">
+      ${cards}
+    </div>
+  </div>
+</section>`;
+}
+
+/** Review card — exactly matches reference */
+function lpReviewCardHTML(review, ariaHidden = false) {
+  const initials = review.name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+  return `
+<div class="w-[320px] shrink-0 bg-[#f8f9ff] border border-[#eef0f7] rounded-[24px] p-5 flex flex-col justify-between mx-2.5"${ariaHidden ? ' aria-hidden="true"' : ''}>
+  <div>
+    <div class="flex items-center gap-2 mb-2">
+      <img src="/photos/google.webp" alt="Google" loading="lazy" class="w-10 h-10 object-contain">
+      <div class="text-[#f4b400] text-[26px] leading-none">★★★★★</div>
+    </div>
+    <p class="text-[15px] font-bold text-[#001e3c] leading-[1.4] mt-[15px] mb-[25px] line-clamp-4">&ldquo;${review.comment}&rdquo;</p>
+  </div>
+  <div class="flex items-center gap-3">
+    <div class="w-11 h-11 bg-[#d0dbff] rounded-full flex items-center justify-center text-[#3b5998] font-bold text-sm">${initials}</div>
+    <div>
+      <div class="font-bold text-[15px] text-[#444] mb-0.5">${review.name}</div>
+      <div class="text-[13px] text-[#888]">${review.location} &bull; AV Services</div>
+    </div>
+  </div>
+</div>`;
+}
+
+/** Hero lead form — right column on desktop, top on mobile */
+function lpHeroFormHTML(group, city) {
+  const sourceValue = `${city.name} | ${group.name} Landing Page`;
+  return `
+<div class="order-1 lg:order-2 flex flex-col justify-center bg-white border border-slate-200/80 rounded-2xl shadow-lg p-6 md:p-8">
+  <div class="text-center mb-6">
+    <span class="bg-primary-50 text-primary-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Fast Quote</span>
+    <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2 mb-1">${group.heroFormTitle}</h3>
+    <p class="text-xs text-slate-500">${group.heroFormSubtext}</p>
+  </div>
+  <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-wa-number="${city.whatsapp}" data-wa-message="${encodeURIComponent(group.waMessage(city))}">
+    <div>
+      <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
+      <input type="text" name="Name" placeholder="Your Name" required
+        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:bg-white focus:border-primary-500 text-sm transition-all duration-200">
+    </div>
+    <div>
+      <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+      <input type="tel" name="Number" placeholder="10-digit Mobile Number" inputmode="numeric" required
+        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:bg-white focus:border-primary-500 text-sm transition-all duration-200">
+    </div>
+    <input type="hidden" name="Source" value="${sourceValue}">
+    <div class="rounded-xl border border-amber-100 bg-amber-50/70 p-3 text-center text-xs font-medium text-amber-800">
+      ${group.heroAmberNotice(city)}
+    </div>
+    <button type="submit"
+      class="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary-500/20 hover:shadow-xl transition-all duration-300 flex justify-center items-center gap-2 text-sm">
+      Get Quote Now <i class="fa-solid fa-arrow-right text-xs"></i>
+    </button>
+  </form>
+</div>`;
+}
+
+/** Hero image slider — left column on desktop, bottom on mobile */
+function lpHeroSliderHTML(slides, group, city) {
+  const slidesJSON = JSON.stringify(slides);
+  return `
+<div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-xl aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:min-h-[460px] bg-slate-900"
+  x-data="{ activeSlide: 0, slides: ${slidesJSON} }"
+  x-init="setInterval(() => activeSlide = (activeSlide + 1) % slides.length, 3000)">
+  <template x-for="(slide, index) in slides" :key="index">
+    <img :src="slide" alt="${group.name} setup in ${city.name}"
+      class="absolute inset-0 h-full w-full object-cover transition-all duration-1000 ease-in-out"
+      x-show="activeSlide === index"
+      x-transition:enter="transition-opacity duration-1000"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition-opacity duration-1000 absolute"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0">
+  </template>
+  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+</div>`;
+}
+
+/** Gallery section — 2-col mobile / 3-col desktop, exactly like reference */
+function lpGalleryHTML(portfolioImages) {
+  const alts = ['Professional AV setup', 'LED screen rental event', 'Sound system setup', 'Corporate AV event', 'Wedding display setup', 'Conference AV setup'];
+  // Use only 4 images in a 2x2 grid on mobile, 4-col on desktop
+  const imgs = portfolioImages.slice(0, 4);
+  return `
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="text-center mb-8">
+    <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Our Portfolio</span>
+    <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">Professionalism Delivered with Perfection</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    ${imgs.map((src, i) => `
+    <div class="aspect-square rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <img src="${src}" alt="${alts[i] || 'AV setup'}" loading="lazy" class="w-full h-full object-cover">
+    </div>`).join('')}
+  </div>
+</section>`;
+}
+
+/** Modal form */
+function lpModalHTML(group, city) {
+  const sourceValue = `${city.name} | ${group.name} Landing Page`;
+  return `
+<div x-show="showModal" x-cloak class="relative z-50" aria-labelledby="lp-modal-title" role="dialog" aria-modal="true">
+  <div x-show="showModal"
+    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+    x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+      <div x-show="showModal" @click.away="showModal = false"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-slate-100">
+        <button @click="showModal = false"
+          class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="px-6 py-8">
+          <div class="text-center mb-6">
+            <span class="bg-primary-50 text-primary-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Booking Call</span>
+            <h3 class="font-display text-2xl font-extrabold text-slate-900 mt-2 mb-1" id="lp-modal-title">${group.modalTitle(city)}</h3>
+            <p class="text-slate-500 text-xs">${group.modalSubtext(city)}</p>
+          </div>
+          <form class="space-y-4" data-lead-form data-source="${sourceValue}" data-wa-number="${city.whatsapp}" data-wa-message="${encodeURIComponent(group.waMessage(city))}">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Name</label>
+              <input type="text" name="Name" placeholder="Your Name" required
+                class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+              <input type="tel" name="Number" inputmode="numeric" required placeholder="10-digit Mobile Number"
+                class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition text-sm">
+            </div>
+            <input type="hidden" name="Source" value="${sourceValue}">
+            <div class="rounded-xl border border-amber-100 bg-amber-50/70 p-3 text-center text-xs font-medium text-amber-800">
+              ${group.modalAmberNotice(city)}
+            </div>
+            <button type="submit"
+              class="w-full bg-primary-500 hover:bg-primary-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-primary-500/20 transition-all flex justify-center items-center gap-2 text-sm">
+              Send Booking Request <i class="fa-solid fa-check text-xs"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+/** Floating call + WA buttons — matches reference */
+function lpFloatingButtonsHTML(city, group) {
+  const waMsg = encodeURIComponent(group.waMessage(city));
+  return `
+<div class="fixed right-4 bottom-4 md:right-6 md:bottom-6 z-40 flex flex-col gap-3" aria-label="Quick contact actions">
+  <a href="tel:+91${city.phone}" aria-label="Call ${city.name} office"
+    class="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+    style="background-color:#2d93ff;color:white;" onmouseover="this.style.backgroundColor='#015fc3'" onmouseout="this.style.backgroundColor='#2d93ff'">
+    <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5.15 12.81 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.35 1.75.67 2.57a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.19-1.19a2 2 0 0 1 2.11-.45c.82.32 1.68.55 2.57.67A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </a>
+  <a href="https://wa.me/${city.whatsapp}?text=${waMsg}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+    class="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+    style="background-color:#d3ff81;color:rgb(0,0,0);" onmouseover="this.style.backgroundColor='#78ff1e'" onmouseout="this.style.backgroundColor='#d3ff81'">
+    <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+  </a>
+</div>`;
+}
+
+/** LP footer — city-specific, dark, matches reference */
+function lpFooterHTML(city) {
+  const serviceLinks = services
+    .filter(s => ['projector-for-rent','led-screen-for-rent','sound-system-for-rent','tv-for-rent','combo-packages'].includes(s.slug))
+    .map(s => `<a href="/${city.slug}/${s.slug}.html" class="hover:text-white transition text-xs">${s.name}</a>`)
+    .join('');
+  return `
+<footer class="bg-slate-950 text-slate-400 pt-12 pb-6 border-t border-slate-900" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-900">
+      <div>
+        <a href="/index.html" class="flex items-center mb-4">
+          <img src="/photos/logo-footer.webp" alt="Rams AudioVisuals" class="h-10 w-auto object-contain brightness-0 invert">
+        </a>
+        <p class="text-xs leading-relaxed max-w-xs">Professional AV equipment rentals in ${city.name}. LED walls, projectors, PA systems, and full event display configurations delivered and set up.</p>
+        <div class="flex gap-4 mt-5">
+          <a href="https://www.facebook.com/profile.php?id=61590470136429" target="_blank" rel="noopener"
+            class="w-8 h-8 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all duration-200" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f text-sm"></i>
+          </a>
+          <a href="https://www.instagram.com/ramsaudiovisuals.in/" target="_blank" rel="noopener"
+            class="w-8 h-8 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all duration-200" aria-label="Instagram">
+            <i class="fa-brands fa-instagram text-sm"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/125183919/" target="_blank" rel="noopener"
+            class="w-8 h-8 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all duration-200" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in text-sm"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-extrabold text-sm uppercase tracking-wider mb-4">${city.name} Office</h4>
+        <p class="text-xs mb-2">Direct Call: <a href="tel:+91${city.phone}" class="text-white font-semibold hover:underline">${city.phoneDisplay}</a></p>
+        <p class="text-xs mb-2">WhatsApp: <a href="https://wa.me/${city.whatsapp}" target="_blank" rel="noopener" class="text-white font-semibold hover:underline">Chat Support</a></p>
+        <p class="text-xs">Email: <a href="mailto:contact@ramsaudiovisuals.com" class="text-white font-semibold hover:underline">contact@ramsaudiovisuals.com</a></p>
+      </div>
+      <div>
+        <h4 class="text-white font-extrabold text-sm uppercase tracking-wider mb-4">Equipment</h4>
+        <div class="grid grid-cols-2 gap-2">${serviceLinks}</div>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-slate-500 font-medium">
+      <p>&copy; ${new Date().getFullYear()} Rams AudioVisuals. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="/about.html" class="hover:text-white transition">About Us</a>
+        <a href="/contact.html" class="hover:text-white transition">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</footer>`;
+}
+
+/** Lead form submit script — POSTs to Apps Script + opens WhatsApp */
+const LP_SCRIPT = `
+<script>
+  function scrollLP(id, dir) {
+    const el = document.getElementById(id);
+    if (el) el.scrollBy({ left: dir === 'left' ? -300 : 300, behavior: 'smooth' });
+  }
+
+  function setupPhoneValidation() {
+    document.querySelectorAll('input[type="tel"]').forEach(input => {
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/\\D/g, '').slice(0, 10);
+        input.setCustomValidity(input.value.length === 10 ? '' : 'Enter exactly 10 digits.');
+      });
+      input.addEventListener('keypress', e => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+    });
+  }
+
+  function setupLeadForms() {
+    document.querySelectorAll('form[data-lead-form]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const nameInput  = form.querySelector('input[name="Name"]');
+        const phoneInput = form.querySelector('input[name="Number"]');
+        const sourceInput = form.querySelector('input[name="Source"]');
+        const name   = nameInput  ? nameInput.value.trim()  : '';
+        const phone  = phoneInput ? phoneInput.value.trim() : '';
+        const source = sourceInput ? sourceInput.value : (form.dataset.source || '');
+        const waNumber  = form.dataset.waNumber  || '';
+        const waBase    = form.dataset.waMessage ? decodeURIComponent(form.dataset.waMessage) : '';
+
+        if (phone.length !== 10) {
+          if (phoneInput) phoneInput.setCustomValidity('Enter exactly 10 digits.');
+          form.reportValidity();
+          return;
+        }
+
+        // 1. POST to Apps Script (fire-and-forget, no-cors)
+        const fd = new FormData();
+        fd.append('Name',   name);
+        fd.append('Number', phone);
+        fd.append('Source', source);
+        fetch('${APPS_SCRIPT_URL}', { method: 'POST', mode: 'no-cors', body: fd });
+
+        // 2. Open WhatsApp
+        const waMsg = waBase + '\\nName: ' + name + '\\nPhone: +91 ' + phone;
+        const waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg);
+        const popup = window.open(waUrl, '_blank', 'noopener');
+        if (!popup) window.location.href = waUrl;
+
+        // 3. Reset + close modal
+        form.reset();
+        const root = document.querySelector('[x-data]');
+        if (root && root._x_dataStack) {
+          try { root._x_dataStack[0].showModal = false; } catch(_) {}
+        }
+      });
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setupPhoneValidation();
+    setupLeadForms();
+  });
+<\/script>`;
+
+/**
+ * Phase 6 main — loops cities × adGroups → writes public/lp/{city}-{adGroup}.html
+ */
+function buildAdLandingPages() {
+  mkdirSync('public/lp', { recursive: true });
+
+  const packageItems = equipment.filter(item => item.id >= 21 && item.id <= 28);
+  const curatedEquip = equipment
+    .filter(item => !['combo'].includes(item.category) && item.id <= 17)
+    .sort((a, b) => b.bookedCount - a.bookedCount)
+    .slice(0, 6);
+
+  cities.forEach(city => {
+    adGroups.forEach((group, gIdx) => {
+      // ── Equipment items ──
+      let equipItems = group.equipmentFilter
+        ? equipment.filter(group.equipmentFilter)
+        : curatedEquip;
+
+      // ── Rail IDs (unique per page so multiple rails don't conflict) ──
+      const equipRailId = `equip-rail-${group.slug}`;
+      const pkgRailId   = `pkg-rail-${group.slug}`;
+
+      const equipCards = equipItems.map(item => lpEquipCardHTML(item, city, 'Quick WhatsApp')).join('');
+      const pkgCards   = packageItems.map(item => lpPackageCardHTML(item, city)).join('');
+
+      const equipSection = lpScrollRailHTML({
+        railId: equipRailId,
+        sectionLabel: group.equipSectionLabel,
+        sectionTitle: group.equipSectionTitle,
+        cards: equipCards,
+        bgClass: '',
+      });
+
+      const pkgSection = lpScrollRailHTML({
+        railId: pkgRailId,
+        sectionLabel: group.packageSectionLabel,
+        sectionTitle: group.packageSectionTitle,
+        cards: pkgCards,
+        bgClass: 'bg-slate-50/50',
+      });
+
+      // ── Hero slider images ──
+      const heroSlides = LP_GALLERY_SETS[gIdx % LP_GALLERY_SETS.length];
+      const portfolioImgs = LP_PORTFOLIO_SETS[gIdx % LP_PORTFOLIO_SETS.length];
+
+      // ── Reviews (city testimonials + global Google reviews, doubled for marquee) ──
+      const cityReviews = (city.testimonials || []).map(t => ({
+        name: t.name,
+        location: `${t.area}, ${city.name}`,
+        comment: t.text,
+      }));
+      const reviewsAll = [...cityReviews, ...googleReviews];
+      const reviewCards1 = reviewsAll.map(r => lpReviewCardHTML(r, false)).join('');
+      const reviewCards2 = reviewsAll.map(r => lpReviewCardHTML(r, true)).join('');
+
+      const reviewsSection = `
+<section class="overflow-hidden w-full py-10 bg-white border-y border-slate-200/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+    <span class="text-xs uppercase tracking-wider font-extrabold text-primary-500">Client Reviews</span>
+    <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-1">What Our Clients Say</h2>
+  </div>
+  <div class="animate-marquee">
+    ${reviewCards1}${reviewCards2}
+  </div>
+</section>`;
+
+      // ── Section order ──
+      const isEquipFirst = group.sectionOrder === 'equipment-first';
+      const mainContent = isEquipFirst
+        ? `${equipSection}\n${pkgSection}`
+        : `${pkgSection}\n${equipSection}`;
+
+      // ── Full page ──
+      const html = `${lpHeadHTML({ title: group.pageTitle(city), description: group.metaDescription(city) })}
+
+<!-- 1. FIXED HEADER -->
+<header class="fixed top-0 inset-x-0 z-40 bg-white border-b border-slate-200/50 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="/index.html" class="flex items-center">
+        <img src="/photos/logo new.webp" alt="Rams AudioVisuals" class="h-7 md:h-8 w-auto object-contain">
+      </a>
+      <button @click="showModal = true"
+        class="flex items-center justify-center gap-2 bg-primary-100 hover:bg-primary-200 text-primary-700 text-xs sm:text-sm font-extrabold px-5 py-2.5 rounded-full border border-primary-200 transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm active:translate-y-0">
+        <i class="fa-regular fa-calendar-check text-sm"></i> Book Now
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 2. HEADLINE BANNER -->
+  <section class="bg-gradient-to-r from-primary-50/50 via-slate-50 to-primary-50/50 border-b border-slate-200/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 text-center">
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">${group.h1(city)}</h1>
+      <p class="text-sm md:text-base text-primary-500 font-bold uppercase tracking-wider mt-2">${group.subheading}</p>
+    </div>
+  </section>
+
+  <!-- 3. HERO — 70/30 grid desktop, stacked mobile (form top) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-[68%_32%] gap-8 items-stretch">
+      ${lpHeroFormHTML(group, city)}
+      ${lpHeroSliderHTML(heroSlides, group, city)}
+    </div>
+  </section>
+
+  ${mainContent}
+  ${reviewsSection}
+  ${lpGalleryHTML(portfolioImgs)}
+</main>
+
+${lpFooterHTML(city)}
+${lpFloatingButtonsHTML(city, group)}
+${lpModalHTML(group, city)}
+${LP_SCRIPT}
+</body>
+</html>`;
+
+      writePage(`public/lp/${city.slug}-${group.slug}.html`, html);
+    });
+  });
+  console.log(`✓ ${cities.length * adGroups.length} ad landing pages → public/lp/`);
+}
+
 
 /* ---- sitemap ---- */
 function buildSitemap() {
@@ -2302,6 +2957,7 @@ function buildRobots() {
   buildEventsPage();
   buildCorporatePage();
   buildOffersPage();
+  buildAdLandingPages();
   buildSitemap();
   buildRobots();
   console.log('\n✅ Build complete.\n');

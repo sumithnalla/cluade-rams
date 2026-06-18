@@ -305,6 +305,7 @@ export const equipment = [
     bookedCount: 132,
     rating: 4.7
   },
+  /*
   {
     id: 18,
     category: "combo",
@@ -359,11 +360,12 @@ export const equipment = [
     bookedCount: 198,
     rating: 4.7
   },
+*/
   {
     id: 21,
-    category: "package",
+    category: "combo",
     subcategory: "meeting",
-    image: "/packages/meeting-essentials-package.webp",
+    image: "/equipment/meeting essential.png",
     badge: "Popular",
     name: "Meeting Essentials Package",
     model: "Projector, Projection Screen, Powered Speaker, HDMI Cable & Setup",
@@ -380,9 +382,9 @@ export const equipment = [
 
   {
     id: 22,
-    category: "package",
+    category: "combo",
     subcategory: "presentation",
-    image: "/packages/presentation-pro-package.webp",
+    image: "/equipment/presentation pro.png",
     badge: "Corporate",
     name: "Presentation Pro Package",
     model: "Projector, Screen, Audio Mixer, 2 Speakers, Presentation Laptop & Wireless Presenter",
@@ -399,9 +401,9 @@ export const equipment = [
 
   {
     id: 23,
-    category: "package",
+    category: "combo",
     subcategory: "sound",
-    image: "/packages/pa-system-package.webp",
+    image: "/equipment/pa system package.png",
     badge: "All-in-One",
     name: "PA System Package",
     model: "Audio Mixer, 2 Powered Speakers with Stands, 2 Cordless Microphones",
@@ -418,9 +420,9 @@ export const equipment = [
 
   {
     id: 24,
-    category: "package",
+    category: "combo",
     subcategory: "conference",
-    image: "/packages/conference-package.webp",
+    image: "/equipment/conference package.png",
     badge: "Business",
     name: "Conference Package",
     model: "High Brightness Projector, Large Screen, Audio Mixer, Speakers, Wireless Mics & Podium Mic",
@@ -437,9 +439,9 @@ export const equipment = [
 
   {
     id: 25,
-    category: "package",
+    category: "combo",
     subcategory: "led",
-    image: "/packages/led-display-package.webp",
+    image: "/equipment/led display package.png",
     badge: "Premium",
     name: "LED Display Package",
     model: "LED Wall, Video Processor, Cabling, Installation & Operator Support",
@@ -456,9 +458,9 @@ export const equipment = [
 
   {
     id: 26,
-    category: "package",
+    category: "combo",
     subcategory: "event-audio",
-    image: "/packages/event-audio-package.webp",
+    image: "/equipment/event audio.png",
     badge: "Event Ready",
     name: "Event Audio Package",
     model: "Audio Mixer, 4 Powered Speakers, 4 Wireless Mics & Monitor Speaker",
@@ -475,9 +477,9 @@ export const equipment = [
 
   {
     id: 27,
-    category: "package",
+    category: "combo",
     subcategory: "premium-event",
-    image: "/packages/premium-event-av-package.webp",
+    image: "/equipment/premium event av.png",
     badge: "Premium",
     name: "Premium Event AV Package",
     model: "LED Wall, Projector, Screen, Audio Mixer, 4 Speakers & 4 Wireless Mics",
@@ -494,9 +496,9 @@ export const equipment = [
 
   {
     id: 28,
-    category: "package",
+    category: "combo",
     subcategory: "custom",
-    image: "/packages/custom-av-package.webp",
+    image: "/equipment/custom av.png",
     badge: "Custom",
     name: "Custom AV Package",
     model: "Tailor-Made AV Configuration Based on Event Requirements",
@@ -515,7 +517,7 @@ export const equipment = [
     id: 29,
     category: "combo",
     subcategory: "projector-screen",
-    image: "/combos/projector-screen-combo.webp",
+    image: "/equipment/projector screen combo.png",
     badge: "Best Seller",
     name: "Projector + Screen Combo",
     model: "Projector, Projection Screen, HDMI Cable & Setup",
@@ -534,7 +536,7 @@ export const equipment = [
     id: 30,
     category: "combo",
     subcategory: "projector-sound",
-    image: "/combos/projector-sound-combo.webp",
+    image: "/equipment/projector sound combo.png",
     badge: "Value Deal",
     name: "Projector + Sound Combo",
     model: "Projector, Projection Screen, Powered Speaker & Setup",
@@ -553,7 +555,7 @@ export const equipment = [
     id: 31,
     category: "combo",
     subcategory: "complete-event",
-    image: "/combos/complete-event-combo.webp",
+    image: "/equipment/complete event combo.png",
     badge: "Ultimate",
     name: "Complete Event Combo",
     model: "Projector, Screen, Sound System, Wireless Mics & Technician",
@@ -567,5 +569,4 @@ export const equipment = [
     bookedCount: 119,
     rating: 5.0
   }
-
 ];

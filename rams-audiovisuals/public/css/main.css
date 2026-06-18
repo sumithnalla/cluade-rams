@@ -1236,6 +1236,36 @@ p {
   border: 1px solid var(--border-strong);
   background: var(--card);
   box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.offer-card__image {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 18px;
+  margin-bottom: 4px;
+}
+
+.offer-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+  transition: transform 0.4s ease;
+}
+
+.offer-card:hover .offer-card__image img {
+  transform: scale(1.04);
 }
 
 .offer-card__badge {
@@ -2411,6 +2441,38 @@ p {
   line-height: 1.72;
   color: rgba(255, 255, 255, 0.52);
   max-width: 30ch;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--transition);
+}
+
+.footer__social-link:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+.footer__social-link svg {
+  width: 18px;
+  height: 18px;
 }
 
 .footer__badge-row {
