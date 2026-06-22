@@ -384,6 +384,13 @@ p {
   justify-content: center;
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 /* ===== CARDS ===== */
 .card {
   background: var(--card);

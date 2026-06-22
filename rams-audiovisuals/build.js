@@ -1546,6 +1546,167 @@ ${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV e
   writePage('public/privacy-policy.html', html);
 }
 
+function buildContactThankYou() {
+  const noIndexSchema = `{}</script><meta name="robots" content="noindex, nofollow"><script type="application/ld+json">{}`;
+
+  const html = `${headHTML({ 
+    title: 'Thank You | Rams AudioVisuals', 
+    description: 'Thank you for contacting Rams AudioVisuals. We will get back to you shortly.', 
+    canonical: '/contact-thank-you.html',
+    schema: noIndexSchema
+  })}
+${navbarHTML('')}
+<style>
+  .thank-you-card {
+    padding: 48px 32px; 
+    margin-top: 24px; 
+    background: var(--card); 
+    border: 1px solid var(--border-strong); 
+    box-shadow: var(--shadow-card); 
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+  .thank-you-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+    align-items: center;
+    justify-content: center;
+  }
+  .thank-you-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  @media(min-width: 576px) {
+    .thank-you-actions {
+      flex-direction: row;
+    }
+    .thank-you-actions .btn {
+      flex: 1;
+      max-width: 240px;
+    }
+  }
+</style>
+<main>
+  <section class="section thank-you-page">
+    <div class="container" style="max-width: 600px; margin: 0 auto;">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">›</span>
+        <span aria-current="page">Thank you</span>
+      </nav>
+      
+      <div class="thank-you-card">
+        <!-- Checkmark Circle -->
+        <div class="thank-you-badge" style="width: 64px; height: 64px; background: #e6f7f0; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 24px;">
+          ✓
+        </div>
+        
+        <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 8px; color: var(--text-primary);">Thank You!</h1>
+        <h2 style="font-size: 1.25rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 24px;">Your Request is Confirmed</h2>
+        
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 32px;" id="thank-you-message">
+          Our event coordination team will contact you within 10 minutes on your number to discuss availability, customized package options, and delivery schedules.
+        </p>
+        
+        <!-- Actions -->
+        <div class="thank-you-actions">
+          <a href="tel:+919700033342" id="call-office-btn" class="btn btn--primary btn--full" style="justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-right: 8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18.85 19.5 19.5 0 0 1 5.15 12.81 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.35 1.75.67 2.57a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.19-1.19a2 2 0 0 1 2.11-.45c.82.32 1.68.55 2.57.67A2 2 0 0 1 22 16.92z"></path></svg>
+            Call Office Directly
+          </a>
+          <a href="/index.html" id="back-home-btn" class="btn btn--secondary btn--full" style="justify-content: center;">
+            Back to Homepage
+          </a>
+        </div>
+        
+        <!-- Next Steps -->
+        <div style="text-align: left; background: var(--bg-pastel); border: 1px solid #d8e8ff; border-radius: var(--radius-sm); padding: 24px;">
+          <h3 style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 20px; text-align: center;">
+            What Happens Next?
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Step 1 -->
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0;">1</div>
+              <div>
+                <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin: 0 0 4px 0;">10-Minute Callback</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">We call you to clarify equipment list, event timing, power setup, and exact delivery coordinate details.</p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0;">2</div>
+              <div>
+                <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin: 0 0 4px 0;">Customized Quote</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">We send a transparent, custom quotation on email or WhatsApp including all logistics and optional operator supports.</p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div style="display: flex; gap: 12px; align-items: start;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0;">3</div>
+              <div>
+                <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin: 0 0 4px 0;">Delivery, Setup &amp; Handover</h4>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">Our transport team delivers the gear on-time and does full testing. You just enjoy a flawless AV setup!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const citySlug = params.get('city');
+    const name = params.get('name');
+
+    const cityData = {
+      hyderabad: { name: 'Hyderabad', phone: '9700033342', phoneDisplay: '+91 97000 33342' },
+      bangalore: { name: 'Bangalore', phone: '9553703737', phoneDisplay: '+91 95537 03737' },
+      mumbai: { name: 'Mumbai', phone: '9553073030', phoneDisplay: '+91 95530 73030' },
+      chennai: { name: 'Chennai', phone: '9014885749', phoneDisplay: '+91 90148 85749' },
+      pune: { name: 'Pune', phone: '9133033004', phoneDisplay: '+91 91330 33004' }
+    };
+
+    const selectedCity = cityData[citySlug] || { name: 'our office', phone: '9700033342', phoneDisplay: '+91 97000 33342' };
+
+    if (name) {
+      const greetingEl = document.querySelector('.thank-you-card h1');
+      if (greetingEl) {
+        greetingEl.textContent = 'Thank You, ' + name + '!';
+      }
+    }
+
+    const messageEl = document.getElementById('thank-you-message');
+    if (messageEl) {
+      const displayCity = selectedCity.name === 'our office' ? 'our local team' : '<strong>' + selectedCity.name + '</strong>';
+      messageEl.innerHTML = 'Our event coordination team in ' + displayCity + ' will contact you within <strong style="color: var(--text-primary); font-weight: 700;">10 minutes</strong> on your number to discuss availability, customized package options, and delivery schedules.';
+    }
+
+    const callBtn = document.getElementById('call-office-btn');
+    if (callBtn) {
+      callBtn.href = 'tel:+91' + selectedCity.phone;
+      callBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-right: 8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18.85 19.5 19.5 0 0 1 5.15 12.81 19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.89.35 1.75.67 2.57a2 2 0 0 1-.45 2.11L8.09 9.59a16 16 0 0 0 6.32 6.32l1.19-1.19a2 2 0 0 1 2.11-.45c.82.32 1.68.55 2.57.67A2 2 0 0 1 22 16.92z"></path></svg>Call ' + (selectedCity.name === 'our office' ? 'Office' : selectedCity.name) + ' Directly';
+    }
+
+    if (citySlug && cityData[citySlug]) {
+      const homeBtn = document.getElementById('back-home-btn');
+      if (homeBtn) {
+        homeBtn.href = '/' + citySlug + '/index.html';
+        homeBtn.textContent = 'Back to ' + selectedCity.name + ' Homepage';
+      }
+    }
+  })();
+</script>
+${footerHTML()}
+${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I need AV equipment for my event.' })}`;
+
+  writePage('public/contact-thank-you.html', html);
+}
+
 function buildCityPages() {
   cities.forEach(city => {
     const serviceCards = services.map(s => `
@@ -3055,6 +3216,7 @@ function buildRobots() {
   buildEquipmentHub();
   buildAbout();
   buildContact();
+  buildContactThankYou();
   buildPrivacyPolicy();
   buildCityPages();
   buildCityServicePages();

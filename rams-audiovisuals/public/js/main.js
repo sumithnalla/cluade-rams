@@ -34,6 +34,7 @@
   const phoneInput = form.querySelector('[data-phone-input]');
   const citySelect = form.querySelector('[data-city-select]');
   const status = form.querySelector('[data-contact-status]');
+  let isSubmitting = false;
 
   const setStatus = (message, isError = false) => {
     if (!status) return;
@@ -60,31 +61,61 @@
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
+
     normalizePhone();
     setStatus('');
 
     if (!form.reportValidity()) return;
 
+    isSubmitting = true;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : 'Send message';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+
     const formData = new FormData(form);
     const selectedOption = citySelect?.options[citySelect.selectedIndex];
     const cityName = selectedOption?.dataset.cityName || selectedOption?.textContent?.trim() || 'your city';
-    const whatsappNumber = selectedOption?.dataset.cityWhatsapp || '919700033342';
-    const message = [
-      'Hi Rams AudioVisuals,',
-      `Name: ${formData.get('name')}`,
-      `Email: ${formData.get('email')}`,
-      `Phone: +91 ${formData.get('phone')}`,
-      `City: ${cityName}`,
-      `Message: ${formData.get('message')}`
-    ].join('\n');
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const citySlug = selectedOption?.value || '';
 
-    setStatus(`Opening WhatsApp for ${cityName}...`);
-    const popup = window.open(whatsappUrl, '_blank', 'noopener');
-    if (!popup) {
-      window.location.href = whatsappUrl;
-    }
-    form.reset();
+    setStatus('Sending your message...');
+
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxHos0F8836zP2NpBGvb6GmmI8l08u7kc1oU3Nqa9eNuVSFLAQo_xI-Hq2GwDHl3mdLGA/exec';
+
+    const params = new URLSearchParams();
+    params.append('Name', formData.get('name'));
+    params.append('Email', formData.get('email'));
+    params.append('Phone', formData.get('phone'));
+    params.append('City', cityName);
+    params.append('Message', formData.get('message'));
+
+    fetch(scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params.toString()
+    })
+    .then(() => {
+      setStatus('Successfully submitted!');
+      form.reset();
+      setTimeout(() => {
+        window.location.href = `/contact-thank-you.html?city=${encodeURIComponent(citySlug)}&name=${encodeURIComponent(formData.get('name') || '')}`;
+      }, 500);
+    })
+    .catch((error) => {
+      console.error('Error submitting form:', error);
+      setStatus('Something went wrong. Please try again or contact us directly.', true);
+      isSubmitting = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    });
   });
 })();
 
