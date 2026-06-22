@@ -2306,7 +2306,7 @@ ${closingHTML('/js/main.js', { number: '919700033342', message: 'Hi, I want to b
    6 ad groups × 5 cities = 30 pages (noindex)
    ============================================ */
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCXe774VG8zvOZDAWfl_UAmqDUyFDhd2zG1fQpPGZzKQdLYVGVLFQV-RGrovWSXx1V/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQBnK4brEDrtnHe_-HNZjdJABPy_4XIQTu1WATjrwqwVc2kcR-i6s8XVnECMLr7rktOw/exec';
 
 // Fixed gallery images for hero sliders (4 per group, cycling through our 51 real images)
 const LP_GALLERY_SETS = [
